@@ -11,5 +11,23 @@ pids
 logs
 results
 
+# Node.js specific files
 npm-debug.log
 node_modules
+
+# OS X specific files
+.DS_Store
+*.DS_Store
+
+# Application upload directory
+uploads/*
+!uploads/README.md
+
+# Amazon Web Services specific files
+.elasticbeanstalk/
+
+.nodemonignore
+public/lib
+public/stylesheets_build
+public/js_build
+public/views_build

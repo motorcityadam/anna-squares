@@ -1,0 +1,8 @@
+doctype 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', ng-app="annaSquaresApp")
+  include ../includes/header
+  body
+    .navbar.navbar-default.navbar-fixed-top(data-ng-include="'views_build/header/index.html'", data-role="navigation")
+    block content
+    footer(data-ng-include="'views_build/footer/index.html'")
+    include ../includes/footer

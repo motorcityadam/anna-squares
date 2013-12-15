@@ -1,0 +1,38 @@
+{
+  "name": "anna-squares",
+  "version": "0.1.0",
+  "dependencies": {
+    "bootstrap": "latest",
+    "jquery": "latest",
+    "modernizr": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-resource": "latest",
+    "angular-cookies": "latest",
+    "angular-ui-utils": "latest",
+    "font-awesome": "latest",
+    "bootswatch": "latest",
+    "sass-bootstrap-glyphicons": "latest",
+    "angular-placeholders": "latest"
+  },
+  "homepage": "https://github.com/adamjcook/anna-squares",
+  "authors": [
+    "Adam Joseph Cook <adam.joseph.cook@gmail.com>"
+  ],
+  "description": "A daily time tracking and organization web application for healthcare professionals, written in Angular.js and Node.js.",
+  "main": "server.js",
+  "keywords": [
+    "organization",
+    "healthcare",
+    "timetracking"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

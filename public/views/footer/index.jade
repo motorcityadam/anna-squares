@@ -1,0 +1,10 @@
+.container.ls-footer(data-ng-controller="footerController")
+  .row
+    .col-md-12
+      span.ls-copyright {{copyright}}
+  .row
+    .col-md-12
+        ul.list-inline
+          li(ng-repeat="link in links")
+            strong
+              a(href="{{link.url}}") {{link.title}}

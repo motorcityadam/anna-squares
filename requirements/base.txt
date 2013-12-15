@@ -1,0 +1,3 @@
+# Common project Python requirements for all the application release stages.
+
+nodeenv==0.7.1

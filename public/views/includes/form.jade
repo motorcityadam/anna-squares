@@ -1,0 +1,28 @@
+form.ls-form(name="{{formName}}", ng-submit="processForm()", novalidate)
+  div(ng-repeat="formField in formFields")
+    .form-group(ng-class="{'has-error' : {{formName}}.{{formField.name}}.$dirty && {{formName}}.{{formField.name}}.$invalid}")
+      label.control-label {{formField.label}}
+      input.form-control(
+        type="{{formField.type}}",
+        name="{{formField.name}}",
+        ng-required="{{formField.fieldDirectives.isRequired.value}}",
+        ng-pattern="{{formField.fieldDirectives.pattern.value}}",
+        ng-maxlength="{{formField.fieldDirectives.maxLength.value}}",
+        ng-minlength="{{formField.fieldDirectives.minLength.value}}",
+        ng-unique="{{formField.fieldDirectives.unique.value}}")
+      p.ls-field-help.text-muted {{formField.help}}
+      div(ng-show="{{formName}}.{{formField.name}}.$dirty && {{formName}}.{{formField.name}}.$invalid")
+        span.has-error(ng-show="{{formName}}.{{formField.name}}.$error.required") {{formField.fieldDirectives.isRequired.message}}
+        span.has-error(ng-show="{{formName}}.{{formField.name}}.$error.pattern") {{formField.fieldDirectives.pattern.message}}
+        span.has-error(ng-show="{{formName}}.{{formField.name}}.$error.maxlength") {{formField.fieldDirectives.maxLength.message}}
+        span.has-error(ng-show="{{formName}}.{{formField.name}}.$error.minlength") {{formField.fieldDirectives.minLength.message}}
+        span.has-error(ng-show="{{formName}}.{{formField.name}}.$error.unique") {{formField.fieldDirectives.unique.message}}
+  pre {{ formData }}
+  p
+    strong {{formAgreementNotice}}
+    ul.list-unstyled
+      li(ng-repeat="formAgreement in formAgreements")
+        strong
+          a(href="{{formAgreement.url}}") {{formAgreement.title}}
+  button(type="submit", ng-disabled="{{formName}}.inputUsername.$pristine || {{formName}}.inputUsername.$dirty && {{formName}}.inputUsername.$invalid").btn.btn-success
+    span {{submitButtonText}}

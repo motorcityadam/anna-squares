@@ -1,0 +1,134 @@
+// common.styl
+// Root Stylus stylesheet source for anna-squares
+
+body
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-top: 45px; // Accounts for the room allocated for the Bootstrap top fixed navbar.
+
+b,
+strong {
+  font-weight: bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+a,
+a:hover,
+a:active,
+a:focus,
+button {
+  outline: 0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.jumbotron {
+  font-weight: normal;
+}
+
+.jumbotron > h3 {
+  margin-bottom: 21px;
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron h1 {
+    font-size: 46px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .ls-github-ribbon {
+    display: none !important;
+  }
+}
+
+.navbar {
+  font-weight: normal;
+}
+
+.navbar .dropdown-menu > li > a,
+.navbar .dropdown-menu > li > a:focus {
+  font-weight: normal;
+}
+
+label,
+.control-label,
+.help-block,
+.checkbox,
+.radio {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.ls-container-full
+  width: 100%;
+  min-height: 45px;
+  margin: 0;
+  
+.ls-jumbotron-top
+  background: #006698;
+
+.ls-jumbotron-bottom
+  background: #3f4245;
+
+.ls-container-full .jumbotron
+  padding: 0;
+  background: transparent;
+  color: #fff;
+
+.ls-btn-hollow
+  background: none;
+  color: #fff;
+
+.btn-md.ls-btn-hollow
+  padding: 10px 28px;
+
+.navbar-nav>li.ls-accent
+  background: #484848;
+
+.ls-noborder
+  border: none;
+
+.ls-footer
+  padding-top: 10.5px;
+  font-size: 13px;
+
+.ls-footer a,
+.ls-footer a:hover,
+.ls-footer a:focus
+  color: #000;
+  text-decoration: none;
+
+.ls-footer .ls-copyright
+  color: #666;
+
+.ls-form
+  font-size: 13px;
+
+.ls-form p
+  line-height: 1.1;
+
+.ls-form .ls-field-help
+  margin-top: 5px;
+
+.ls-form .btn
+  font-size: 13px;
+
+.panel-default > .panel-heading {
+  background-color: #dadada;
+  border-color: #dadada;
+}
