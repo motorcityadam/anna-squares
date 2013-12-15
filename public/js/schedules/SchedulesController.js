@@ -3,6 +3,17 @@
 annaSquaresApp.controller('schedulesController',
   function SchedulesController($scope) {
 
+    $scope.setupFormFields = [
+      {
+        label: 'Start Time',
+        type: 'text',
+        model: 'startTime',
+        isRequired: true
+      }
+    ];
+
+    $scope.setupFormData = {};
+
     $scope.formFields = [
       {
         label: 'Task',
