@@ -8,6 +8,8 @@ var annaSquaresApp = angular.module('annaSquaresApp',
     'ngResource',
     'ngRoute',
     'ui.route',
+    'ui.bootstrap.timepicker',
+    'ui.bootstrap.datepicker',
     'placeholders.img'
   ]
 );
