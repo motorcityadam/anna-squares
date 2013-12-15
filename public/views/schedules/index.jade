@@ -5,7 +5,23 @@
       .row
         .col-md-12
           h3 Schedule
-          h4 Saturday, December 14, 2013
+          h4 {{scheduleDay}}
       .row
-        .col-md-12
-          h4 Test.
+        .col-md-4
+          h5 Input
+      .row
+        form.ls-form(name="scheduleFormOuter", novalidate)
+          div(ng-repeat="formField in formFields")
+            .col-md-4
+              ng-form(name="scheduleFormInner")
+                .form-group(ng-class="{'has-error' : scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid}")
+                  label.control-label {{formField.label}}
+                  input.form-control(
+                    type="{{formField.type}}",
+                    name="fieldInput",
+                    ng-model="formData[formField.model]",
+                    ng-required="{{formField.isRequired}}")
+                  div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
+                    p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
+      .row
+        pre {{formData}}

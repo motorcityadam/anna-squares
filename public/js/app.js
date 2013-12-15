@@ -40,9 +40,9 @@ annaSquaresApp.config(['$routeProvider', function($routeProvider) {
   // }).
 
   // Route for patients app
-  when('/patients', {
-    templateUrl : '../../views_build/patients/index.html',
-    controller  : 'patientsController'
+  when('/tasks', {
+    templateUrl : '../../views_build/tasks/index.html',
+    controller  : 'tasksController'
   }).
 
   // Default route
