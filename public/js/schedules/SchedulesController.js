@@ -33,4 +33,3 @@ annaSquaresApp.controller('schedulesController',
   }
   
 );
-

@@ -1,14 +1,13 @@
-.container.ls-container-full.ls-jumbotron-top
 .container
   .row
     .col-md-12
       .row
         .col-md-12
           h3 Schedule
-          h4 {{scheduleDay}}
       .row
         .col-md-4
           .well.well-sm(style="display:inline-block;", ng-model="startTime", ng-change="timeChanged()")
+            label.control-label Start Time
             timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
       hr
       .row
@@ -25,5 +24,4 @@
                     ng-required="{{formField.isRequired}}")
                   div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                     p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
-      .row
-        pre {{formData}}
+      hr
