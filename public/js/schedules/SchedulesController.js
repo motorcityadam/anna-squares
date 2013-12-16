@@ -3,16 +3,11 @@
 annaSquaresApp.controller('schedulesController',
   function SchedulesController($scope) {
 
-    $scope.setupFormFields = [
-      {
-        label: 'Start Time',
-        type: 'text',
-        model: 'startTime',
-        isRequired: true
-      }
-    ];
+    $scope.startTime = new Date();
 
-    $scope.setupFormData = {};
+    $scope.hourStep = 1;
+    $scope.minStep = 1;
+    $scope.isMeridian = true;
 
     $scope.formFields = [
       {
@@ -30,6 +25,10 @@ annaSquaresApp.controller('schedulesController',
     ];
 
     $scope.formData = {};
+
+    $scope.timeChanged = function () {
+      console.log('Time changed to: ' + $scope.startTime);
+    };
 
   }
   

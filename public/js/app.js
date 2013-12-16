@@ -8,8 +8,7 @@ var annaSquaresApp = angular.module('annaSquaresApp',
     'ngResource',
     'ngRoute',
     'ui.route',
-    'ui.bootstrap.timepicker',
-    'ui.bootstrap.datepicker',
+    'ui.bootstrap',
     'placeholders.img'
   ]
 );
@@ -30,16 +29,16 @@ annaSquaresApp.config(['$routeProvider', function($routeProvider) {
   // }).
 
   // Route for user app - signin (existing user login)
-  // when('/signin', {
-  //   templateUrl : '../../views_build/user/signin.html',
-  //   controller  : 'signinController'
-  // }).
+  when('/signin', {
+    templateUrl : '../../views_build/user/signin.html',
+    controller  : 'signinController'
+  }).
 
-  // Route for user app - signin (existing user login)
-  // when('/signout', {
-  //   templateUrl : '../../views_build/user/signout.html',
-  //   controller  : 'signoutController'
-  // }).
+  // Route for user app - signout
+  when('/signout', {
+    templateUrl : '../../views_build/user/signout.html',
+    controller  : 'signoutController'
+  }).
 
   // Route for patients app
   when('/tasks', {

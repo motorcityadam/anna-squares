@@ -10,8 +10,6 @@
     "angular-resource": "latest",
     "angular-cookies": "latest",
     "angular-ui-utils": "latest",
-    "font-awesome": "latest",
-    "bootswatch": "latest",
     "sass-bootstrap-glyphicons": "latest",
     "angular-placeholders": "latest",
     "angular-ui-bootstrap": "https://github.com/angular-ui/bootstrap/archive/bootstrap3.zip"

@@ -7,19 +7,9 @@
           h3 Schedule
           h4 {{scheduleDay}}
       .row
-        form.ls-form(name="setupFormOuter", novalidate)
-          div(ng-repeat="setupFormField in setupFormFields")
-            .col-md-4
-              ng-form(name="setupFormInner")
-                .form-group(ng-class="{'has-error' : setupFormInner.fieldInput.$dirty && setupFormInner.fieldInput.$invalid}")
-                  label.control-label {{setupFormField.label}}
-                  input.form-control(
-                    type="{{setupFormField.type}}",
-                    name="fieldInput",
-                    ng-model="setupFormData[setupFormField.model]",
-                    ng-required="{{setupFormField.isRequired}}")
-                  div(ng-show="setupFormInner.fieldInput.$dirty && setupFormInner.fieldInput.$invalid")
-                    p.has-error.help-block(ng-show="setupFormInner.fieldInput.$error.required") This field is required.
+        .col-md-4
+          .well.well-sm(style="display:inline-block;", ng-model="startTime", ng-change="timeChanged()")
+            timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
       hr
       .row
         form.ls-form(name="scheduleFormOuter", novalidate)
@@ -35,7 +25,5 @@
                     ng-required="{{formField.isRequired}}")
                   div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                     p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
-      .row
-        pre {{setupFormData}}
       .row
         pre {{formData}}
