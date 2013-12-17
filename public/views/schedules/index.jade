@@ -12,6 +12,9 @@
                 label.control-label Start Time
                 timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
           .row
+            .col-md-12
+              .alert.alert-danger(ng-show="formAlert") {{formAlert}}
+          .row
             form.ls-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate)
               div(ng-repeat="formField in formFields")
                 .col-md-4

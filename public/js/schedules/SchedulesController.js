@@ -15,18 +15,21 @@ annaSquaresApp.controller('schedulesController',
       {
         label: 'Task',
         type: 'text',
-        model: 'task',
+        model: 'newTask',
         isRequired: true
       },
       {
         label: 'Minutes',
         type: 'number',
-        model: 'minutes',
+        model: 'newMinutes',
         isRequired: true
       },
     ];
 
-    $scope.formData = {};
+    $scope.formData = {
+      newTask: '',
+      newMinutes: 0
+    };
 
     $scope.timeChanged = function () {
 
@@ -36,10 +39,16 @@ annaSquaresApp.controller('schedulesController',
 
     $scope.addScheduleItem = function () {
 
-      var newTask = $scope.formData.task.trim();
-      var newMinutes = $scope.formData.minutes;
+      var newTask = $scope.formData.newTask.trim();
+      var newMinutes = $scope.formData.newMinutes;
 
-      if (newTask.length === 0 || newMinutes.length === 0) {
+      if (newTask.length === 0) {
+        $scope.formAlert = 'Please enter a task name.';
+        return;
+      }
+
+      if (newMinutes === 0) {
+        $scope.formAlert = 'Please enter the number of projected minutes for the task.';
         return;
       }
 
@@ -50,12 +59,9 @@ annaSquaresApp.controller('schedulesController',
 
       console.log(scheduleItems);
 
-      // todoStorage.put(todos);
+      $scope.formData.newTask = '';
+      $scope.formData.newMinutes = 0;
 
-      $scope.newTask = '';
-      $scope.newMinutes = '';
-
-      // $scope.remainingCount++;
     };
 
   }
