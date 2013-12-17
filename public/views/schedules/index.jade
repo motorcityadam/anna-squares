@@ -29,13 +29,9 @@
                       div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                         p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
               .col-md-4
-                button(type="submit").btn.btn-md.btn-success
+                button(type="submit").as-btn-offset.btn.btn-md.btn-success
                   | <span class="glyphicon glyphicon-plus"></span>
                   | Add task
-          .row
-            .col-md-12
-              p
-                a.btn.btn-md.btn-success(href="/") Copy this schedule to today
         .col-md-3
           .ls-sidebar.hidden-print.affix(role="complementary")
             ul.nav.ls-sidenav
