@@ -5,7 +5,13 @@ annaSquaresApp.controller('schedulesController',
 
     var scheduleItems = $scope.scheduleItems = [];
 
-    $scope.startTime = new Date();
+    var newStartTime = '';
+    var newEndTime = '';
+
+    var d = new Date();
+    d.setHours(12);
+    d.setMinutes(0);
+    $scope.startTime = d;
 
     $scope.hourStep = 1;
     $scope.minStep = 1;
@@ -16,12 +22,14 @@ annaSquaresApp.controller('schedulesController',
         label: 'Task',
         type: 'text',
         model: 'newTask',
+        doTrim: true,
         isRequired: true
       },
       {
         label: 'Minutes',
         type: 'number',
         model: 'newMinutes',
+        doTrim: false,
         isRequired: true
       },
     ];
@@ -33,7 +41,14 @@ annaSquaresApp.controller('schedulesController',
 
     $scope.timeChanged = function () {
 
-      console.log('Time changed to: ' + $scope.startTime);
+      console.log($scope.startTime);
+
+    };
+
+    $scope.setTimeToNow = function() {
+
+      $scope.startTime = new Date();
+      $scope.timeChanged();
 
     };
 
@@ -41,6 +56,8 @@ annaSquaresApp.controller('schedulesController',
 
       var newTask = $scope.formData.newTask.trim();
       var newMinutes = $scope.formData.newMinutes;
+      newStartTime = $scope.startTime;
+      newEndTime = $scope.startTime;
 
       if (newTask.length === 0) {
         $scope.formAlert = 'Please enter a task name.';
@@ -54,13 +71,29 @@ annaSquaresApp.controller('schedulesController',
 
       scheduleItems.push({
         task: newTask,
-        minutes: newMinutes
+        minutes: newMinutes,
+        startTime: newStartTime,
+        endTime: newEndTime
       });
-
-      console.log(scheduleItems);
 
       $scope.formData.newTask = '';
       $scope.formData.newMinutes = 0;
+
+      $scope.scheduleFormOuter.$setPristine();
+
+    };
+
+    $scope.printScheduleItems = function () {
+
+    };
+
+    $scope.emailScheduleItems = function () {
+
+    };
+
+    $scope.clearAllScheduleItems = function () {
+
+      scheduleItems.length = 0;
 
     };
 

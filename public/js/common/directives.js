@@ -1,21 +1,13 @@
 // 'use strict';
 
-// annaSquaresApp.directive('lsMatch', ['$timeout', function(timer) {
-
-//   return {
-//     require: 'ngModel',
-//     link: function (scope, elem, attrs, ctrl) {
-//       var run = function () {
-//         var firstField = '#' + attrs.lsMatch;
-//         elem.add(firstField).on('keyup', function () {
-//           scope.$apply(function () {
-//             var v = elem.val()===$(firstField).val();
-//             ctrl.$setValidity('match', v);
-//           });
-//         });
-//       };
-//       timer(run, 0);
-//     }
-//   };
-
-// }]);
+annaSquaresApp.directive('lsFocus', function ($timeout) {
+  return function (scope, elem, attrs) {
+    attrs.$observe('lsFocus', function (newVal) {
+      if (newVal) {
+        $timeout(function () {
+          newVal === 'true' && elem[0].focus();
+        }, 0, false);
+      }
+    });
+  };
+});

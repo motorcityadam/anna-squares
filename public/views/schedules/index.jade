@@ -8,9 +8,18 @@
         .col-md-9
           .row
             .col-md-12
-              .well.well-sm(style="display:inline-block;", ng-model="startTime", ng-change="timeChanged()")
-                label.control-label Start Time
-                timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
+              .well.well-sm.as-start-time-well(style="display:inline-block;", ng-model="startTime", ng-change="timeChanged()")
+                table
+                  tbody
+                    tr
+                      td
+                        label.control-label Start Time
+                      td
+                        timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
+                      td
+                        button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-primary
+                          | <span class="glyphicon glyphicon-time"></span>
+                          |  Set time to now
           .row
             .col-md-12
               .alert.alert-danger(ng-show="formAlert") {{formAlert}}
@@ -25,13 +34,41 @@
                         type="{{formField.type}}",
                         name="fieldInput",
                         ng-model="formData[formField.model]",
+                        ng-trim="{{formField.doTrim}}",
                         ng-required="{{formField.isRequired}}")
                       div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                         p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
               .col-md-4
-                button(type="submit").as-btn-offset.btn.btn-md.btn-success
+                button(type="submit").as-btn-offset.btn.btn-md.btn-primary
                   | <span class="glyphicon glyphicon-plus"></span>
                   | Add task
+          .row
+            .col-md-12
+              .as-accessory-btn-group
+                button(type="button", ng-click="printScheduleItems()").btn.btn-md.btn-primary
+                  | <span class="glyphicon glyphicon-print"></span>
+                  |  Print schedule
+                button(type="button", ng-click="emailScheduleItems()").btn.btn-md.btn-primary
+                  | <span class="glyphicon glyphicon-envelope"></span>
+                  |  Email schedule
+                button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-danger
+                  | <span class="glyphicon glyphicon-trash"></span>
+                  |  Clear schedule
+          .row
+            .col-md-12
+              section(ng-show="scheduleItems.length", ng-cloak)
+                .well.well-sm
+                  ul.as-schedule-items-list
+                    li.list-unstyled.as-schedule-item-row(ng-repeat="scheduleItem in scheduleItems")
+                      .row
+                        .col-md-4
+                          span {{scheduleItem.task}}
+                        .col-md-4
+                          span {{scheduleItem.minutes}}
+                        .col-md-2
+                          span {{scheduleItem.startTime}}
+                        .col-md-2
+                          span {{scheduleItem.endTime}}                      
         .col-md-3
           .ls-sidebar.hidden-print.affix(role="complementary")
             ul.nav.ls-sidenav
