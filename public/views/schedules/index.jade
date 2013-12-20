@@ -56,9 +56,13 @@
                   |  Clear schedule
           .row
             .col-md-12
-              section(ng-show="scheduleItems.length", ng-cloak)
+              section
                 .well.well-sm
                   ul.as-schedule-items-list
+                    li.list-unstyled.as-schedule-item-row(ng-hide="scheduleItems.length", ng-cloak)
+                      .row
+                        .col-md-12
+                          span There are no tasks for this day yet. Please set a start time and add some tasks to begin.
                     li.list-unstyled.as-schedule-item-row(ng-repeat="scheduleItem in scheduleItems")
                       .row
                         .col-md-4
