@@ -22,7 +22,7 @@
             .col-md-12
               .alert.alert-danger(ng-show="formAlert") {{formAlert}}
           .row
-            form.as-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate, as-focus)
+            form.as-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate, as-focus="scheduleItems.length")
               div(ng-repeat="formField in formFields")
                 .col-md-4
                   ng-form(name="scheduleFormInner")
@@ -33,8 +33,7 @@
                         name="fieldInput",
                         ng-model="formData[formField.model]",
                         ng-trim="{{formField.doTrim}}",
-                        ng-required="{{formField.isRequired}}",
-                        data-focus="{{formField.hasFocus}}")
+                        ng-required="{{formField.isRequired}}")
                       div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                         p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
               .col-md-4
@@ -80,7 +79,7 @@
                         .col-md-2
                           span {{scheduleItem.startTime}}
                         .col-md-2
-                          span {{scheduleItem.endTime}}                      
+                          span {{scheduleItem.endTime}}                     
         .col-md-3
           .as-sidebar.hidden-print.affix(role="complementary")
             ul.nav.as-sidenav

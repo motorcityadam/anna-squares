@@ -13,7 +13,8 @@
     "sass-bootstrap-glyphicons": "latest",
     "angular-placeholders": "latest",
     "angular-ui-bootstrap": "https://github.com/angular-ui/bootstrap/archive/bootstrap3.zip",
-    "momentjs": "latest"
+    "momentjs": "latest",
+    "angular-ui-handsontable": "latest"
   },
   "homepage": "https://github.com/adamjcook/anna-squares",
   "authors": [
