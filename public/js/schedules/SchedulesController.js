@@ -1,7 +1,7 @@
 'use strict';
 
 annaSquaresApp.controller('schedulesController',
-  function SchedulesController($scope) {
+  function SchedulesController ($scope) {
 
     var scheduleItems = $scope.scheduleItems = [];
 
@@ -23,14 +23,16 @@ annaSquaresApp.controller('schedulesController',
         type: 'text',
         model: 'newTask',
         doTrim: true,
-        isRequired: true
+        isRequired: true,
+        hasFocus: true
       },
       {
         label: 'Minutes',
         type: 'number',
         model: 'newMinutes',
         doTrim: false,
-        isRequired: true
+        isRequired: true,
+        hasFocus: false
       },
     ];
 
@@ -85,9 +87,19 @@ annaSquaresApp.controller('schedulesController',
 
     $scope.printScheduleItems = function () {
 
+      console.log('printScheduleItems');
+
     };
 
     $scope.emailScheduleItems = function () {
+
+      console.log('emailScheduleItems');
+
+    };
+
+    $scope.sendScheduleItems = function () {
+
+      console.log('sendScheduleItems');
 
     };
 

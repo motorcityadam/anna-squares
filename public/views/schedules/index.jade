@@ -1,11 +1,9 @@
-.container
+.container.as-content-container
   .row
     .col-md-12
       .row
-        .col-md-12
-          h3 Schedule
-      .row
         .col-md-9
+          h3 Schedule
           .row
             .col-md-12
               .well.well-sm.as-start-time-well(style="display:inline-block;", ng-model="startTime", ng-change="timeChanged()")
@@ -17,14 +15,14 @@
                       td
                         timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
                       td
-                        button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-primary
+                        button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-warning
                           | <span class="glyphicon glyphicon-time"></span>
                           |  Set time to now
           .row
             .col-md-12
               .alert.alert-danger(ng-show="formAlert") {{formAlert}}
           .row
-            form.ls-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate)
+            form.as-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate, as-focus)
               div(ng-repeat="formField in formFields")
                 .col-md-4
                   ng-form(name="scheduleFormInner")
@@ -35,34 +33,44 @@
                         name="fieldInput",
                         ng-model="formData[formField.model]",
                         ng-trim="{{formField.doTrim}}",
-                        ng-required="{{formField.isRequired}}")
+                        ng-required="{{formField.isRequired}}",
+                        data-focus="{{formField.hasFocus}}")
                       div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                         p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
               .col-md-4
-                button(type="submit").as-btn-offset.btn.btn-md.btn-primary
+                button(type="submit").as-btn-offset.btn.btn-md.btn-warning
                   | <span class="glyphicon glyphicon-plus"></span>
                   | Add task
           .row
             .col-md-12
-              .as-accessory-btn-group
-                button(type="button", ng-click="printScheduleItems()").btn.btn-md.btn-primary
-                  | <span class="glyphicon glyphicon-print"></span>
-                  |  Print schedule
-                button(type="button", ng-click="emailScheduleItems()").btn.btn-md.btn-primary
-                  | <span class="glyphicon glyphicon-envelope"></span>
-                  |  Email schedule
+              .btn-group.as-accessory-btn-group
+                button.btn.btn-warning.btn-md.dropdown-toggle(type="button", data-toggle="dropdown")
+                  | Share schedule
+                  | <span class="caret"></span>
+                ul.dropdown-menu(role="menu")
+                  li
+                    a(ng-click="printScheduleItems()")
+                      | <span class="glyphicon glyphicon-print"></span>
+                      |  Print schedule
+                    a(ng-click="emailScheduleItems()")
+                      | <span class="glyphicon glyphicon-envelope"></span>
+                      |  Email schedule
+                    a(ng-click="sendScheduleItems()")
+                      | <span class="glyphicon glyphicon-send"></span>
+                      |  Send schedule
                 button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-danger
                   | <span class="glyphicon glyphicon-trash"></span>
                   |  Clear schedule
           .row
             .col-md-12
               section
-                .well.well-sm
-                  ul.as-schedule-items-list
+                .well.well-sm.as-schedule-item-well
+                  ul
                     li.list-unstyled.as-schedule-item-row(ng-hide="scheduleItems.length", ng-cloak)
                       .row
                         .col-md-12
-                          span There are no tasks for this day yet. Please set a start time and add some tasks to begin.
+                          span
+                            strong There are no tasks for this day yet. Please set a start time and add some tasks to begin.
                     li.list-unstyled.as-schedule-item-row(ng-repeat="scheduleItem in scheduleItems")
                       .row
                         .col-md-4
@@ -74,8 +82,8 @@
                         .col-md-2
                           span {{scheduleItem.endTime}}                      
         .col-md-3
-          .ls-sidebar.hidden-print.affix(role="complementary")
-            ul.nav.ls-sidenav
+          .as-sidebar.hidden-print.affix(role="complementary")
+            ul.nav.as-sidenav
               li.active
                 a(href='/') Today's Schedule
               li

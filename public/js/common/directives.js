@@ -1,13 +1,11 @@
-// 'use strict';
+'use strict';
 
-annaSquaresApp.directive('lsFocus', function ($timeout) {
-  return function (scope, elem, attrs) {
-    attrs.$observe('lsFocus', function (newVal) {
-      if (newVal) {
-        $timeout(function () {
-          newVal === 'true' && elem[0].focus();
-        }, 0, false);
-      }
-    });
+annaSquaresApp.directive('asFocus', function ($timeout) {
+  return function (scope, elem, attr) {
+    $timeout(function () {
+      console.log(elem);
+      console.log(attr);
+      elem[0].focus();
+    }, 0, false);
   };
 });

@@ -4,6 +4,7 @@
 body
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-top: 45px;
+  background: #515151;
 
 b,
 strong
@@ -45,6 +46,27 @@ button
 .navbar .dropdown-menu > li > a:focus
   font-weight: normal;
 
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus
+  color: #333;
+  background-color: #cfcfcf;
+  cursor: pointer;
+
+.navbar-inverse .navbar-brand
+  color: #fff;
+
+.navbar-inverse .navbar-nav > li > a
+  color: #fff;
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus
+  color: #333;
+  background-color: #fff;
+
+.navbar-inverse .navbar-nav > li > a:active
+  color: #333;
+  background-color: #fff;
+
 label,
 .control-label,
 .help-block,
@@ -65,33 +87,48 @@ pre
 .alert
   border-radius: 0;
 
-.ls-container-full
+.as-container-full
   width: 100%;
   min-height: 45px;
   margin: 0;
   
-.ls-jumbotron-top
-  background: #006698;
+.as-jumbotron-top
+  background: #B00000;
 
-.ls-jumbotron-bottom
+.as-jumbotron-bottom
   background: #3f4245;
 
-.ls-container-full .jumbotron
+.as-container-full .jumbotron
   padding: 0;
   background: transparent;
   color: #fff;
 
-.ls-btn-hollow
+.as-btn-hollow
   background: none;
   color: #fff;
 
-.btn-md.ls-btn-hollow
+.btn-md.as-btn-hollow
   padding: 10px 28px;
 
 .btn
   border-radius: 0;
+  color: #333;
 
-.navbar-nav>li.ls-accent
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active,
+.open .dropdown-toggle.btn-warning
+  color: #333;
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.open .dropdown-toggle.btn-danger
+  color: #333;
+
+.navbar-nav>li.as-accent
   background: #484848;
 
 .form-control
@@ -102,7 +139,11 @@ pre
 
 .well
   margin-bottom: 10px;
+  background: #cfcfcf;
+  border: 0;
   border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 
 .well-lg
   border-radius: 0;
@@ -110,32 +151,35 @@ pre
 .well-sm
   border-radius: 0;
 
-.ls-noborder
+.as-content-container
+  background: #fff;
+
+.as-noborder
   border: none;
 
-.ls-footer
+.as-footer
   padding-top: 10.5px;
   font-size: 13px;
 
-.ls-footer a,
-.ls-footer a:hover,
-.ls-footer a:focus
+.as-footer a,
+.as-footer a:hover,
+.as-footer a:focus
   color: #000;
   text-decoration: none;
 
-.ls-footer .ls-copyright
-  color: #666;
+.as-footer .as-copyright
+  color: #999;
 
-.ls-footer .ls-license
-  color: #666;
+.as-footer .as-license
+  color: #999;
 
-.ls-form
+.as-form
   font-size: 13px;
 
-.ls-form p
+.as-form p
   line-height: 1.1;
 
-.ls-form .ls-field-help
+.as-form .as-field-help
   margin-top: 5px;
 
 .panel-default > .panel-heading
@@ -143,75 +187,77 @@ pre
   border-color: #dadada;
 
 
-.ls-sidebar.affix
+.as-sidebar.affix
   position: static;
 
-.ls-sidenav
+.as-sidenav
   margin-top: 30px;
   margin-bottom: 30px;
   padding-top:    10px;
   padding-bottom: 10px;
-  background-color: #eee;
+  background-color: #fff;
   border-radius: 0px;
 
-.ls-sidebar .nav > li > a
+.as-sidebar .nav > li > a
   display: block;
-  color: #666;
-  padding: 5px 20px;
-  border-left: 2px solid transparent;
-
-.ls-sidebar .nav > li > a:hover,
-.ls-sidebar .nav > li > a:focus
-  text-decoration: none;
-  background-color: #ccc;
-  border-left: 2px solid #006698;
-
-.ls-sidebar .nav > .active > a,
-.ls-sidebar .nav > .active:hover > a,
-.ls-sidebar .nav > .active:focus > a
-  font-weight: bold;
   color: #333;
-  background-color: transparent;
-  border-left: 2px solid #006698;
+  padding: 5px 20px;
+  border-left: 3px solid transparent;
 
-.ls-sidebar .nav .nav
+.as-sidebar .nav > li > a:hover,
+.as-sidebar .nav > li > a:focus
+  text-decoration: none;
+  color: #333;
+  background-color: #cfcfcf;
+  border-left: 3px solid #9e9e9e;
+  font-weight: normal;
+
+.as-sidebar .nav > .active > a,
+.as-sidebar .nav > .active:hover > a,
+.as-sidebar .nav > .active:focus > a
+  font-weight: bold;
+  color: #fff;
+  background-color: #9e9e9e;
+  border-left: 3px solid #333;
+  font-weight: normal;
+
+.as-sidebar .nav .nav
   display: none;
   margin-bottom: 8px;
 
-.ls-sidebar .nav .nav > li > a
+.as-sidebar .nav .nav > li > a
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 30px;
   font-size: 90%;
 
 @media (min-width: 992px)
-  .ls-sidebar .nav > .active > ul
+  .as-sidebar .nav > .active > ul
     display: block;
 
-  .ls-sidebar.affix,
-  .ls-sidebar.affix-bottom
+  .as-sidebar.affix,
+  .as-sidebar.affix-bottom
     width: 213px;
 
-  .ls-sidebar.affix
-    position: fixed;
-    top: 110px;
+  .as-sidebar.affix-bottom
+    position: aasolute;
 
-  .ls-sidebar.affix-bottom
-    position: alsolute;
-
-  .ls-sidebar.affix-bottom .ls-sidenav,
-  .ls-sidebar.affix .ls-sidenav
+  .as-sidebar.affix-bottom .as-sidenav,
+  .as-sidebar.affix .as-sidenav
     margin-top: 0;
     margin-bottom: 0;
 
 @media (min-width: 1200px)
-  .ls-sidebar.affix-bottom,
-  .ls-sidebar.affix
+  .as-sidebar.affix-bottom,
+  .as-sidebar.affix
     width: 263px;
 
 
 .as-btn-offset
   margin-top: 22px;
+
+.as-schedule-item-well
+  margin-top: 15px;
 
 .as-schedule-items-list
   margin-bottom: 0;
@@ -220,6 +266,5 @@ pre
 .as-schedule-item-row
   margin: 10px 0;
 
-.as-accessory-btn-group > button
-  margin-bottom: 10px;
+.btn-group > button
   margin-right 5px;

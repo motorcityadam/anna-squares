@@ -1,4 +1,4 @@
-.container
+.container.as-content-container
   .row
     .col-md-12
       .row
@@ -54,5 +54,5 @@
                     a(href="{{formHelp.url}}") {{formHelp.title}}
             button(
               type="submit",
-              ng-disabled="signinForm.inputUsername.$pristine || signinForm.inputPassword.$pristine").btn.btn-md.btn-success
+              ng-disabled="signinForm.inputUsername.$pristine || signinForm.inputPassword.$pristine").btn.btn-md.btn-warning
               span Sign In
