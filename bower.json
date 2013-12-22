@@ -14,7 +14,8 @@
     "angular-placeholders": "latest",
     "angular-ui-bootstrap": "https://github.com/angular-ui/bootstrap/archive/bootstrap3.zip",
     "momentjs": "latest",
-    "angular-ui-handsontable": "latest"
+    "angular-ui-handsontable": "latest",
+    "ng-grid": "latest"
   },
   "homepage": "https://github.com/adamjcook/anna-squares",
   "authors": [

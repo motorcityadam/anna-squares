@@ -53,14 +53,14 @@ annaSquaresApp.controller('schedulesController',
 
       for (i=0; i<scheduleItems.length; i++) {
         if (i === 0) {
-          startTime = startTime
+          startTime = startTime;
         } else {
           startTime = lastTime;
         }
         
-        scheduleItems[i].startTime = startTime.format("LT");
+        scheduleItems[i].startTime = startTime.format('LT');
         endTime = startTime.clone().add('minutes', scheduleItems[i].minutes);
-        scheduleItems[i].endTime = endTime.format("LT");
+        scheduleItems[i].endTime = endTime.format('LT');
         lastTime = endTime.clone();
       }
 
@@ -100,8 +100,8 @@ annaSquaresApp.controller('schedulesController',
       scheduleItems.push({
         task: newTask,
         minutes: newMinutes,
-        startTime: newStartTime.format("LT"),
-        endTime: newEndTime.format("LT")
+        startTime: newStartTime.format('LT'),
+        endTime: newEndTime.format('LT')
       });
 
       $scope.formData.newTask = '';

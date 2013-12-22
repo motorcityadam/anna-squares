@@ -74,6 +74,7 @@
                         th Docs
                         th Task
                         th Minutes
+                        th Variance
                         th Start Time
                         th End Time
                     tbody
@@ -84,10 +85,12 @@
                           input(type="checkbox")
                         td {{scheduleItem.task}}
                         td {{scheduleItem.minutes}}
+                        td
+                          input.form-control(type="number")
                         td {{scheduleItem.startTime}}
                         td {{scheduleItem.endTime}}                  
         .col-md-4
-          .as-sidebar.hidden-print.affix(role="complementary")
+          .as-sidebar.hidden-print(role="complementary")
             ul.nav.as-sidenav
               li.active
                 a(href='/') Today's Schedule
