@@ -18,28 +18,31 @@
                         button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-primary
                           | <span class="glyphicon glyphicon-time"></span>
                           |  Set time to now
+          //- .row
+          //-   .col-md-12
+          //-     .alert.alert-danger(ng-show="formAlert") {{formAlert}}
+          //- .row
+          //-   form.as-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate, as-focus="scheduleItems.length")
+          //-     div(ng-repeat="formField in formFields")
+          //-       .col-md-4
+          //-         ng-form(name="scheduleFormInner")
+          //-           .form-group(ng-class="{'has-error' : scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid}")
+          //-             label.control-label {{formField.label}}
+          //-             input.form-control(
+          //-               type="{{formField.type}}",
+          //-               name="fieldInput",
+          //-               ng-model="formData[formField.model]",
+          //-               ng-trim="{{formField.doTrim}}",
+          //-               ng-required="{{formField.isRequired}}")
+          //-             div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
+          //-               p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
+          //-     .col-md-4
+          //-       button(type="submit").as-btn-offset.btn.btn-md.btn-primary
+          //-         | <span class="glyphicon glyphicon-plus"></span>
+          //-         | Add task
           .row
             .col-md-12
-              .alert.alert-danger(ng-show="formAlert") {{formAlert}}
-          .row
-            form.as-form(name="scheduleFormOuter", ng-submit="addScheduleItem()", novalidate, as-focus="scheduleItems.length")
-              div(ng-repeat="formField in formFields")
-                .col-md-4
-                  ng-form(name="scheduleFormInner")
-                    .form-group(ng-class="{'has-error' : scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid}")
-                      label.control-label {{formField.label}}
-                      input.form-control(
-                        type="{{formField.type}}",
-                        name="fieldInput",
-                        ng-model="formData[formField.model]",
-                        ng-trim="{{formField.doTrim}}",
-                        ng-required="{{formField.isRequired}}")
-                      div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
-                        p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
-              .col-md-4
-                button(type="submit").as-btn-offset.btn.btn-md.btn-primary
-                  | <span class="glyphicon glyphicon-plus"></span>
-                  | Add task
+              .as-schedule-grid(ng-grid="gridOptions")
           .row
             .col-md-12
               .btn-group.as-accessory-btn-group
@@ -60,35 +63,33 @@
                 button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-warning
                   | <span class="glyphicon glyphicon-trash"></span>
                   |  Clear schedule
-          .row
-            .col-md-12
-              section
-                .well.well-sm.as-schedule-well(ng-hide="scheduleItems.length", ng-cloak)
-                  span
-                    strong There are no tasks for this day yet. Please set a start time and add some tasks to begin.
-                .table-condensed.table-responsive(ng-show="scheduleItems.length", ng-cloak)
-                  table.table
-                    thead
-                      tr
-                        th Must
-                        th Docs
-                        th Task
-                        th Minutes
-                        th Variance
-                        th Start Time
-                        th End Time
-                    tbody
-                      tr(ng-repeat="scheduleItem in scheduleItems")
-                        td
-                          | <span class="glyphicon glyphicon-star-empty"></span>
-                        td
-                          input(type="checkbox")
-                        td {{scheduleItem.task}}
-                        td {{scheduleItem.minutes}}
-                        td
-                          input.form-control(type="number")
-                        td {{scheduleItem.startTime}}
-                        td {{scheduleItem.endTime}}                  
+              //- section
+              //-   .well.well-sm.as-schedule-well(ng-hide="scheduleItems.length", ng-cloak)
+              //-     span
+              //-       strong There are no tasks for this day yet. Please set a start time and add some tasks to begin.
+              //-   .table-condensed.table-responsive(ng-show="scheduleItems.length", ng-cloak)
+              //-     table.table
+              //-       thead
+              //-         tr
+              //-           th Must
+              //-           th Docs
+              //-           th Task
+              //-           th Minutes
+              //-           th Variance
+              //-           th Start Time
+              //-           th End Time
+              //-       tbody
+              //-         tr(ng-repeat="scheduleItem in scheduleItems")
+              //-           td
+              //-             | <span class="glyphicon glyphicon-star-empty"></span>
+              //-           td
+              //-             input(type="checkbox")
+              //-           td {{scheduleItem.task}}
+              //-           td {{scheduleItem.minutes}}
+              //-           td
+              //-             input.form-control(type="number")
+              //-           td {{scheduleItem.startTime}}
+              //-           td {{scheduleItem.endTime}}                  
         .col-md-4
           .as-sidebar.hidden-print(role="complementary")
             ul.nav.as-sidenav

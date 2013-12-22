@@ -42,6 +42,94 @@ annaSquaresApp.controller('schedulesController',
       newMinutes: 0
     };
 
+    $scope.scheduleData = [
+      {
+        task: 'Anna',
+        minutes: 50,
+        variance: 0,
+        startTime: '',
+        endTime: ''
+      }, {
+        task: 'Adam',
+        minutes: 43,
+        variance: 0,
+        startTime: '',
+        endTime: ''
+      }, {
+        task: 'Cassandra',
+        minutes: 27,
+        variance: 0,
+        startTime: '',
+        endTime: ''
+      }, {
+        task: 'Angel',
+        minutes: 29,
+        variance: 0,
+        startTime: '',
+        endTime: ''
+      }, {
+        task: 'Beverly',
+        minutes: 34,
+        variance: 0,
+        startTime: '',
+        endTime: ''
+      }
+    ];
+
+    $scope.gridOptions = { 
+      data: 'scheduleData',
+      headerRowHeight: 30,
+      enableCellSelection: true,
+      enableRowSelection: true,
+      enableCellEditOnFocus: true,
+      multiSelect: false,
+      columnDefs: [
+        {
+          field: 'isMust',
+          displayName: 'Must',
+          sortable: false,
+          enableCellEdit: true,
+          width: '50px'
+        }, {
+          field: 'hasDocs',
+          displayName: 'Docs',
+          sortable: false,
+          enableCellEdit: true,
+          width: '50px'
+        }, {
+          field: 'task',
+          displayName: 'Task',
+          sortable: false,
+          enableCellEdit: true,
+          width: '250px'
+        }, {
+          field: 'minutes', 
+          displayName: 'Minutes',
+          sortable: false,
+          enableCellEdit: true,
+          width: '75px'
+        }, {
+          field: 'variance',
+          displayName: 'Variance',
+          sortable: false,
+          enableCellEdit: true,
+          width: '75px'
+        }, {
+          field: 'startTime',
+          displayName: 'Start Time',
+          sortable: false,
+          enableCellEdit: false,
+          width: '100px'
+        }, {
+          field: 'endTime',
+          displayName: 'End Time',
+          sortable: false,
+          enableCellEdit: false,
+          width: '100px'
+        }
+      ]
+    };
+
     $scope.timeChanged = function () {
 
       var i = 0;

@@ -9,6 +9,7 @@ var annaSquaresApp = angular.module('annaSquaresApp',
     'ngRoute',
     'ui.route',
     'ui.bootstrap',
+    'ngGrid',
     'placeholders.img'
   ]
 );
