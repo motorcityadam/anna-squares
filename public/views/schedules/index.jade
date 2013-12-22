@@ -2,7 +2,7 @@
   .row
     .col-md-12
       .row
-        .col-md-9
+        .col-md-8
           h3 Schedule
           .row
             .col-md-12
@@ -15,7 +15,7 @@
                       td
                         timepicker(hour-step="hourStep", minute-step="minStep", show-meridian="isMeridian")
                       td
-                        button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-warning
+                        button(ng-click="setTimeToNow()", type="submit").btn.btn-md.btn-primary
                           | <span class="glyphicon glyphicon-time"></span>
                           |  Set time to now
           .row
@@ -37,75 +37,97 @@
                       div(ng-show="scheduleFormInner.fieldInput.$dirty && scheduleFormInner.fieldInput.$invalid")
                         p.has-error.help-block(ng-show="scheduleFormInner.fieldInput.$error.required") This field is required.
               .col-md-4
-                button(type="submit").as-btn-offset.btn.btn-md.btn-warning
+                button(type="submit").as-btn-offset.btn.btn-md.btn-primary
                   | <span class="glyphicon glyphicon-plus"></span>
                   | Add task
           .row
             .col-md-12
               .btn-group.as-accessory-btn-group
-                button.btn.btn-warning.btn-md.dropdown-toggle(type="button", data-toggle="dropdown")
+                button.btn.btn-primary.btn-md.dropdown-toggle(type="button", data-toggle="dropdown")
                   | Share schedule
                   | <span class="caret"></span>
                 ul.dropdown-menu(role="menu")
                   li
                     a(ng-click="printScheduleItems()")
                       | <span class="glyphicon glyphicon-print"></span>
-                      |  Print schedule
+                      | Print schedule
                     a(ng-click="emailScheduleItems()")
                       | <span class="glyphicon glyphicon-envelope"></span>
-                      |  Email schedule
+                      | Email schedule
                     a(ng-click="sendScheduleItems()")
                       | <span class="glyphicon glyphicon-send"></span>
-                      |  Send schedule
-                button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-danger
+                      | Send schedule
+                button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-warning
                   | <span class="glyphicon glyphicon-trash"></span>
                   |  Clear schedule
           .row
             .col-md-12
               section
-                .well.well-sm.as-schedule-item-well
-                  ul
-                    li.list-unstyled.as-schedule-item-row(ng-hide="scheduleItems.length", ng-cloak)
-                      .row
-                        .col-md-12
-                          span
-                            strong There are no tasks for this day yet. Please set a start time and add some tasks to begin.
-                    li.list-unstyled.as-schedule-item-row(ng-repeat="scheduleItem in scheduleItems")
-                      .row
-                        .col-md-4
-                          span {{scheduleItem.task}}
-                        .col-md-4
-                          span {{scheduleItem.minutes}}
-                        .col-md-2
-                          span {{scheduleItem.startTime}}
-                        .col-md-2
-                          span {{scheduleItem.endTime}}                     
-        .col-md-3
+                .well.well-sm.as-schedule-well(ng-hide="scheduleItems.length", ng-cloak)
+                  span
+                    strong There are no tasks for this day yet. Please set a start time and add some tasks to begin.
+                .table-condensed.table-responsive(ng-show="scheduleItems.length", ng-cloak)
+                  table.table
+                    thead
+                      tr
+                        th Must
+                        th Docs
+                        th Task
+                        th Minutes
+                        th Start Time
+                        th End Time
+                    tbody
+                      tr(ng-repeat="scheduleItem in scheduleItems")
+                        td
+                          | <span class="glyphicon glyphicon-star-empty"></span>
+                        td
+                          input(type="checkbox")
+                        td {{scheduleItem.task}}
+                        td {{scheduleItem.minutes}}
+                        td {{scheduleItem.startTime}}
+                        td {{scheduleItem.endTime}}                  
+        .col-md-4
           .as-sidebar.hidden-print.affix(role="complementary")
             ul.nav.as-sidenav
               li.active
                 a(href='/') Today's Schedule
               li
-                a(href='/') Schedule 2
+                a(href='/') Friday, December 20, 2013
               li
-                a(href='/') Schedule 3
+                a(href='/') Thursday, December 19, 2013
               li
-                a(href='/') Schedule 4
+                a(href='/') Wednesday, December 18, 2013
               li
-                a(href='/') Schedule 5
+                a(href='/') Tuesday, December 17, 2013
               li
-                a(href='/') Schedule 6
+                a(href='/') Monday, December 16, 2013
               li
-                a(href='/') Schedule 7
+                a(href='/') Sunday, December 15, 2013
               li
-                a(href='/') Schedule 8
+                a(href='/') Saturday, December 14, 2013
               li
-                a(href='/') Schedule 9
+                a(href='/') Friday, December 13, 2013
               li
-                a(href='/') Schedule 10
+                a(href='/') Thursday, December 12, 2013
               li
-                a(href='/') Schedule 11
+                a(href='/') Wednesday, December 11, 2013
               li
-                a(href='/') Schedule 12
+                a(href='/') Tuesday, December 10, 2013
               li
-                a(href='/') Schedule 13
+                a(href='/') Monday, December 9, 2013
+              li
+                a(href='/') Sunday, December 8, 2013
+              li
+                a(href='/') Saturday, December 7, 2013
+              li
+                a(href='/') Friday, December 6, 2013
+              li
+                a(href='/') Thursday, December 5, 2013
+              li
+                a(href='/') Wednesday, December 4, 2013
+              li
+                a(href='/') Tuesday, December 3, 2013
+              li
+                a(href='/') Monday, December 2, 2013
+              li
+                a(href='/') Sunday, December 1, 2013

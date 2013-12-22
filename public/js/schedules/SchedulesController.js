@@ -7,7 +7,9 @@ annaSquaresApp.controller('schedulesController',
 
     var newStartTime = '';
     var newEndTime = '';
-    var lastTime = '';
+    var newLastTime = '';
+
+    // var lastTime = '';
 
     var d = moment({hour: 12, minute: 0});
     $scope.startTime = d;
@@ -42,7 +44,25 @@ annaSquaresApp.controller('schedulesController',
 
     $scope.timeChanged = function () {
 
-      console.log('timeChanged');
+      var i = 0;
+      var startTime;
+      var endTime;
+      var lastTime;
+
+      startTime = $scope.startTime;
+
+      for (i=0; i<scheduleItems.length; i++) {
+        if (i === 0) {
+          startTime = startTime
+        } else {
+          startTime = lastTime;
+        }
+        
+        scheduleItems[i].startTime = startTime.format("LT");
+        endTime = startTime.clone().add('minutes', scheduleItems[i].minutes);
+        scheduleItems[i].endTime = endTime.format("LT");
+        lastTime = endTime.clone();
+      }
 
     };
 
@@ -71,11 +91,11 @@ annaSquaresApp.controller('schedulesController',
       if (scheduleItems.length === 0) {
         newStartTime = $scope.startTime;
       } else {
-        newStartTime = lastTime;
+        newStartTime = newLastTime;
       }
 
       newEndTime = newStartTime.clone().add('minutes', newMinutes);
-      lastTime = newEndTime.clone();
+      newLastTime = newEndTime.clone();
 
       scheduleItems.push({
         task: newTask,
@@ -84,15 +104,8 @@ annaSquaresApp.controller('schedulesController',
         endTime: newEndTime.format("LT")
       });
 
-      // scheduleItems.push({
-      //   task: newTask,
-      //   minutes: newMinutes
-      // });
-
       $scope.formData.newTask = '';
       $scope.formData.newMinutes = 0;
-
-      console.log(scheduleItems);
 
       $scope.scheduleFormOuter.$setPristine();
 

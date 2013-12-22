@@ -4,7 +4,7 @@
 body
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-top: 45px;
-  background: #515151;
+  background: #ccc;
 
 b,
 strong
@@ -25,11 +25,18 @@ h6,
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
 
+h1,
+h2,
+h3
+  margin-top: 10px;
+
 a,
 a:hover,
 a:active,
 a:focus,
-button
+.btn:hover,
+.btn:active,
+.btn:focus
   outline: 0;
   outline: none;
 
@@ -42,14 +49,24 @@ button
 .navbar
   font-weight: normal;
 
+.navbar-inverse
+  border-color: #222;
+
 .navbar .dropdown-menu > li > a,
 .navbar .dropdown-menu > li > a:focus
   font-weight: normal;
 
+.dropdown-menu
+  border-radius: 0;
+  border: 1px solid #9a9a9a;
+  -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.22);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.22);
+
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus
   color: #333;
-  background-color: #cfcfcf;
+  background-color: #f2f2f2;
   cursor: pointer;
 
 .navbar-inverse .navbar-brand
@@ -60,12 +77,12 @@ button
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus
-  color: #333;
-  background-color: #fff;
+  color: #fff;
+  background-color: #333;
 
 .navbar-inverse .navbar-nav > li > a:active
-  color: #333;
-  background-color: #fff;
+  color: #fff;
+  background-color: #333;
 
 label,
 .control-label,
@@ -83,7 +100,6 @@ hr
 pre
   border-radius: 0;
 
-
 .alert
   border: 0;
   border-radius: 0;
@@ -94,7 +110,7 @@ pre
   margin: 0;
   
 .as-jumbotron-top
-  background: #B00000;
+  background: #065fa3;
 
 .as-jumbotron-bottom
   background: #3f4245;
@@ -112,8 +128,23 @@ pre
   padding: 10px 28px;
 
 .btn
+  outline: 0;
+  border: 1px outset #ccc;
   border-radius: 0;
   color: #333;
+
+.btn-link:hover,
+.btn-link:focus,
+.btn-link:active
+  border: 1px inset #ccc;
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary
+  color: #333;
+  border: 1px inset #ccc;
 
 .btn-warning:hover,
 .btn-warning:focus,
@@ -121,6 +152,7 @@ pre
 .btn-warning.active,
 .open .dropdown-toggle.btn-warning
   color: #333;
+  border: 1px inset #ccc;
 
 .btn-danger:hover,
 .btn-danger:focus,
@@ -128,19 +160,26 @@ pre
 .btn-danger.active,
 .open .dropdown-toggle.btn-danger
   color: #333;
+  border: 1px inset #ccc;
 
 .navbar-nav>li.as-accent
   background: #484848;
 
 .form-control
   border-radius: 0;
+  outline: none;
+  border: 1px inset #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
 
 .glyphicon
   color: #333;
 
 .well
   margin-bottom: 10px;
-  background: #cfcfcf;
+  background: #f2f2f2;
   border: 0;
   border-radius: 0;
   -webkit-box-shadow: none;
@@ -187,17 +226,20 @@ pre
   background-color: #dadada;
   border-color: #dadada;
 
-
 .as-sidebar.affix
   position: static;
 
 .as-sidenav
   margin-top: 30px;
   margin-bottom: 30px;
-  padding-top:    10px;
+  padding-top: 10px;
   padding-bottom: 10px;
   background-color: #fff;
   border-radius: 0px;
+  max-height: 380px;
+  overflow-y: auto;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #000;
 
 .as-sidebar .nav > li > a
   display: block;
@@ -209,17 +251,17 @@ pre
 .as-sidebar .nav > li > a:focus
   text-decoration: none;
   color: #333;
-  background-color: #cfcfcf;
-  border-left: 3px solid #9e9e9e;
+  background-color: #f2f2f2;
+  border-left: 3px solid #333;
   font-weight: normal;
 
 .as-sidebar .nav > .active > a,
 .as-sidebar .nav > .active:hover > a,
 .as-sidebar .nav > .active:focus > a
   font-weight: bold;
-  color: #fff;
-  background-color: #9e9e9e;
-  border-left: 3px solid #333;
+  color: #333;
+  background-color: #ccc;
+  border-left: 3px solid #065fa3;
   font-weight: normal;
 
 .as-sidebar .nav .nav
@@ -236,10 +278,6 @@ pre
   .as-sidebar .nav > .active > ul
     display: block;
 
-  .as-sidebar.affix,
-  .as-sidebar.affix-bottom
-    width: 213px;
-
   .as-sidebar.affix-bottom
     position: aasolute;
 
@@ -248,23 +286,19 @@ pre
     margin-top: 0;
     margin-bottom: 0;
 
-@media (min-width: 1200px)
-  .as-sidebar.affix-bottom,
-  .as-sidebar.affix
-    width: 263px;
-
-
 .as-btn-offset
   margin-top: 22px;
 
-.as-schedule-item-well
+@media (max-width: 992px)
+  .as-btn-offset
+    margin-top: 0;
+    margin-bottom: 10px;
+
+.as-schedule-well
   margin-top: 15px;
+  text-align: center;
 
-.as-schedule-items-list
-  margin-bottom: 0;
-  padding-left: 0;
-
-.as-schedule-item-row
+.as-schedule-well span
   margin: 10px 0;
 
 .btn-group > button
