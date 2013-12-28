@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "latest",
     "jquery": "latest",
+    "jquery.ui": "latest",
     "modernizr": "latest",
     "angular": "latest",
     "angular-route": "latest",
@@ -12,10 +13,9 @@
     "angular-ui-utils": "latest",
     "sass-bootstrap-glyphicons": "latest",
     "angular-placeholders": "latest",
-    "angular-ui-bootstrap": "https://github.com/angular-ui/bootstrap/archive/bootstrap3.zip",
     "momentjs": "latest",
-    "angular-ui-handsontable": "latest",
-    "ng-grid": "latest"
+    "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip",
+    "angular-asc-ui": "git@github.com:adamjcook/angular-asc-ui.git"
   },
   "homepage": "https://github.com/adamjcook/anna-squares",
   "authors": [

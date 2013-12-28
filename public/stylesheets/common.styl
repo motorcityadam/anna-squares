@@ -7,7 +7,8 @@ body
   background: #ccc;
 
 b,
-strong
+strong,
+.strong
   font-weight: bold;
 
 h1,
@@ -101,7 +102,6 @@ pre
   border-radius: 0;
 
 .alert
-  border: 0;
   border-radius: 0;
 
 .as-container-full
@@ -129,14 +129,15 @@ pre
 
 .btn
   outline: 0;
-  border: 1px outset #ccc;
   border-radius: 0;
   color: #333;
 
-.btn-link:hover,
-.btn-link:focus,
-.btn-link:active
-  border: 1px inset #ccc;
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info
+  color: #333;
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -144,7 +145,6 @@ pre
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary
   color: #333;
-  border: 1px inset #ccc;
 
 .btn-warning:hover,
 .btn-warning:focus,
@@ -152,7 +152,6 @@ pre
 .btn-warning.active,
 .open .dropdown-toggle.btn-warning
   color: #333;
-  border: 1px inset #ccc;
 
 .btn-danger:hover,
 .btn-danger:focus,
@@ -160,12 +159,33 @@ pre
 .btn-danger.active,
 .open .dropdown-toggle.btn-danger
   color: #333;
-  border: 1px inset #ccc;
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success
+  color: #333;
 
 .navbar-nav>li.as-accent
   background: #484848;
 
 .form-control
+  border-radius: 0;
+  outline: none;
+  border: 1px inset #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
+
+.date-control
+  padding: 6px 12px;
+  vertical-align: middle;
+  text-align: center;
+  width: 250px;
+  height: 34px;
+  margin-left: 10px;
   border-radius: 0;
   outline: none;
   border: 1px inset #cccccc;
@@ -303,8 +323,9 @@ pre
 .as-schedule-well span
   margin: 10px 0;
 
-.btn-group > button
-  margin-right 5px;
+.calendar-btn,
+.time-btn
+  border: 1px solid #999;
 
 .as-schedule-grid
   margin: 10px 0;
@@ -313,4 +334,80 @@ pre
   border-right: 1px solid #000;
   border-bottom: 1px solid #000;
   width: 100%;
-  min-height: 270px;
+  min-height: 300px;
+
+.as-schedule-grid table
+  margin-bottom: 0;
+
+.as-schedule-notes
+  margin-bottom: 10px;
+
+table
+  font-size: 13px;
+
+thead
+  background: #ccc;
+
+td
+  text-align: center;
+
+td > input
+  width: 100%;
+
+.alert
+  padding: 10px;
+  margin: 10px 0 0 0;
+  border-radius: 0;
+
+.table-bordered
+  border: 1px solid #999;
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td
+  line-height: 1.428571429;
+  vertical-align: middle;
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td
+  border: 1px solid #999;
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th
+  background-color: #f2f2f2;
+
+.table > tbody > tr > td.row-btn
+  background-color: #ccc;
+  text-align: center;
+  padding: 5px 10px;
+
+input[type="radio"],
+input[type="checkbox"]
+  display: inline;
+  margin: 0;
+  width: auto;
+
+button[disabled],
+html input[disabled]
+  cursor: not-allowed;
+  background-color: #ddd;
+
+.form-control
+  font-size: 13px;
+  border: 1px inset #ccc;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
+
+@media (max-width: 767px)
+  .table-responsive
+    overflow-x: auto;
