@@ -15,7 +15,7 @@
     "angular-placeholders": "latest",
     "momentjs": "latest",
     "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip",
-    "angular-asc-ui": "git@github.com:adamjcook/angular-asc-ui.git"
+    "angular-asc-ui": "https://github.com/adamjcook/angular-asc-ui/archive/v0.1.13.zip"
   },
   "homepage": "https://github.com/adamjcook/anna-squares",
   "authors": [

@@ -28,6 +28,6 @@ uploads/*
 
 .nodemonignore
 public/lib
-public/stylesheets_build
-public/js_build
-public/views_build
+# public/stylesheets_build
+# public/js_build
+# public/views_build

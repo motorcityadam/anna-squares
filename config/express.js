@@ -8,7 +8,8 @@ var flash      = require('connect-flash');
 var helpers    = require('view-helpers');
 var config     = require('./config');
 
-module.exports = function(app, passport, db) {
+// module.exports = function(app, passport, db) {
+module.exports = function(app, passport) {
 
   app.set('showStackError', true);
   
@@ -48,12 +49,15 @@ module.exports = function(app, passport, db) {
     app.use(express.methodOverride());
 
     //express/mongo session storage
+    // app.use(express.session({
+    //   secret: 'MEAN',
+    //   store: new mongoStore({
+    //     db: db.connection.db,
+    //     collection: 'sessions'
+    //   })
+    // }));
     app.use(express.session({
-      secret: 'MEAN',
-      store: new mongoStore({
-        db: db.connection.db,
-        collection: 'sessions'
-      })
+      secret: 'MEAN'
     }));
 
     //connect flash for flash messages

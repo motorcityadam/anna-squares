@@ -14,7 +14,7 @@ var auth     = require('./config/middlewares/auth');
 var mongoose = require('mongoose');
 
 // Configure database connection
-var db = mongoose.connect(config.db);
+// var db = mongoose.connect(config.db);
 
 // Load application models
 var models_path = __dirname + '/server/models';
@@ -39,7 +39,8 @@ require('./config/passport')(passport);
 var app = express();
 
 // Bootstrap express configuration
-require('./config/express')(app, passport, db);
+// require('./config/express')(app, passport, db);
+require('./config/express')(app, passport);
 
 // Bootstrap application routes
 require('./config/routes')(app, passport, auth);

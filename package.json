@@ -11,7 +11,7 @@
     } 
   ],
   "scripts": {
-    "start": "node node_modules/grunt-cli/bin/grunt",
+    "start": "server.js",
     "test": "node node_modules/grunt-cli/bin/grunt test",
     "postinstall": "bower install"
   },
@@ -70,5 +70,6 @@
     "node": "0.10.x",
     "npm": "1.3.x"
   },
+  "subdomain": "anna-squares",
   "jshintConfig": ".jshintrc"
 }
