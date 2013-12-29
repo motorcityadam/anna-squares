@@ -27,6 +27,7 @@
           ng-disabled="true",
           asc-timepicker-popup="shortTime",
           ng-model="startTime",
+          ng-change="changeStartTime()",
           is-open="timeOpened",
           timepicker-options="timePickerOptions",
           ng-required="true")
@@ -45,18 +46,19 @@
               tr.column-label
                 th(colspan="3")
                 th(ng-repeat="columnDefintion in columnDefintions") {{columnDefintion.displayName}}
-            tbody(ui-sortable, ng-model="rowIds")
-              tr(ng-repeat="rowId in rowIds")
+            tbody(ui-sortable="sortableOptions", ng-model="rowData")
+              tr(ng-repeat="rowDatum in rowData")
                 td.row-btn
                   span.glyphicon.glyphicon-move
                 td.row-btn(ng-click="addRow()")
                   span.glyphicon.glyphicon-plus
-                td.row-btn(ng-click="removeRow(rowId)")
+                td.row-btn(ng-click="removeRow(rowDatum)")
                   span.glyphicon.glyphicon-remove
                 td(ng-repeat="columnDefintion in columnDefintions")
                   input.form-control(
                     ng-disabled="{{columnDefintion.isDisabled}}",
-                    ng-model="cellData[columnDefintion.name+rowId]",
+                    ng-model="rowDatum.data[columnDefintion.name]",
+                    ng-change="{{columnDefintion.doOnChange}}",
                     type="{{columnDefintion.type}}",
                     min="{{columnDefintion.minNumber}}",
                     max="{{columnDefintion.maxNumber}}")
@@ -85,9 +87,8 @@
         button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-warning
           | <span class="glyphicon glyphicon-trash"></span>
           |  Clear schedule
-  .row
-    .col-md-12
-      pre {{rowIds}}
-      pre {{cellData}}
-      pre {{scheduleDate}}
-      pre {{startTime}}
+  //- .row
+  //-   .col-md-12
+  //-     pre {{rowData}}
+  //-     pre {{scheduleDate}}
+  //-     pre {{startTime}}

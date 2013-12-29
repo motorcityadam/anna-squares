@@ -5,12 +5,6 @@ annaSquaresApp.controller('schedulesController',
 
     var scheduleItems = $scope.scheduleItems = [];
 
-    // var newStartTime = '';
-    // var newEndTime = '';
-    // var newLastTime = '';
-
-    // var lastTime = '';
-
     var d = moment();
     $scope.scheduleDate = d._d;
     $scope.startTime = d._d;
@@ -36,13 +30,13 @@ annaSquaresApp.controller('schedulesController',
       });
     };
 
-    $scope.timePickerOptions = {
+    $scope.timePickerOptions = {};
 
+    $scope.sortableOptions = {
+      stop: function(e, ui) {
+        computeTimes();
+      }
     };
-
-    $scope.hourStep = 1;
-    $scope.minStep = 1;
-    $scope.isMeridian = true;
 
     $scope.alerts = [];
 
@@ -52,63 +46,76 @@ annaSquaresApp.controller('schedulesController',
         displayName: 'Must',
         type: 'checkbox',
         isDisabled: false,
+        doOnChange: '',
         minNumber: '',
         maxNumber: ''
       },
       {
-        name: 'hasPBDoc',
-        displayName: 'PB',
+        name: 'hasDocs',
+        displayName: 'Docs',
         type: 'checkbox',
         isDisabled: false,
+        doOnChange: '',
         minNumber: '',
         maxNumber: ''
       },
-      {
-        name: 'hasPNDoc',
-        displayName: 'PN',
-        type: 'checkbox',
-        isDisabled: false,
-        minNumber: '',
-        maxNumber: ''
-      },
-      {
-        name: 'hasPCDoc',
-        displayName: 'PC',
-        type: 'checkbox',
-        isDisabled: false,
-        minNumber: '',
-        maxNumber: ''
-      },
-      {
-        name: 'hasDCDoc',
-        displayName: 'DC',
-        type: 'checkbox',
-        isDisabled: false,
-        minNumber: '',
-        maxNumber: ''
-      },
-      {
-        name: 'hasEVDoc',
-        displayName: 'EV',
-        type: 'checkbox',
-        isDisabled: false,
-        minNumber: '',
-        maxNumber: ''
-      },
+      // {
+      //   name: 'hasPNDoc',
+      //   displayName: 'PN',
+      //   type: 'checkbox',
+      //   isDisabled: false,
+      //   minNumber: '',
+      //   maxNumber: ''
+      // },
+      // {
+      //   name: 'hasPCDoc',
+      //   displayName: 'PC',
+      //   type: 'checkbox',
+      //   isDisabled: false,
+      //   minNumber: '',
+      //   maxNumber: ''
+      // },
+      // {
+      //   name: 'hasDCDoc',
+      //   displayName: 'DC',
+      //   type: 'checkbox',
+      //   isDisabled: false,
+      //   minNumber: '',
+      //   maxNumber: ''
+      // },
+      // {
+      //   name: 'hasEVDoc',
+      //   displayName: 'EV',
+      //   type: 'checkbox',
+      //   isDisabled: false,
+      //   minNumber: '',
+      //   maxNumber: ''
+      // },
       {
         name: 'patient',
         displayName: 'Patient',
         type: 'text',
         isDisabled: false,
+        doOnChange: '',
         minNumber: '',
         maxNumber: ''
       },
       {
-        name: 'minutes',
-        displayName: 'Minutes',
+        name: 'plan',
+        displayName: 'Plan',
         type: 'number',
         isDisabled: false,
+        doOnChange: 'changeMinutes(rowDatum)',
         minNumber: '0',
+        maxNumber: ''
+      },
+      {
+        name: 'met',
+        displayName: 'Met',
+        type: 'number',
+        isDisabled: true,
+        doOnChange: '',
+        minNumber: '',
         maxNumber: ''
       },
       {
@@ -116,6 +123,7 @@ annaSquaresApp.controller('schedulesController',
         displayName: 'Variance',
         type: 'number',
         isDisabled: false,
+        doOnChange: 'changeVariance(rowDatum)',
         minNumber: '',
         maxNumber: '0'
       },
@@ -124,6 +132,7 @@ annaSquaresApp.controller('schedulesController',
         displayName: 'Start Time',
         type: 'text',
         isDisabled: true,
+        doOnChange: '',
         minNumber: '',
         maxNumber: ''
       },
@@ -132,218 +141,86 @@ annaSquaresApp.controller('schedulesController',
         displayName: 'End Time',
         type: 'text',
         isDisabled: true,
+        doOnChange: '',
         minNumber: '',
         maxNumber: ''
       }
     ];
 
-    $scope.rowIds = [1];
-
-    $scope.cellData = {};
+    $scope.rowData = [
+      {
+        id: 1,
+        data: {
+          plan: 0,
+          met: 0,
+          variance: 0
+        }
+      }
+    ];
 
     $scope.addRow = function () {
+      var i;
+      var maxRowId;
       var nextRowId;
-      nextRowId = Math.max.apply(Math, $scope.rowIds) + 1;
-      $scope.rowIds.push(nextRowId);
+      maxRowId = $scope.rowData[0].id;
+      for (i=0; i < $scope.rowData.length; i++) {
+        if ($scope.rowData[i].id > maxRowId) {
+          maxRowId = $scope.rowData[i].id;
+        }
+      }
+      nextRowId = maxRowId + 1;
+      $scope.rowData.push({id: nextRowId, data: {plan: 0, met: 0, variance: 0}});
+      computeTimes();
     };
 
-    $scope.removeRow = function (rowId) {
+    $scope.removeRow = function (rowDatum) {
       var targetIndex;
-      if ($scope.rowIds.length === 1) {
+      if ($scope.rowData.length === 1) {
         $scope.alerts.length = 0;
         $scope.alerts.push({type: 'danger', msg: 'This row cannot be removed because it is the last one.'});
         return;
       }
-      targetIndex = $scope.rowIds.indexOf(rowId);
+      targetIndex = $scope.rowData.indexOf(rowDatum);
       if (targetIndex > -1) {
-        $scope.rowIds.splice(targetIndex, 1);
+        $scope.rowData.splice(targetIndex, 1);
       }
+      computeTimes();
     };
 
     $scope.closeAlert = function (index) {
       $scope.alerts.splice(index, 1);
     };
 
-    // $scope.formFields = [
-    //   {
-    //     label: 'Task',
-    //     type: 'text',
-    //     model: 'newTask',
-    //     doTrim: true,
-    //     isRequired: true,
-    //     hasFocus: true
-    //   },
-    //   {
-    //     label: 'Minutes',
-    //     type: 'number',
-    //     model: 'newMinutes',
-    //     doTrim: false,
-    //     isRequired: true,
-    //     hasFocus: false
-    //   },
-    // ];
+    $scope.markRowMust = function (rowId) {
+      console.log(rowId);
+    };
 
-    // $scope.formData = {
-    //   newTask: '',
-    //   newMinutes: 0
-    // };
+    $scope.changeStartTime = function () {
+      computeTimes();
+    };
 
-    // $scope.scheduleData = [
-    //   {
-    //     task: 'Anna',
-    //     minutes: 50,
-    //     variance: 0,
-    //     startTime: '',
-    //     endTime: ''
-    //   }, {
-    //     task: 'Adam',
-    //     minutes: 43,
-    //     variance: 0,
-    //     startTime: '',
-    //     endTime: ''
-    //   }, {
-    //     task: 'Cassandra',
-    //     minutes: 27,
-    //     variance: 0,
-    //     startTime: '',
-    //     endTime: ''
-    //   }, {
-    //     task: 'Angel',
-    //     minutes: 29,
-    //     variance: 0,
-    //     startTime: '',
-    //     endTime: ''
-    //   }, {
-    //     task: 'Beverly',
-    //     minutes: 34,
-    //     variance: 0,
-    //     startTime: '',
-    //     endTime: ''
-    //   }
-    // ];
+    $scope.changeMinutes = function (rowDatum) {
+      rowDatum.data.variance = 0;
+      $scope.changeVariance(rowDatum);
+      computeTimes();
+    };
 
-    // $scope.gridOptions = { 
-    //   data: 'scheduleData',
-    //   headerRowHeight: 30,
-    //   enableCellSelection: true,
-    //   enableRowSelection: true,
-    //   enableCellEditOnFocus: true,
-    //   multiSelect: false,
-    //   columnDefs: [
-    //     {
-    //       field: 'isMust',
-    //       displayName: 'Must',
-    //       sortable: false,
-    //       enableCellEdit: true,
-    //       width: '50px'
-    //     }, {
-    //       field: 'hasDocs',
-    //       displayName: 'Docs',
-    //       sortable: false,
-    //       enableCellEdit: true,
-    //       width: '50px'
-    //     }, {
-    //       field: 'task',
-    //       displayName: 'Task',
-    //       sortable: false,
-    //       enableCellEdit: true,
-    //       width: '250px'
-    //     }, {
-    //       field: 'minutes', 
-    //       displayName: 'Minutes',
-    //       sortable: false,
-    //       enableCellEdit: true,
-    //       width: '75px'
-    //     }, {
-    //       field: 'variance',
-    //       displayName: 'Variance',
-    //       sortable: false,
-    //       enableCellEdit: true,
-    //       width: '75px'
-    //     }, {
-    //       field: 'startTime',
-    //       displayName: 'Start Time',
-    //       sortable: false,
-    //       enableCellEdit: false,
-    //       width: '100px'
-    //     }, {
-    //       field: 'endTime',
-    //       displayName: 'End Time',
-    //       sortable: false,
-    //       enableCellEdit: false,
-    //       width: '100px'
-    //     }
-    //   ]
-    // };
+    $scope.changeVariance = function (rowDatum) {
+      rowDatum.data.met = rowDatum.data.plan + rowDatum.data.variance;
+      computeTimes();
+    };
 
-    // $scope.timeChanged = function () {
-
-    //   var i = 0;
-    //   var startTime;
-    //   var endTime;
-    //   var lastTime;
-
-    //   startTime = $scope.startTime;
-
-    //   for (i=0; i<scheduleItems.length; i++) {
-    //     if (i === 0) {
-    //       startTime = startTime;
-    //     } else {
-    //       startTime = lastTime;
-    //     }
-        
-    //     scheduleItems[i].startTime = startTime.format('LT');
-    //     endTime = startTime.clone().add('minutes', scheduleItems[i].minutes);
-    //     scheduleItems[i].endTime = endTime.format('LT');
-    //     lastTime = endTime.clone();
-    //   }
-
-    // };
-
-    // $scope.setTimeToNow = function() {
-
-    //   $scope.startTime = moment();
-    //   $scope.timeChanged();
-
-    // };
-
-    // $scope.addScheduleItem = function () {
-
-    //   var newTask = $scope.formData.newTask.trim();
-    //   var newMinutes = $scope.formData.newMinutes;
-
-    //   if (newTask.length === 0) {
-    //     $scope.formAlert = 'Please enter a task name.';
-    //     return;
-    //   }
-
-    //   if (newMinutes === 0) {
-    //     $scope.formAlert = 'Please enter the number of projected minutes for the task.';
-    //     return;
-    //   }
-      
-    //   if (scheduleItems.length === 0) {
-    //     newStartTime = $scope.startTime;
-    //   } else {
-    //     newStartTime = newLastTime;
-    //   }
-
-    //   newEndTime = newStartTime.clone().add('minutes', newMinutes);
-    //   newLastTime = newEndTime.clone();
-
-    //   scheduleItems.push({
-    //     task: newTask,
-    //     minutes: newMinutes,
-    //     startTime: newStartTime.format('LT'),
-    //     endTime: newEndTime.format('LT')
-    //   });
-
-    //   $scope.formData.newTask = '';
-    //   $scope.formData.newMinutes = 0;
-
-    //   $scope.scheduleFormOuter.$setPristine();
-
-    // };
+    var computeTimes = function() {
+      var startTime = moment($scope.startTime);
+      var endTime;
+      var i;
+      for (i=0; i < $scope.rowData.length; i++) {
+        endTime = startTime.clone().add('minutes', $scope.rowData[i].data.met);
+        $scope.rowData[i].data.startTime = startTime.format('LT');
+        startTime = endTime.clone();
+        $scope.rowData[i].data.endTime = endTime.format('LT');
+      }
+    };
 
     $scope.printScheduleItems = function () {
 
@@ -369,6 +246,9 @@ annaSquaresApp.controller('schedulesController',
       $scope.cellData = {};
 
     };
+
+    // Controller initialization
+    computeTimes();
 
   }
   
