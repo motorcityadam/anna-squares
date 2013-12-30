@@ -105,7 +105,7 @@ annaSquaresApp.controller('schedulesController',
         displayName: 'Plan',
         type: 'number',
         isDisabled: false,
-        doOnChange: 'changeMinutes(rowDatum)',
+        doOnChange: 'changePlan(rowDatum)',
         minNumber: '0',
         maxNumber: ''
       },
@@ -113,19 +113,19 @@ annaSquaresApp.controller('schedulesController',
         name: 'met',
         displayName: 'Met',
         type: 'number',
-        isDisabled: true,
-        doOnChange: '',
-        minNumber: '',
+        isDisabled: false,
+        doOnChange: 'changeMet(rowDatum)',
+        minNumber: '0',
         maxNumber: ''
       },
       {
         name: 'variance',
         displayName: 'Variance',
         type: 'number',
-        isDisabled: false,
-        doOnChange: 'changeVariance(rowDatum)',
+        isDisabled: true,
+        doOnChange: '',
         minNumber: '',
-        maxNumber: '0'
+        maxNumber: ''
       },
       {
         name: 'startTime',
@@ -199,14 +199,19 @@ annaSquaresApp.controller('schedulesController',
       computeTimes();
     };
 
-    $scope.changeMinutes = function (rowDatum) {
-      rowDatum.data.variance = 0;
-      $scope.changeVariance(rowDatum);
+    $scope.changePlan = function (rowDatum) {
+      rowDatum.data.met = rowDatum.data.plan;
+      $scope.changeMet(rowDatum);
       computeTimes();
     };
 
-    $scope.changeVariance = function (rowDatum) {
-      rowDatum.data.met = rowDatum.data.plan + rowDatum.data.variance;
+    // $scope.changeVariance = function (rowDatum) {
+    //   rowDatum.data.met = rowDatum.data.plan + rowDatum.data.variance;
+    //   computeTimes();
+    // };
+
+    $scope.changeMet = function (rowDatum) {
+      rowDatum.data.variance = rowDatum.data.met - rowDatum.data.plan;
       computeTimes();
     };
 
