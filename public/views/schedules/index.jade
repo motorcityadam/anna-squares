@@ -59,6 +59,7 @@
                     ng-disabled="{{columnDefintion.isDisabled}}",
                     ng-model="rowDatum.data[columnDefintion.name]",
                     ng-change="{{columnDefintion.doOnChange}}",
+                    ng-class="{{columnDefintion.classExpression}}",
                     type="{{columnDefintion.type}}",
                     min="{{columnDefintion.minNumber}}",
                     max="{{columnDefintion.maxNumber}}")
