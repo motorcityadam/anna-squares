@@ -1,0 +1,67 @@
+// -------- Jquery resources --------
+script(type='text/javascript', src='/lib/jquery/jquery.min.js')
+script(type='text/javascript', src='/lib/jquery-ui/ui/minified/jquery-ui.min.js')
+
+// -------- Bootstrap resources --------
+script(type='text/javascript', src='/lib/bootstrap/dist/js/bootstrap.min.js')
+
+// -------- Angular.js resources -------- 
+script(type='text/javascript', src='/lib/angular/angular.js')
+script(type='text/javascript', src='/lib/angular-route/angular-route.js')
+script(type='text/javascript', src='/lib/angular-cookies/angular-cookies.js')
+script(type='text/javascript', src='/lib/angular-resource/angular-resource.js')
+script(type='text/javascript', src='/lib/angular-ui-utils/ui-utils.min.js')
+script(type='text/javascript', src='/lib/angular-placeholders/src/img/img.js')
+
+// -------- Angular-UI-Bootstrap resources --------
+//- script(type='text/javascript', src='/lib/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.8.0-SNAPSHOT.min.js')
+
+// -------- Angular-ASC-UI resources (WIP) --------
+script(type='text/javascript', src='/lib/angular-asc-ui/dist/asc-ui-tpls.js')
+
+// -------- Angular-UI Sortable resources --------
+script(type='text/javascript', src='/lib/angular-ui-sortable/src/sortable.js')
+
+// -------- Moment.js resources --------
+script(type='text/javascript', src='/lib/momentjs/min/moment.min.js')
+
+// Application initialization
+script(type='text/javascript', src='/js_build/app.js')
+
+// -------- Application initializations --------
+// Application directives
+script(type='text/javascript', src='/js_build/common/directives.js')
+
+// Application filters
+script(type='text/javascript', src='/js_build/common/filters.js')
+
+// -------- Application services --------
+script(type='text/javascript', src='/js_build/common/services/global.js')
+
+// -------- Application modules and controllers --------
+// Core app
+script(type='text/javascript', src='/js_build/core/CoreController.js')
+
+// Header app
+script(type='text/javascript', src='/js_build/header/HeaderController.js')
+
+// Footer app
+script(type='text/javascript', src='/js_build/footer/FooterController.js')
+
+// Homepage app
+script(type='text/javascript', src='/js_build/homepage/HomepageController.js')
+
+// Schedules app
+script(type='text/javascript', src='/js_build/schedules/SchedulesController.js')
+
+// Tasks app
+script(type='text/javascript', src='/js_build/tasks/TasksController.js')
+
+// User app
+// script(type='text/javascript', src='/js_build/user/SignupController.js')
+// script(type='text/javascript', src='/js_build/user/SigninController.js')
+// script(type='text/javascript', src='/js_build/user/SignoutController.js')
+
+if (req.host='localhost')
+  // Livereload script 
+  script(type='text/javascript', src='http://localhost:35729/livereload.js')  

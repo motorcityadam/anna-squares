@@ -1,0 +1,17 @@
+.container.as-footer(data-ng-controller="footerController")
+  .row
+    .col-md-12
+      span.as-copyright © 2013-2014
+        a(href="http://www.adamjcook.io")  Adam Joseph Cook
+      br
+      span.as-license Code for the application is licensed under the 
+        a(href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank") The MIT License.
+      br
+      span.as-license Icons used are generously provided by 
+        a(href="http://glyphicons.com/") Glyphicons.
+  .row
+    .col-md-12
+        ul.list-inline
+          li(ng-repeat="link in links")
+            strong
+              a(href="{{link.url}}") {{link.title}}
