@@ -1,6 +1,6 @@
 {
   "name": "anna-squares",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "dependencies": {
     "bootstrap": "latest",
     "jquery": "latest",

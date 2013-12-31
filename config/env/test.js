@@ -2,7 +2,7 @@ module.exports = {
   db: "mongodb://localhost/anna-squares-test",
   port: 3001,
   app: {
-    name: "Squares (test)"
+    name: "AnnaSquares (test)"
   },
   facebook: {
     clientID: "APP_ID",

@@ -1,7 +1,7 @@
 module.exports = {
   db: "mongodb://localhost/anna-squares-dev",
   app: {
-    name: "Squares (development)"
+    name: "AnnaSquares (development)"
   },
   facebook: {
     clientID: "APP_ID",

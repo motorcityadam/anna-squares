@@ -1,6 +1,6 @@
 {
   "name": "anna-squares",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "author": "Adam Joseph Cook <adam.joseph.cook@gmail.com>",
   "description": "A daily time tracking and organization web application for healthcare professionals, written in Angular.js and Node.js.",
