@@ -13,6 +13,7 @@
     "angular-cookies": "latest",
     "angular-ui-utils": "latest",
     "sass-bootstrap-glyphicons": "latest",
+    "font-awesome": "latest",
     "angular-placeholders": "latest",
     "momentjs": "latest",
     "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip",

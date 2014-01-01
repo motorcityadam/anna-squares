@@ -47,7 +47,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'checkbox',
         isDisabled: false,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       },
@@ -57,7 +57,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'checkbox',
         isDisabled: false,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       },
@@ -99,7 +99,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'text',
         isDisabled: false,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       },
@@ -119,7 +119,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'number',
         isDisabled: false,
         doOnChange: 'changeMet(rowDatum)',
-        classExpression: '',
+        classExpression: "",
         minNumber: '0',
         maxNumber: ''
       },
@@ -129,7 +129,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'number',
         isDisabled: true,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       },
@@ -139,7 +139,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'text',
         isDisabled: true,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       },
@@ -149,7 +149,7 @@ annaSquaresApp.controller('schedulesController',
         type: 'text',
         isDisabled: true,
         doOnChange: '',
-        classExpression: '',
+        classExpression: "",
         minNumber: '',
         maxNumber: ''
       }
@@ -257,6 +257,12 @@ annaSquaresApp.controller('schedulesController',
 
       $scope.rowIds = [1];
       $scope.cellData = {};
+
+    };
+
+    $scope.deleteSchedule = function () {
+
+      console.log('deleteSchedule');
 
     };
 
