@@ -28,6 +28,7 @@ uploads/*
 
 .nodemonignore
 public/lib
-# public/stylesheets_build
-# public/js_build
-# public/views_build
+
+.idea/dictionaries/
+.idea/workspace.xml
+.idea/tasks.xml
