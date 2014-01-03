@@ -29,6 +29,6 @@ uploads/*
 .nodemonignore
 public/lib
 
-.idea/dictionaries/
+.idea/dictionaries/*
 .idea/workspace.xml
 .idea/tasks.xml
