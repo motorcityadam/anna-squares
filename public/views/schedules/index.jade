@@ -1,9 +1,11 @@
-.container.as-content-container
+.as-content-container
   .row
-    .col-md-12
-      h3 Schedule
+    .col-lg-12
+      h3
+        i.fa.fa-tasks.fa-1x
+        |  Schedule
   .row
-    .col-md-4
+    .col-lg-4
       label Schedule Date
       .input-group
         input.form-control(
@@ -18,8 +20,8 @@
           close-text="Close")
         .input-group-btn
           button.btn.calendar-btn(ng-click="openCalendar()")
-            span.glyphicon.glyphicon-calendar
-    .col-md-4
+            i.fa.fa-calendar
+    .col-lg-4
       label Start Time
       .input-group
         input.form-control(
@@ -33,12 +35,12 @@
           ng-required="true")
         .input-group-btn
           button.btn.time-btn(ng-click="openTime()")
-            span.glyphicon.glyphicon-time
+            i.fa.fa-clock-o
   .row
-    .col-md-12
+    .col-lg-12
       alert(ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)") {{alert.msg}}
   .row
-    .col-md-12
+    .col-lg-12
       .as-schedule-grid
         .table-responsive
           table.table.table-bordered.table-condensed.table-hover
@@ -49,11 +51,11 @@
             tbody(ui-sortable="sortableOptions", ng-model="rowData")
               tr(ng-repeat="rowDatum in rowData")
                 td.row-btn
-                  span.glyphicon.glyphicon-move
+                  i.fa.fa-arrows
                 td.row-btn(ng-click="addRow()")
-                  span.glyphicon.glyphicon-plus
+                  i.fa.fa-plus
                 td.row-btn(ng-click="removeRow(rowDatum)")
-                  span.glyphicon.glyphicon-remove
+                  i.fa.fa-times
                 td(ng-repeat="columnDefintion in columnDefintions")
                   input.form-control(
                     ng-disabled="{{columnDefintion.isDisabled}}",
@@ -65,37 +67,7 @@
                     max="{{columnDefintion.maxNumber}}",
                     as-on-touch)
   .row
-    .col-md-12
+    .col-lg-12
       .as-schedule-notes
         label Notes
         textarea.form-control(rows="3")
-  .row
-    .col-md-4
-      .btn-group.as-accessory-btn-group
-        button.btn.btn-primary.btn-md.dropdown-toggle(type="button", data-toggle="dropdown")
-          | Share schedule
-          | <span class="caret"></span>
-        ul.dropdown-menu(role="menu")
-          li
-            a(ng-click="printScheduleItems()")
-              | <span class="glyphicon glyphicon-print"></span>
-              | Print schedule
-            a(ng-click="emailScheduleItems()")
-              | <span class="glyphicon glyphicon-envelope"></span>
-              | Email schedule
-            a(ng-click="sendScheduleItems()")
-              | <span class="glyphicon glyphicon-send"></span>
-              | Send schedule
-    .col-md-4.col-md-offset-4
-      .btn-group.as-accessory-btn-group
-        button(type="button", ng-click="clearAllScheduleItems()").btn.btn-md.btn-warning
-          | <span class="glyphicon glyphicon-trash"></span>
-          |  Clear schedule
-        button(type="button", ng-click="deleteSchedule()").btn.btn-md.btn-danger
-          | <span class="glyphicon glyphicon-fire"></span>
-          |  Delete schedule
-  //- .row
-  //-   .col-md-12
-  //-     pre {{rowData}}
-  //-     pre {{scheduleDate}}
-  //-     pre {{startTime}}

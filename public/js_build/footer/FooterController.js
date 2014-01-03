@@ -1,2 +1,2 @@
-/*! anna-squares - v0.1.6 - 01-01-2014 */
-"use strict";annaSquaresApp.controller("footerController",function($scope){$scope.links=[{title:"Terms",url:""},{title:"Privacy",url:""},{title:"Contact",url:""},{title:"About",url:""}]});
+/*! anna-squares - v0.1.6 - 02-01-2014 */
+"use strict";annaSquaresApp.controller("footerController",function($scope){$scope.links=[{title:"Contributing",url:""},{title:"Blog",url:""},{title:"Terms",url:""},{title:"Privacy",url:""},{title:"Contact",url:""},{title:"About",url:""}]});

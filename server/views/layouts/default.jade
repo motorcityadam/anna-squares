@@ -2,9 +2,22 @@ doctype html
 html(lang='en', xmlns='http://www.w3.org/1999/xhtml', ng-app="annaSquaresApp")
   include ../includes/header
   body
-    .navbar.navbar-default.navbar-inverse.navbar-fixed-top(data-ng-include="'views_build/header/index.html'", data-role="navigation")
-    .navbar.navbar-default.as-toolbar-fixed-top(data-ng-include="'views_build/toolbar/index.html'", data-role="navigation")
-    //- .container.as-container-full.as-jumbotron-top
-    block content
-    footer(data-ng-include="'views_build/footer/index.html'")
-    include ../includes/footer
+    #as-wrapper
+      // .navbar.navbar-default.navbar-inverse.navbar-fixed-top(data-ng-include="'views_build/header/index.html'",data-role="navigation")
+      nav.navbar.navbar-inverse.navbar-fixed-top(data-role="navigation")
+        .navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href="/")
+            | AnnaSquares
+            sub  beta
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.as-side-nav(data-ng-include="'views_build/sidebar/index.html'", data-ng-controller="sidebarController")
+          ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-include="'views_build/header/index.html'", data-ng-controller="headerController")
+      #as-page-wrapper
+        block content
+        footer(data-ng-include="'views_build/footer/index.html'")
+      include ../includes/footer

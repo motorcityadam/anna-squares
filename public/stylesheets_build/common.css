@@ -1,5 +1,5 @@
-/*! anna-squares - v0.1.6 - 01-01-2014 */
-body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;padding-top:90px;background:#ccc}
+/*! anna-squares - v0.1.6 - 02-01-2014 */
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#fff}
 b,strong,.strong{font-weight:bold}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:normal}
 h1,h2,h3{margin-top:10px}
@@ -12,10 +12,11 @@ a,a:hover,a:active,a:focus,.btn:hover,.btn:active,.btn:focus{outline:0;outline:n
 .dropdown-menu{border-radius:0;border:1px solid #9a9a9a;-moz-box-shadow:3px 3px 3px rgba(0,0,0,0.22);-webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.22);box-shadow:3px 3px 3px rgba(0,0,0,0.22)}
 .dropdown-menu > li > a:hover,.dropdown-menu > li > a:focus{color:#333;background-color:#f2f2f2;cursor:pointer}
 .navbar-inverse .navbar-brand{color:#fff}
-.navbar-inverse .navbar-nav > li > a{color:#fff}
+.navbar-inverse .navbar-nav > li > a{color:#ccc}
 .navbar-inverse .navbar-nav > li > a:hover,.navbar-inverse .navbar-nav > li > a:focus{color:#fff;background-color:#333}
 .navbar-inverse .navbar-nav > li > a:active{color:#fff;background-color:#333}
-label,.control-label,.help-block,.checkbox,.radio{font-size:13px;font-weight:bold}
+@media (min-width: 768px){.navbar-fixed-top .navbar-collapse{padding-right:15px;padding-left:15px}
+}label,.control-label,.help-block,.checkbox,.radio{font-size:13px;font-weight:bold}
 hr{margin-top:0;margin-bottom:5px;border-top:1px solid #ccc}
 pre{border-radius:0}
 .alert{border-radius:0}
@@ -47,6 +48,8 @@ pre{border-radius:0}
 .as-form{font-size:13px}
 .as-form p{line-height:1.1}
 .as-form .as-field-help{margin-top:5px}
+.panel{border-radius:0}
+.panel-heading{padding:10px}
 .panel-default > .panel-heading{background-color:#dadada;border-color:#dadada}
 .as-accessory-btn-group{margin-bottom:15px}
 .as-sidenav{margin-top:30px;margin-bottom:30px;padding-top:10px;padding-bottom:10px;background-color:#fff;border-radius:0;max-height:380px;overflow-y:auto;border-left:1px solid #ccc;border-top:1px solid #ccc;border-right:1px solid #000;border-bottom:1px solid #000}
@@ -66,6 +69,7 @@ pre{border-radius:0}
 .as-schedule-grid{margin:10px 0;border-left:1px solid #ccc;border-top:1px solid #ccc;border-right:1px solid #000;border-bottom:1px solid #000;width:100%;min-height:300px}
 .as-schedule-grid table{margin-bottom:0}
 .as-schedule-notes{margin-bottom:10px}
+.as-schedule-notes > textarea{resize:none}
 table{font-size:13px}
 thead{background:#ccc}
 td{text-align:center}

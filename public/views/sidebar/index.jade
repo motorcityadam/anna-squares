@@ -1,0 +1,45 @@
+li
+  a(href="#!/schedules")
+    i.fa.fa-plus
+    |  Start New Schedule...
+li
+  a(href="#")
+    i.fa.fa-list
+    |  Browse Schedules
+li
+  a(href="#")
+    i.fa.fa-edit
+    |  Edit Schedule
+li
+  a(href="#")
+    i.fa.fa-copy
+    |  Copy Last Schedule
+li
+  a(href="#")
+    i.fa.fa-print
+    |  Print Schedule...
+li
+  a(href="#")
+    i.fa.fa-envelope
+    |  Email Schedule...
+li
+  a(href="#")
+    i.fa.fa-share
+    |  Share Schedule With...
+li
+  a(href="#")
+    i.fa.fa-book
+    |  Help and Documentation
+li.divider
+li.dropdown
+  a.dropdown-toggle(href="#", data-toggle="dropdown")
+    i.fa.fa-trash-o
+    |  Delete Schedule
+    | <b class="caret"></b>
+  ul.dropdown-menu
+    li
+      .panel.panel-danger
+        .panel-heading
+          p Are you sure? This cannot be undone.
+          .btn-group
+            button.btn.btn-danger(type="button") Yes

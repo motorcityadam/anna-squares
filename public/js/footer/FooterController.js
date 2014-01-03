@@ -5,6 +5,14 @@ annaSquaresApp.controller('footerController',
 
     $scope.links = [
       {
+        title : 'Contributing',
+        url   : ''
+      },
+      {
+        title : 'Blog',
+        url   : ''
+      },
+      {
         title : 'Terms',
         url   : ''
       },
