@@ -31,15 +31,12 @@ annaSquaresApp.config(['$routeProvider', function($routeProvider) {
     controller  : 'schedulesController'
   }).
 
-  // *** Tasks app routes ***
-  // GET /tasks (List all tasks)
-
   // *** User app routes ***
   // Route for user app - signup (new user registration)
-  // when('/signup', {
-  //   templateUrl : '../../views_build/user/signup.html',
-  //   controller  : 'signupController'
-  // }).
+  when('/signup', {
+     templateUrl : '../../views_build/user/signup.html',
+     controller  : 'signupController'
+  }).
 
   // Route for user app - signin (existing user login)
   when('/signin', {
@@ -53,10 +50,11 @@ annaSquaresApp.config(['$routeProvider', function($routeProvider) {
     controller  : 'signoutController'
   }).
 
-  // Route for patients app
-  when('/tasks', {
-    templateUrl : '../../views_build/tasks/index.html',
-    controller  : 'tasksController'
+  // *** Feedback app routes ***
+  // Route for feedback app
+  when('/feedback', {
+    templateUrl : '../../views_build/feedback/index.html',
+    controller  : 'feedbackController'
   }).
 
   // Default route

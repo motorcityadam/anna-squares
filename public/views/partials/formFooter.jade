@@ -1,0 +1,12 @@
+p(ng-show="formAgreementNotice")
+  strong {{formAgreementNotice}}
+ul.list-unstyled
+  li(ng-repeat="formAgreement in formAgreements")
+    strong
+      a(href="{{formAgreement.url}}", target="_blank") {{formAgreement.title}}
+div(ng-repeat="buttonDefinition in buttonDefinitions")
+  button(
+    type="{{buttonDefinition.type}}",
+    ng-disabled="{{buttonDefinition.disabledWhen}}",
+    class="{{buttonDefinition.class}}")
+    span {{buttonDefinition.caption}}

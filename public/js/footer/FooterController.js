@@ -6,27 +6,27 @@ annaSquaresApp.controller('footerController',
     $scope.links = [
       {
         title : 'Contributing',
-        url   : ''
+        url   : '#!/about/contributing'
       },
       {
         title : 'Blog',
-        url   : ''
+        url   : 'http://blog.annasquares.com'
       },
       {
         title : 'Terms',
-        url   : ''
+        url   : '#!/about/terms'
       },
       {
         title : 'Privacy',
-        url   : ''
+        url   : '#!/about/privacy'
       },
       {
         title : 'Contact',
-        url   : ''
+        url   : '#!/about/contact'
       },
       {
         title : 'About',
-        url   : ''
+        url   : '#!/about'
       },
     ];
 

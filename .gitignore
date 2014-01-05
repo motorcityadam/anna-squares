@@ -32,3 +32,8 @@ public/lib
 .idea/dictionaries/*
 .idea/workspace.xml
 .idea/tasks.xml
+
+# IntelliJ IDEA artifacts
+.idea
+*.iml
+*.iws

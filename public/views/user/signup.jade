@@ -1,108 +1,12 @@
-.container
+.as-content-container
   .row
-    .col-md-12
-      .row
-        .col-md-12
-          h2 {{pageHeader}}
-          h4 {{pageSubHeader}}
-      .row
-        .col-md-5
-          form.ls-form(name="signupForm", ng-submit="processForm()", novalidate)
-            // Username field
-            .form-group(ng-class="{'has-error' : signupForm.inputUsername.$dirty && signupForm.inputUsername.$invalid}")
-              label.control-label Username
-              input#inputUsername.form-control(
-                type="text",
-                name="inputUsername",
-                ng-model="formData.username",
-                ng-required="true",
-                ng-pattern="/^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$/",
-                ng-maxlength="39",
-                ng-minlength="",
-                ng-unique="")
-              p.ls-field-help.text-muted This is your username. Your username cannot be changed after the account is created.
-              div(ng-show="signupForm.inputUsername.$dirty && signupForm.inputUsername.$invalid")
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.required") This field is required.
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.pattern") Username may only contain alphanumeric characters or dashes and cannot begin with a dash.
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.maxlength") The username provided is too long (must be a maximum is 39 characters).
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.minlength")
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.unique") The username provided has already been taken. Please choose another username.
-                p.has-error.help-block(ng-show="signupForm.inputUsername.$error.match")
-            // E-mail address field
-            .form-group(ng-class="{'has-error' : signupForm.inputEmail.$dirty && signupForm.inputEmail.$invalid}")
-              label.control-label Email Address
-              input#inputEmail.form-control(
-                type="email",
-                name="inputEmail",
-                ng-model="formData.email",
-                ng-required="true",
-                ng-pattern="",
-                ng-maxlength="125",
-                ng-minlength="",
-                ng-unique="")
-              p.ls-field-help.text-muted Please enter your e-mail address. Learnscape.io will never share your address with anyone without you explicit permission.
-              div(ng-show="signupForm.inputEmail.$dirty && signupForm.inputEmail.$invalid")
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.required") This field is required.
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.pattern")
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.maxlength") The e-mail address provided is invalid or malformed.
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.email") The e-mail address provided is invalid or malformed.
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.minlength")
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.unique") The e-mail address provided is already tied to another account. Please check the entered e-mail address.
-                p.has-error.help-block(ng-show="signupForm.inputEmail.$error.match")
-            // Password field
-            .form-group(ng-class="{'has-error' : signupForm.inputPassword1.$dirty && signupForm.inputPassword1.$invalid}")
-              label.control-label Password
-              input#inputPassword1.form-control(
-                type="password",
-                name="inputPassword1",
-                ng-model="formData.password1",
-                ng-required="true",
-                ng-pattern="/^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$/",
-                ng-maxlength="",
-                ng-minlength="7",
-                ng-unique="")
-              p.ls-field-help.text-muted Use at least one lowercase letter, one uppercase letter, one numeral or special character, and seven characters.
-              div(ng-show="signupForm.inputPassword1.$dirty && signupForm.inputPassword1.$invalid")
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.required") This field is required.
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.pattern") The password must contain at least one number and one lowercase letter.
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.maxlength")
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.email")
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.minlength") The password provided is too short (must be a minimum of 7 characters).
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.unique")
-                p.has-error.help-block(ng-show="signupForm.inputPassword1.$error.match")
-            // Password (confirmation) field
-            .form-group(ng-class="{'has-error' : signupForm.inputPassword2.$dirty && signupForm.inputPassword2.$invalid}")
-              label.control-label Confirm Password
-              input#inputPassword2.form-control(
-                type="password",
-                name="inputPassword2",
-                ng-model="formData.password2",
-                ng-required="true",
-                ng-pattern="",
-                ng-maxlength="",
-                ng-minlength="",
-                ng-unique="",
-                ls-match="inputPassword1")
-              p.ls-field-help.text-muted
-              div(ng-show="signupForm.inputPassword2.$dirty && signupForm.inputPassword2.$invalid")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.required") This field is required.
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.pattern")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.maxlength")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.email")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.minlength")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.unique")
-                p.has-error.help-block(ng-show="signupForm.inputPassword2.$error.match") The passwords provided do not match.
-            p
-              strong {{formAgreementNotice}}
-              ul.list-unstyled
-                li(ng-repeat="formAgreement in formAgreements")
-                  strong
-                    a(href="{{formAgreement.url}}") {{formAgreement.title}}
-            button(
-              type="submit",
-              ng-disabled="signupForm.$pristine || signupForm.$dirty && signupForm.$invalid").btn.btn-success
-              span {{submitButtonText}}
-        .col-md-7
-          .panel.panel-default
-            .panel-heading {{sidePanelHeader}}
-            .panel-body {{sidePanelContent}}
+    .col-lg-12
+      h3
+        i.fa.fa-magic.fa-1x
+        |  Sign Up
+      h4 AnnaSquares is free and it always will be.
+  .row
+    .col-lg-6
+      include ../partials/formBody.jade
+    .col-lg-6
+      include ../partials/formFooter.jade
