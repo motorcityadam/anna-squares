@@ -7,12 +7,13 @@ script(type='text/javascript', src='/lib/jqueryui-touch-punch/jquery.ui.touch-pu
 script(type='text/javascript', src='/lib/bootstrap/dist/js/bootstrap.min.js')
 
 // -------- Angular.js resources -------- 
-script(type='text/javascript', src='/lib/angular/angular.js')
-script(type='text/javascript', src='/lib/angular-route/angular-route.js')
-script(type='text/javascript', src='/lib/angular-cookies/angular-cookies.js')
-script(type='text/javascript', src='/lib/angular-resource/angular-resource.js')
+script(type='text/javascript', src='/lib/angular/angular.min.js')
+script(type='text/javascript', src='/lib/angular-route/angular-route.min.js')
+script(type='text/javascript', src='/lib/angular-cookies/angular-cookies.min.js')
+script(type='text/javascript', src='/lib/angular-resource/angular-resource.min.js')
 script(type='text/javascript', src='/lib/angular-ui-utils/ui-utils.min.js')
 script(type='text/javascript', src='/lib/angular-placeholders/src/img/img.js')
+script(type='text/javascript', src='/lib/angular-flash/dist/angular-flash.min.js')
 
 // -------- Angular-ASC-UI resources (WIP) --------
 script(type='text/javascript', src='/lib/angular-asc-ui/dist/asc-ui-tpls.js')
@@ -28,12 +29,12 @@ script(type='text/javascript', src='/js_build/app.js')
 
 // -------- Application initializations --------
 // Application directives
-script(type='text/javascript', src='/js_build/common/directives.js')
+script(type='text/javascript', src='/js_build/common/directives/global.js')
 
 // Application filters
 script(type='text/javascript', src='/js_build/common/filters.js')
 
-// -------- Application services --------
+// Application services
 script(type='text/javascript', src='/js_build/common/services/global.js')
 
 // -------- Application modules and controllers --------
@@ -59,9 +60,9 @@ script(type='text/javascript', src='/js_build/sidebar/SidebarController.js')
 script(type='text/javascript', src='/js_build/feedback/FeedbackController.js')
 
 // User app
-script(type='text/javascript', src='/js_build/user/SignupController.js')
-script(type='text/javascript', src='/js_build/user/SigninController.js')
-script(type='text/javascript', src='/js_build/user/SignoutController.js')
+script(type='text/javascript', src='/js_build/users/SignupController.js')
+script(type='text/javascript', src='/js_build/users/SigninController.js')
+script(type='text/javascript', src='/js_build/users/SignoutController.js')
 
 if (req.host='localhost')
   // Livereload script 

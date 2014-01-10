@@ -15,9 +15,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/stylesheets',
+          cwd: 'client/stylesheets',
           src: [ '**/*.styl' ],
-          dest: 'public/stylesheets_build/',
+          dest: 'client/stylesheets_build/',
           ext: '.css'
         }]
       },
@@ -29,9 +29,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/stylesheets',
+          cwd: 'client/stylesheets',
           src: [ '**/*.styl' ],
-          dest: 'public/stylesheets_build/',
+          dest: 'client/stylesheets_build/',
           ext: '.css'
         }]
       }
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 
     clean: {
       client_js: {
-        src: [ __dirname + '/public/js_build/' ]
+        src: [ __dirname + '/client/js_build/' ]
       }
     },
 
@@ -53,9 +53,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/js',
+          cwd: 'client/js',
           src: [ '**/*.js' ],
-          dest: 'public/js_build/',
+          dest: 'client/js_build/',
           ext: '.js'
         }]
       },
@@ -67,9 +67,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/js',
+          cwd: 'client/js',
           src: [ '**/*.js' ],
-          dest: 'public/js_build/',
+          dest: 'client/js_build/',
           ext: '.js'
         }]
       }
@@ -82,9 +82,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/views',
+          cwd: 'client/views',
           src: [ '**/*.jade' ],
-          dest: 'public/views_build/',
+          dest: 'client/views_build/',
           ext: '.html'
         }]
       },
@@ -94,9 +94,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'public/views',
+          cwd: 'client/views',
           src: [ '**/*.jade' ],
-          dest: 'public/views_build/',
+          dest: 'client/views_build/',
           ext: '.html'
         }]
       }
@@ -104,40 +104,40 @@ module.exports = function(grunt) {
 
     watch: {
       stylus: {
-        files: ['public/stylesheets/**'],
+        files: ['client/stylesheets/**'],
         tasks: ['stylus:development'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       server_jade: {
         files: ['server/views/**'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       client_jade: {
-        files: ['public/views/**'],
+        files: ['client/views/**'],
         tasks: ['jade:development'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       js: {
-        files: ['public/js/**', 'server/**/*.js'],
+        files: ['client/js/**', 'server/**/*.js'],
         tasks: ['clean:client_js', 'jshint', 'uglify:development'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       html: {
-        files: ['public/views/**'],
+        files: ['client/views/**'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       css: {
-        files: ['public/css/**'],
+        files: ['client/css/**'],
         options: {
           livereload: true
         }
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
       options: {
         jshintrc: __dirname + '/.jshintrc'
       },
-      src: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'server/**/*.js']
+      src: ['gruntfile.js', 'client/js/**/*.js', 'test/**/*.js', 'server/**/*.js']
     },
 
     nodemon: {

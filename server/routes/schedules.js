@@ -1,23 +1,39 @@
-// ****** REST Layout (no user management) ******
+// ****** REST Layout ******
 // :schedule - schedule ID {String} - datecode hash (based on MMDDYYYY)
-// :task     - task ID {String}     - SHA-1 hash of the task text
 //
-// *** Schedules app routes ***
-// GET /schedules (List all schedules)
-// POST /schedules (Create a new schedule)
-// GET /schedules/:schedule (Retrieve a specific schedule)
-// PATCH /schedules/:schedule (Edit an existing schedule)
-// DELETE /schedules/:schedule (Delete an existing schedule)
-//
-// ****** REST Layout (with user management) ******
-// :user     - username {String}
-// :schedule - schedule ID {String} - datecode hash (based on MMDDYYYY)
-// :task     - task ID {String}     - SHA-1 hash of the task text
-//
-// *** Schedules app routes ***
-// GET /:user/schedules (List all schedules for the currently logged in user)
-// POST /:user/schedules (Create a new schedule for the currently logged in user)
-// GET /:user/schedules/:schedule (Retrieve a specific schedule for the currently logged in user)
-// PATCH /:user/schedules/:schedule (Edit an existing schedule for the currently logged in user)
-// DELETE /:user/schedules/:schedule (Delete an existing schedule for the currently logged in user)
-//
+// *** Schedule app routes ***
+// GET     /schedules                 ->  index
+// GET     /schedules/new             ->  new
+// POST    /schedules                 ->  create
+// GET     /schedules/:schedule       ->  show
+// GET     /schedules/:schedule/edit  ->  edit
+// PUT     /schedules/:schedule       ->  update
+// DELETE  /schedules/:schedule       ->  destroy
+
+exports.index = function(req, res){
+  res.send('schedule index');
+};
+
+exports.new = function(req, res){
+  res.send('new schedule');
+};
+
+exports.create = function(req, res){
+  res.send('create schedule');
+};
+
+exports.show = function(req, res){
+  res.send('show schedule ' + req.params.schedule);
+};
+
+exports.edit = function(req, res){
+  res.send('edit schedule ' + req.params.schedule);
+};
+
+exports.update = function(req, res){
+  res.send('update schedule ' + req.params.schedule);
+};
+
+exports.destroy = function(req, res){
+  res.send('destroy schedule ' + req.params.schedule);
+};

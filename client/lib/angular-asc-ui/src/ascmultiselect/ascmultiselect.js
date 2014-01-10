@@ -1,0 +1,1 @@
+angular.module('asc.ui.ascmultiselect', ['asc.ui.position']);

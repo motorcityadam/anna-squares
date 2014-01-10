@@ -1,0 +1,6 @@
+p(ng-show="formAgreementNotice")
+  strong {{formAgreementNotice}}
+ul.list-unstyled
+  li(ng-repeat="formAgreement in formAgreements")
+    strong
+      a(href="{{formAgreement.url}}", target="_blank") {{formAgreement.title}}
