@@ -27,7 +27,7 @@ uploads/*
 .elasticbeanstalk/
 
 .nodemonignore
-public/lib
+client/lib
 
 .idea/dictionaries/*
 .idea/workspace.xml
