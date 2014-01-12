@@ -7,6 +7,7 @@
     "jquery.ui": "latest",
     "jqueryui-touch-punch": "latest",
     "modernizr": "latest",
+    "underscore": "latest",
     "angular": "latest",
     "angular-route": "latest",
     "angular-resource": "latest",

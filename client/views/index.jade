@@ -1,0 +1,163 @@
+doctype html
+html(lang='en', data-ng-app='anna-squares')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+    title= appName
+    meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
+    meta(name="keywords", content="organization, healthcare, timetracking")
+    meta(name="description", content="#{appName}")
+
+    link(href='/img/icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
+
+    case (settings.env)
+      when 'development'
+        link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/lib/font-awesome/css/font-awesome.min.css')
+      when 'production'
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+
+    link(rel='stylesheet', href='/stylesheets_build/common.css')
+    link(rel='stylesheet', href='/stylesheets_build/sidebar.css')
+    link(rel='stylesheet', href='/stylesheets_build/flash.css')
+
+    script(type='text/javascript', src='/lib/modernizr/modernizr.js')
+
+    // Facebook redirect fix
+    script(type="text/javascript").
+      if (window.location.href.indexOf('#_=_') > 0) {
+        window.location = window.location.href.replace(/#.*/, '');
+      }
+  body(data-ng-cloak)
+    #as-wrapper
+      nav.navbar.navbar-inverse.navbar-fixed-top(data-role="navigation")
+        .navbar-header
+          button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href="/")
+            | AnnaSquares
+            sub  beta
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarController")
+          ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
+            li(data-access-level='accessLevels.anon', active-nav)
+              a(href='/login')
+                i.fa.fa-sign-in
+                |  Sign In
+            li(data-access-level='accessLevels.anon', active-nav)
+              a(href='/register')
+                i.fa.fa-magic
+                |  Register
+            li(data-access-level='accessLevels.user', active-nav)
+              a(href='/')
+                i.fa.fa-dashboard
+                |  Dashboard
+            li(data-access-level='accessLevels.user', active-nav)
+              a(href='/private')
+                i.fa.fa-tasks
+                |  Schedules
+            li(data-access-level='accessLevels.admin', active-nav)
+              a(href='/admin')
+                i.fa.fa-building-o
+                |  Admin
+            li(data-access-level='accessLevels.user')
+              a(href="", data-ng-click="logout()")
+                i.fa.fa-sign-out
+                |  Sign Out
+          div#userInfo.pull-right(data-access-level='accessLevels.user')
+            | Welcome&nbsp;
+            strong {{ user.username }}&nbsp;
+            span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+      #as-page-wrapper
+        .alert.alert-danger(data-ng-bind="error", data-ng-show="error")
+        div(data-ng-view='ng-view')
+        .as-footer
+          .row
+            .col-lg-12
+              span.as-copyright © 2013 - 2014
+                a(href="http://www.adamjcook.io")  Adam Joseph Cook
+              br
+              span.as-license Code for the application is completely open-source and is licensed under the
+                a(href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank")  The MIT License.
+              br
+              span.as-license Some of the icons used are generously provided by
+                a(href="http://glyphicons.com/")  Glyphicons.
+              br
+              span.as-license Many thanks to all the
+                a(href="https://github.com/adamjcook/anna-squares/blob/master/CONTRIBUTORS.md", target="_blank")  project contributors.
+          .row
+            .col-lg-12
+              ul.list-inline
+                li
+                  strong
+                    a(href="/about/contributing") Contributing
+                li
+                  strong
+                    a(href="http://blog.annasquares.com") Blog
+                li
+                  strong
+                    a(href="/about/terms") Terms
+                li
+                  strong
+                    a(href="/about/privacy") Privacy
+                li
+                  strong
+                    a(href="/about/contact") Contact
+                li
+                  strong
+                    a(href="/about") About
+  footer
+    case (settings.env)
+      when 'development'
+        script(src='/lib/jquery/jquery.min.js')
+        script(src='/lib/jquery-ui/ui/minified/jquery-ui.min.js')
+        script(src='/lib/jqueryui-touch-punch/jquery.ui.touch-punch.min.js')
+        script(src='/lib/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/lib/underscore/underscore-min.js')
+        script(src='/lib/angular/angular.min.js')
+        script(src='/lib/angular-cookies/angular-cookies.min.js')
+        script(src='/lib/angular-route/angular-route.min.js')
+        script(src='/lib/angular-placeholders/src/img/img.js')
+        script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
+        script(src='/lib/angular-ui-sortable/src/sortable.js')
+        script(src='/lib/momentjs/min/moment.min.js')
+      when 'production'
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js')
+        script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-cookies.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js')
+        script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
+        script(src='/lib/angular-ui-sortable/src/sortable.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js')
+
+    script(src='/js_build/routingConfig.js')
+    script(src='/js_build/app.js')
+    script(src='/js_build/services.js')
+    script(src='/js_build/controllers.js')
+    script(src='/js_build/filters.js')
+    script(src='/js_build/directives.js')
+    // Load all partial views
+    script(type="text/ng-template", id="404")
+      include partials/404
+    script(type="text/ng-template", id="admin")
+      include partials/admin
+    script(type="text/ng-template", id="home")
+      include partials/home
+    script(type="text/ng-template", id="login")
+      include partials/login
+    script(type="text/ng-template", id="private")
+      include partials/private
+    script(type="text/ng-template", id="register")
+      include partials/register
+    if (req.host='localhost')
+      // Livereload script
+      script(type='text/javascript', src='http://localhost:35729/livereload.js')

@@ -110,15 +110,8 @@ module.exports = function(grunt) {
           livereload: true
         }
       },
-      server_jade: {
-        files: ['server/views/**'],
-        options: {
-          livereload: true
-        }
-      },
       client_jade: {
         files: ['client/views/**'],
-        tasks: ['jade:development'],
         options: {
           livereload: true
         }
@@ -222,17 +215,10 @@ module.exports = function(grunt) {
     ['stylus:production']
   );
 
-  grunt.registerTask(
-    'templates',
-    'Compiling Jade templates.',
-    ['jade']
-  );
-
   // Register default grunt tasks (default is also a development deployment).
   grunt.registerTask('default',
     ['env:development',
     'stylus:development',
-    'jade',
     'jshint',
     'clean:client_js',
     'uglify:development',
@@ -241,7 +227,6 @@ module.exports = function(grunt) {
   grunt.registerTask('development',
     ['env:development',
     'stylus:development',
-    'jade',
     'jshint',
     'clean:client_js',
     'uglify:development',
@@ -251,7 +236,6 @@ module.exports = function(grunt) {
   grunt.registerTask('stage',
     ['env:stage',
     'stylus:production',
-    'jade',
     'jshint',
     'clean:client_js',
     'uglify:production']);
@@ -260,7 +244,6 @@ module.exports = function(grunt) {
   grunt.registerTask('production',
     ['env:production',
     'stylus:production',
-    'jade',
     'jshint',
     'clean:client_js',
     'uglify:production']);

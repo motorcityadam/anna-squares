@@ -1,56 +1,55 @@
-/*
- * server.js
- * Entry point for anna-squares
- */
+var express    = require('express')
+    , http     = require('http')
+    , passport = require('passport')
+    , path     = require('path')
+    , helpers  = require('view-helpers');
 
-var express  = require('express');
-var fs       = require('fs');
-var passport = require('passport');
-var Resource = require('express-resource');
+var User     = require('./server/models/User.js')
+    , config = require('./config/config');
 
-// Load application configurations
-var env      = process.env.NODE_ENV || 'development';
-var config   = require('./config/config');
-var auth     = require('./config/middlewares/auth');
-var mongoose = require('mongoose');
+var app = module.exports = express();
 
-// Configure database connection
-var db = mongoose.connect(config.db);
+app.set('views', __dirname + '/client/views');
+app.set('view engine', 'jade');
+app.use(express.logger('dev'))
+app.use(express.cookieParser());
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(express.favicon());
+app.use(express.static(path.join(__dirname, 'client')));
+app.use(
+  express.cookieSession({
+    secret: config.cookieSecret
+  })
+);
 
-// Load application models
-var models_path = __dirname + '/server/models';
-var walk = function(path) {
-  fs.readdirSync(path).forEach(function(file) {
-    var newPath = path + '/' + file;
-    var stat = fs.statSync(newPath);
-    if (stat.isFile()) {
-      if (/(.*)\.(js$|coffee$)/.test(file)) {
-        require(newPath);
-      }
-    } else if (stat.isDirectory()) {
-      walk(newPath);
-    }
-  });
-};
-walk(models_path);
+app.configure('development', 'production', function() {
+  app.use(express.csrf());
+});
 
-// Passport configuration
-require('./config/passport')(passport);
+app.use(function(req, res, next) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  next();
+});
 
-var app = express();
+app.use(helpers(config.app.name));
 
-// Express configuration
-require('./config/express')(app, passport, db);
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Application routes
-app.resource(require('./server/routes/index'));
-app.resource('users', require('./server/routes/users'));
-require('./server/routes/callbacks')(app, passport, auth);
-app.resource('schedules', require('./server/routes/schedules'));
+passport.use(User.localStrategy);
+passport.use(User.twitterStrategy());
+passport.use(User.facebookStrategy());
+passport.use(User.googleStrategy());
+passport.use(User.linkedInStrategy());
 
-// Start the application
-var port = config.port;
-app.listen(port);
-console.log('Express server listening on port ' + port + ' in ' + env + ' mode.');
+passport.serializeUser(User.serializeUser);
+passport.deserializeUser(User.deserializeUser);
 
-exports = module.exports = app;
+require('./server/routes.js')(app);
+
+app.set('port', config.port);
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
+});

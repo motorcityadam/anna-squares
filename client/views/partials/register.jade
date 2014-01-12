@@ -1,0 +1,50 @@
+.as-content-container
+  .row
+    .col-lg-12
+      h3
+        i.fa.fa-magic.fa-1x
+        |  Register
+      h4 AnnaSquares is free and it always will be.
+  .row
+    .col-lg-6
+      form.as-form(ng-submit="register()", name="registerForm")
+        .form-group
+          label.control-label(for="username") Username
+          input.form-control(
+            type="text",
+            data-ng-model="username",
+            name="username",
+            required,
+            data-ng-minlength="1",
+            data-ng-maxlength="20",
+            data-ng-pattern="/^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$/",
+            autofocus)
+          p.as-field-help.text-muted This is your username. Your username cannot be changed after the account is created.
+        .form-group
+          label.control-label(for="password") Password
+          input.form-control(
+            type="password",
+            data-ng-model="password",
+            name="password",
+            required,
+            data-ng-minlength="7",
+            data-ng-maxlength="",
+            data-ng-pattern="/^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\\W).*$/")
+          p.as-field-help.text-muted Please enter a password with the following complexity characteristics:
+          ul
+            li.text-muted.strong At least 7 characters long.
+            li.text-muted.strong Contains a lowercase letter.
+            li.text-muted.strong Contains an uppercase letter.
+            li.text-muted.strong Contains a numeral or special character.
+        p
+          strong By clicking on the "Create An Account" button below, you are agreeing to the following:
+        ul.list-unstyled
+          li
+            strong
+              a(href="/about/privacy", target="_blank") Privacy Policy
+          li
+            strong
+              a(href="/about/terms", target="_blank") Terms of Service
+        .form-group
+          button.btn.btn-md.btn-primary(type="submit", data-ng-disabled="registerForm.$invalid")
+            span Create An Account

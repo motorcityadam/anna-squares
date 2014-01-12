@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 09-01-2014 */
+/*! anna-squares - v0.1.7 - 11-01-2014 */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #fff;
@@ -133,42 +133,6 @@ pre {
 .btn {
   outline: 0;
   border-radius: 0;
-/*color: #333;*/
-}
-.btn-info:hover,
-.btn-info:focus,
-.btn-info:active,
-.btn-info.active,
-.open .dropdown-toggle.btn-info {
-  color: #333;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  color: #333;
-}
-.btn-warning:hover,
-.btn-warning:focus,
-.btn-warning:active,
-.btn-warning.active,
-.open .dropdown-toggle.btn-warning {
-  color: #333;
-}
-.btn-danger:hover,
-.btn-danger:focus,
-.btn-danger:active,
-.btn-danger.active,
-.open .dropdown-toggle.btn-danger {
-  color: #333;
-}
-.btn-success:hover,
-.btn-success:focus,
-.btn-success:active,
-.btn-success.active,
-.open .dropdown-toggle.btn-success {
-  color: #333;
 }
 .navbar-nav>li.as-accent {
   background: #484848;

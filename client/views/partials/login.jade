@@ -1,0 +1,23 @@
+.as-content-container
+  .row
+    .col-lg-12
+      h3
+        i.fa.fa-sign-in.fa-1x
+        |  Sign In
+      h4 Schedule management tailored for you.
+  .row
+    .col-lg-6
+      form.as-form(ng-submit="login()", name="loginForm", novalidate)
+        .form-group
+          label.control-label(for="username") Username or Email Address
+          input.form-control(type="text", data-ng-model="username", name="username", required, autofocus)
+        .form-group
+          label.control-label(for="password") Password
+          input.form-control(type="password", data-ng-model="password", name="password", required)
+        ul.list-unstyled
+          li
+            strong
+              a(href='/forgotpassword', target='_blank') Reset your password?
+        .form-group
+          button.btn.btn-md.btn-primary(type="submit", data-ng-disabled="loginForm.$invalid")
+            span Sign In
