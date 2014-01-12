@@ -66,13 +66,108 @@ html(lang='en', data-ng-app='anna-squares')
                 i.fa.fa-building-o
                 |  Admin
             li(data-access-level='accessLevels.user')
-              a(href="", data-ng-click="logout()")
-                i.fa.fa-sign-out
-                |  Sign Out
-          div#userInfo.pull-right(data-access-level='accessLevels.user')
-            | Welcome&nbsp;
-            strong {{ user.username }}&nbsp;
-            span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+              a(href="/feedback")
+                i.fa.fa-comment
+                |  Send Feedback
+            li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                i.fa.fa-thumb-tack
+                |  Notifications
+                | <span class="badge">2</span>
+                | <b class="caret"></b>
+              ul.dropdown-menu
+                li.dropdown-header.strong 2 Notifications
+                li.notification-preview
+                  a(href="#")
+                    span.avatar
+                      img.img-rounded(ph-img="80x80")
+                    span.name Adam Cook
+                    span.notification This is a notification. This notification is very important.
+                    span.time
+                      i.fa.fa-clock-o
+                      |  4:34 PM
+                li.divider
+                li.notification-preview
+                  a(href="#")
+                    span.avatar
+                      img.img-rounded(ph-img="80x80")
+                    span.name Adam Cook
+                    span.notification This is a sample notification. This notification is very important.
+                    span.time
+                      i.fa.fa-clock-o
+                      |  4:34 PM
+                li.divider
+                li
+                  a(href="#")
+                    | View All Notifications
+            li.dropdown.alerts-dropdown(data-access-level='accessLevels.user')
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                i.fa.fa-bullhorn
+                |  Alerts
+                | <span class="badge">3</span>
+                | <b class="caret"></b>
+              ul.dropdown-menu
+                li.dropdown-header.strong 3 Alerts
+                li.alert-preview
+                  a(href="#")
+                    span.name.label.label-info Information
+                    span.alert This is an informational alert about the application.
+                    span.time
+                      i.fa.fa-clock-o
+                      |  4:34 PM
+                li.divider
+                li.alert-preview
+                  a(href="#")
+                    span.name.label.label-danger Notice
+                    span.alert This is an warning alert about the application.
+                    span.time
+                      i.fa.fa-clock-o
+                      |  4:34 PM
+                li.divider
+                li.alert-preview
+                  a(href="#")
+                    span.name.label.label-danger Notice
+                    span.alert This is an warning alert about the application.
+                    span.time
+                      i.fa.fa-clock-o
+                      |  4:34 PM
+                li.divider
+                li
+                  a(href="#")
+                    | View All Alerts
+            li.dropdown.user-dropdown(data-access-level='accessLevels.user')
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                i.fa.fa-user
+                |  {{ user.username }}
+                | <b class="caret"></b>
+              div.dropdown-menu
+                div.user-dropdown-avatar
+                  a(href="#")
+                    div
+                      img.img-rounded(ph-img="80x80")
+                div.user-dropdown-links
+                  ul
+                    li
+                      a(href="#")
+                        i.fa.fa-user
+                        |  Profile
+                    li
+                      a(href="#")
+                        i.fa.fa-group
+                        |  Partners
+                    li
+                      a(href="#")
+                        i.fa.fa-gear
+                        |  Settings
+                    li.divider
+                    li
+                      a(href="", data-ng-click="logout()")
+                        i.fa.fa-sign-out
+                        |  Sign Out
+          // div#userInfo.pull-right(data-access-level='accessLevels.user')
+            // | Welcome&nbsp;
+            // strong {{ user.username }}&nbsp;
+            // span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
       #as-page-wrapper
         .alert.alert-danger(data-ng-bind="error", data-ng-show="error")
         div(data-ng-view='ng-view')
