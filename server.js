@@ -11,6 +11,9 @@ var app = module.exports = express();
 
 app.set('views', __dirname + '/client/views');
 app.set('view engine', 'jade');
+app.set('view options', {
+  pretty: true
+});
 app.use(express.logger('dev'))
 app.use(express.cookieParser());
 app.use(express.json());
@@ -24,9 +27,7 @@ app.use(
   })
 );
 
-app.configure('development', 'production', function() {
-  app.use(express.csrf());
-});
+app.use(express.csrf());
 
 app.use(function(req, res, next) {
   res.cookie('XSRF-TOKEN', req.csrfToken());

@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "server.js",
-    "test": "node node_modules/grunt-cli/bin/grunt test",
+    "test": "NODE_ENV=test grunt test",
     "postinstall": "bower install"
   },
   "repository": {
@@ -52,17 +52,35 @@
   },
   "analyze": false,
   "devDependencies": {
+    "sinon": "latest",
+    "chai": "latest",
+    "mocha": "latest",
     "supertest": "latest",
+    "passport-stub": "latest",
+    "grunt": "latest",
     "should": "latest",
+    "phantomjs": "latest",
+    "karma": "latest",
+    "karma-junit-reporter": "latest",
+    "karma-jasmine": "latest",
+    "karma-ng-scenario": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-firefox-launcher": "latest",
+    "karma-html2js-preprocessor": "latest",
+    "karma-requirejs": "latest",
+    "karma-coffee-preprocessor": "latest",
+    "karma-phantomjs-launcher": "latest",
+    "karma-script-launcher": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-contrib-stylus": "latest",
     "grunt-contrib-jade": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-clean": "latest",
+    "grunt-mocha-test": "latest",
     "grunt-nodemon": "latest",
     "grunt-concurrent": "latest",
-    "grunt-mocha-test": "latest"
+    "grunt-karma": "latest"
   },
   "bundledDependencies": [
   ],  

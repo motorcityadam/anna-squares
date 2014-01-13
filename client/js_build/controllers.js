@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 11-01-2014 */
+/*! anna-squares - v0.1.7 - 12-01-2014 */
 "use strict";
 
 angular.module("anna-squares").controller("NavCtrl", [ "$rootScope", "$scope", "$location", "Auth", function($rootScope, $scope, $location, Auth) {

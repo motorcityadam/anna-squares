@@ -7,21 +7,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     stylus: {
-      development: {
-        options: {
-          banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %> */\n',
-          linenos: false,
-          compress: false
-        },
-        files: [{
-          expand: true,
-          cwd: 'client/stylesheets',
-          src: [ '**/*.styl' ],
-          dest: 'client/stylesheets_build/',
-          ext: '.css'
-        }]
-      },
-      production: {
+      compile: {
         options: {
           banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %> */\n',
           linenos: false,
@@ -38,7 +24,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      client_js: {
+      clientJs: {
         src: [ __dirname + '/client/js_build/' ]
       }
     },
@@ -75,42 +61,31 @@ module.exports = function(grunt) {
       }
     },
 
-    jade: {
-      development: {
-        options: {
-          data: {}
-        },
-        files: [{
-          expand: true,
-          cwd: 'client/views',
-          src: [ '**/*.jade' ],
-          dest: 'client/views_build/',
-          ext: '.html'
-        }]
+    jshint: {
+      options: {
+        jshintrc: __dirname + '/.jshintrc'
       },
-      production: {
+      src: ['gruntfile.js', 'client/js/**/*.js', 'client/tests/**/*.js', 'server/**/*.js']
+    },
+
+    mochaTest: {
+      serverTest: {
         options: {
-          data: {}
+          reporter: 'spec'
         },
-        files: [{
-          expand: true,
-          cwd: 'client/views',
-          src: [ '**/*.jade' ],
-          dest: 'client/views_build/',
-          ext: '.html'
-        }]
+        src: ['server/tests/**/*.js']
       }
     },
 
     watch: {
       stylus: {
         files: ['client/stylesheets/**'],
-        tasks: ['stylus:development'],
+        tasks: ['stylus'],
         options: {
           livereload: true
         }
       },
-      client_jade: {
+      clientJade: {
         files: ['client/views/**'],
         options: {
           livereload: true
@@ -118,30 +93,11 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['client/js/**', 'server/**/*.js'],
-        tasks: ['clean:client_js', 'jshint', 'uglify:development'],
-        options: {
-          livereload: true
-        }
-      },
-      html: {
-        files: ['client/views/**'],
-        options: {
-          livereload: true
-        }
-      },
-      css: {
-        files: ['client/css/**'],
+        tasks: ['clean', 'jshint', 'uglify:development', 'mochaTest'],
         options: {
           livereload: true
         }
       }
-    },
-
-    jshint: {
-      options: {
-        jshintrc: __dirname + '/.jshintrc'
-      },
-      src: ['gruntfile.js', 'client/js/**/*.js', 'test/**/*.js', 'server/**/*.js']
     },
 
     nodemon: {
@@ -169,13 +125,6 @@ module.exports = function(grunt) {
       }
     },
 
-    mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['test/**/*.js']
-    },
-
     env: {
       development: {
         NODE_ENV: 'development'
@@ -188,6 +137,9 @@ module.exports = function(grunt) {
       },
       test: {
         NODE_ENV: 'test'
+      },
+      travis: {
+        NODE_ENV: 'travis'
       }
     }
 
@@ -200,6 +152,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
@@ -208,46 +161,40 @@ module.exports = function(grunt) {
   // Set grunt default behavior to force.
   grunt.option('force', true);
 
-  // Register individual grunt tasks.
-  grunt.registerTask(
-    'stylesheets',
-    'Compiling Stylus stylesheets.',
-    ['stylus:production']
-  );
+  // Register grunt task to perform project tests.
+  grunt.registerTask('test', ['env:test', 'mochaTest']);
 
   // Register default grunt tasks (default is also a development deployment).
   grunt.registerTask('default',
     ['env:development',
-    'stylus:development',
+    'stylus',
     'jshint',
-    'clean:client_js',
+    'clean',
     'uglify:development',
     'concurrent']);
+
   // Register grunt task for a development environment.
   grunt.registerTask('development',
     ['env:development',
-    'stylus:development',
+    'stylus',
     'jshint',
-    'clean:client_js',
+    'clean',
     'uglify:development',
     'concurrent']);
 
   // Register grunt task for a staging environment.
   grunt.registerTask('stage',
     ['env:stage',
-    'stylus:production',
+    'stylus',
     'jshint',
-    'clean:client_js',
+    'clean',
     'uglify:production']);
 
   // Register grunt task for a production environment.
   grunt.registerTask('production',
     ['env:production',
-    'stylus:production',
+    'stylus',
     'jshint',
-    'clean:client_js',
+    'clean',
     'uglify:production']);
-
-  // Register grunt task to perform project tests.
-  grunt.registerTask('test', ['env:test', 'mochaTest']);
 };
