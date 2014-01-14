@@ -1,3 +1,5 @@
+/*global angular:false*/
+/*jshint unused: vars */
 'use strict';
 
 angular.module('anna-squares')

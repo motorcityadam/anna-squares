@@ -1,3 +1,5 @@
+/*global angular:false*/
+/*jshint unused: vars */
 'use strict';
 
 /* Controllers */
@@ -12,33 +14,33 @@ angular.module('anna-squares')
         Auth.logout(function() {
           $location.path('/login');
         }, function() {
-          $rootScope.error = "Failed to logout";
+          $rootScope.error = 'Failed to logout.';
         });
       };
     }]);
 
 angular.module('anna-squares')
-    .controller('SidebarController', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-
-    }]);
+    .controller('SidebarController', ['$rootScope', '$scope', '$location', 'Auth',
+      function($rootScope, $scope, $location, Auth) { }]);
 
 angular.module('anna-squares')
     .controller('LoginCtrl',
-        ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
+        ['$rootScope', '$scope', '$location', '$window', 'Auth',
+          function($rootScope, $scope, $location, $window, Auth) {
 
           $scope.rememberme = true;
           $scope.login = function() {
             Auth.login({
-                  username: $scope.username,
-                  password: $scope.password,
-                  rememberme: $scope.rememberme
-                },
-                function(res) {
-                  $location.path('/');
-                },
-                function(err) {
-                  $rootScope.error = "Failed to login";
-                });
+              username: $scope.username,
+              password: $scope.password,
+              rememberme: $scope.rememberme
+            },
+            function(res) {
+              $location.path('/');
+            },
+            function(err) {
+              $rootScope.error = 'Failed to login.';
+            });
           };
 
           $scope.loginOauth = function(provider) {
@@ -48,9 +50,7 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
     .controller('HomeCtrl',
-        ['$rootScope', function($rootScope) {
-
-        }]);
+        ['$rootScope', function($rootScope) { }]);
 
 angular.module('anna-squares')
     .controller('RegisterCtrl',
@@ -60,23 +60,22 @@ angular.module('anna-squares')
 
           $scope.register = function() {
             Auth.register({
-                  username: $scope.username,
-                  password: $scope.password,
-                  role: $scope.userRoles.user
-                },
-                function() {
-                  $location.path('/');
-                },
-                function(err) {
-                  $rootScope.error = err;
-                });
+              username: $scope.username,
+              password: $scope.password,
+              role: $scope.userRoles.user
+            },
+            function() {
+              $location.path('/');
+            },
+            function(err) {
+              $rootScope.error = err;
+            });
           };
         }]);
 
 angular.module('anna-squares')
     .controller('PrivateCtrl',
-        ['$rootScope', function($rootScope) {
-        }]);
+        ['$rootScope', function($rootScope) { }]);
 
 
 angular.module('anna-squares')
@@ -89,7 +88,7 @@ angular.module('anna-squares')
             $scope.users = res;
             $scope.loading = false;
           }, function(err) {
-            $rootScope.error = "Failed to fetch users.";
+            $rootScope.error = 'Failed to fetch users.';
             $scope.loading = false;
           });
 

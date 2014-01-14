@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 12-01-2014 */
+/*! anna-squares - v0.1.7 - 13-01-2014 */
 "use strict";
 
 angular.module("anna-squares").controller("NavCtrl", [ "$rootScope", "$scope", "$location", "Auth", function($rootScope, $scope, $location, Auth) {
@@ -9,7 +9,7 @@ angular.module("anna-squares").controller("NavCtrl", [ "$rootScope", "$scope", "
         Auth.logout(function() {
             $location.path("/login");
         }, function() {
-            $rootScope.error = "Failed to logout";
+            $rootScope.error = "Failed to logout.";
         });
     };
 } ]);
@@ -26,7 +26,7 @@ angular.module("anna-squares").controller("LoginCtrl", [ "$rootScope", "$scope",
         }, function(res) {
             $location.path("/");
         }, function(err) {
-            $rootScope.error = "Failed to login";
+            $rootScope.error = "Failed to login.";
         });
     };
     $scope.loginOauth = function(provider) {

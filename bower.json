@@ -21,8 +21,7 @@
   "devDependencies": {
     "angular-mocks": "latest",
     "angular-scenario": "latest",
-    "jasmine": "latest",
-    "jasmine-bootstrap": "latest"
+    "jasmine": "latest"
   },
   "homepage": "https://github.com/adamjcook/anna-squares",
   "authors": [

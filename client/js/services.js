@@ -1,3 +1,8 @@
+/*global
+  angular:false,
+  routingConfig:false,
+  _:false
+*/
 'use strict';
 
 angular.module('anna-squares')
@@ -11,7 +16,7 @@ angular.module('anna-squares')
 
       function changeUser(user) {
         _.extend(currentUser, user);
-      };
+      }
 
       return {
         authorize: function(accessLevel, role) {
@@ -23,7 +28,7 @@ angular.module('anna-squares')
         isLoggedIn: function(user) {
           if(user === undefined)
             user = currentUser;
-          return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
+          return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
         },
         register: function(user, success, error) {
           $http.post('/register', user).success(function(res) {

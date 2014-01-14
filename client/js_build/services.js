@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 12-01-2014 */
+/*! anna-squares - v0.1.7 - 13-01-2014 */
 "use strict";
 
 angular.module("anna-squares").factory("Auth", function($http, $cookieStore) {
@@ -17,7 +17,7 @@ angular.module("anna-squares").factory("Auth", function($http, $cookieStore) {
         },
         isLoggedIn: function(user) {
             if (user === undefined) user = currentUser;
-            return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
+            return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
         },
         register: function(user, success, error) {
             $http.post("/register", user).success(function(res) {

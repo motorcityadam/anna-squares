@@ -1,3 +1,4 @@
+/*jshint unused: vars */
 var app            = require('../../../server')
     , request      = require('supertest')
     , passportStub = require('passport-stub');
@@ -6,23 +7,23 @@ passportStub.install(app);
 
 // User account
 var user = {
-  'username':'newUser',
-  'role':{bitMask: 2,title: "user"},
-  'password':'12345'
+  'username': 'newUser',
+  'role': { bitMask: 2, title: 'user' },
+  'password': '12345'
 };
 
 // User account 2 - No role
 var user2 = {
-  'username':'newUser',
-  'password':'12345'
+  'username': 'newUser',
+  'password': '12345'
 };
 
 // Admin account
 var admin = {
-  'username':'admin',
+  'username': 'admin',
   'role': { bitMask: 4, title: 'admin' },
   'id': '2',
-  'password':'123'
+  'password': '123'
 };
 
 describe('Server Integration Tests - ', function (done) {

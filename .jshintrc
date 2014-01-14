@@ -19,10 +19,9 @@
     "trailing": true, // Prohibit trailing whitespaces.
     "smarttabs": false, // Suppresses warnings about mixed tabs and spaces
     "globals": { // Globals variables.
-        "angular": true,
         "$": false,
         "jQuery": false,
-        "annaSquaresApp": false
+        "angular": false
     },
     "predef": [ // Extra globals.
         "define",
@@ -39,5 +38,6 @@
     "indent": 2, // Specify indentation spacing
     "maxlen": 120, // Max line lenght
     "devel": false, // Allow development statements e.g. `console.log();`.
-    "noempty": true // Prohibit use of empty blocks.
+    "noempty": true, // Prohibit use of empty blocks.
+    "laxcomma": true // This option suppresses warnings about comma-first coding style.
 }

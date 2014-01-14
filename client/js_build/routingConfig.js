@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 12-01-2014 */
+/*! anna-squares - v0.1.7 - 13-01-2014 */
 (function(exports) {
     var config = {
         roles: [ "public", "user", "admin" ],
@@ -9,8 +9,6 @@
             admin: [ "admin" ]
         }
     };
-    exports.userRoles = buildRoles(config.roles);
-    exports.accessLevels = buildAccessLevels(config.accessLevels, exports.userRoles);
     function buildRoles(roles) {
         var bitMask = "01";
         var userRoles = {};
@@ -26,11 +24,13 @@
     }
     function buildAccessLevels(accessLevelDeclarations, userRoles) {
         var accessLevels = {};
+        var resultBitMask;
+        var role;
         for (var level in accessLevelDeclarations) {
-            if (typeof accessLevelDeclarations[level] == "string") {
-                if (accessLevelDeclarations[level] == "*") {
-                    var resultBitMask = "";
-                    for (var role in userRoles) {
+            if (typeof accessLevelDeclarations[level] === "string") {
+                if (accessLevelDeclarations[level] === "*") {
+                    resultBitMask = "";
+                    for (role in userRoles) {
                         resultBitMask += "1";
                     }
                     accessLevels[level] = {
@@ -39,8 +39,8 @@
                     };
                 } else console.log("Access Control Error: Could not parse '" + accessLevelDeclarations[level] + "' as access definition for level '" + level + "'");
             } else {
-                var resultBitMask = 0;
-                for (var role in accessLevelDeclarations[level]) {
+                resultBitMask = 0;
+                for (role in accessLevelDeclarations[level]) {
                     if (userRoles.hasOwnProperty(accessLevelDeclarations[level][role])) resultBitMask = resultBitMask | userRoles[accessLevelDeclarations[level][role]].bitMask; else console.log("Access Control Error: Could not find role '" + accessLevelDeclarations[level][role] + "' in registered roles while building access for '" + level + "'");
                 }
                 accessLevels[level] = {
@@ -51,4 +51,6 @@
         }
         return accessLevels;
     }
+    exports.userRoles = buildRoles(config.roles);
+    exports.accessLevels = buildAccessLevels(config.accessLevels, exports.userRoles);
 })(typeof exports === "undefined" ? this["routingConfig"] = {} : exports);

@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 12-01-2014 */
+/*! anna-squares - v0.1.7 - 13-01-2014 */
 "use strict";
 
 angular.module("anna-squares", [ "ngCookies", "ngRoute" ]).config([ "$routeProvider", "$locationProvider", "$httpProvider", function($routeProvider, $locationProvider, $httpProvider) {
