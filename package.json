@@ -2,13 +2,17 @@
   "name": "anna-squares",
   "version": "0.1.7",
   "private": true,
-  "author": "Adam Joseph Cook <adam.joseph.cook@gmail.com>",
+  "author": "Adam Joseph Cook <acook@alliedstrand.com>",
   "description": "A daily time tracking and organization web application for healthcare professionals, written in Angular.js and Node.js.",
   "contributors": [ 
     {
       "name": "Adam Joseph Cook",
-      "email": "adam.joseph.cook@gmail.com"
-    } 
+      "email": "acook@alliedstrand.com"
+    },
+    {
+      "name": "Anna Marie Acosta",
+      "email": ""
+    }
   ],
   "scripts": {
     "start": "./server/server.js",
