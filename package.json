@@ -11,7 +11,7 @@
     } 
   ],
   "scripts": {
-    "start": "server.js",
+    "start": "./server/server.js",
     "test": "NODE_ENV=test grunt test",
     "postinstall": "bower install"
   },
@@ -44,7 +44,6 @@
     "forever": "latest",
     "jade": "latest",
     "stylus": "latest",
-    "nib": "latest",
     "bower": "latest",
     "grunt": "latest",
     "grunt-cli": "latest",
@@ -52,6 +51,7 @@
   },
   "analyze": false,
   "devDependencies": {
+    "supervisor": "latest",
     "sinon": "latest",
     "chai": "latest",
     "mocha": "latest",
@@ -71,12 +71,14 @@
     "karma-coffee-preprocessor": "latest",
     "karma-phantomjs-launcher": "latest",
     "karma-script-launcher": "latest",
-    "grunt-contrib-watch": "latest",
     "grunt-contrib-jshint": "latest",
+    "grunt-contrib-nodeunit": "latest",
+    "grunt-contrib-watch": "latest",
     "grunt-contrib-stylus": "latest",
     "grunt-contrib-jade": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-clean": "latest",
+    "grunt-contrib-concat": "latest",
     "grunt-mocha-test": "latest",
     "grunt-nodemon": "latest",
     "grunt-concurrent": "latest",

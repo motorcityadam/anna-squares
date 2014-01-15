@@ -1,5 +1,5 @@
 /*jshint unused: vars */
-var app            = require('../../../server')
+var app            = require('../../server')
     , request      = require('supertest')
     , passportStub = require('passport-stub');
 

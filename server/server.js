@@ -2,19 +2,33 @@ var express    = require('express')
     , http     = require('http')
     , passport = require('passport')
     , path     = require('path')
-    , helpers  = require('view-helpers');
+    , helpers  = require('view-helpers')
+    , stylus   = require('stylus');
 
-var User     = require('./server/models/User.js')
+var User     = require('./models/User.js')
     , config = require('./config/config');
 
 var app = module.exports = express();
+var rootDir = __dirname + '../';
 
-app.set('views', __dirname + '/client/views');
+app.set('views', rootDir + 'client/views');
 app.set('view engine', 'jade');
 app.set('view options', {
   pretty: true
 });
-app.use(express.logger('dev'))
+
+var compile = function (str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .set('compress', true);
+};
+
+app.use(stylus.middleware({
+  src:     rootDir + 'client/stylesheets',
+  compile: compile
+}));
+
+app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.json());
 app.use(express.urlencoded());
@@ -48,7 +62,7 @@ passport.use(User.linkedInStrategy());
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
-require('./server/routes.js')(app);
+require('./routes.js')(app);
 
 app.set('port', config.port);
 http.createServer(app).listen(app.get('port'), function(){

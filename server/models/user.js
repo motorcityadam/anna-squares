@@ -7,7 +7,7 @@ var _                  = require('underscore')
     , validator        = require('validator');
 
 var userRoles = require('../../client/js_build/routingConfig').userRoles
-    , config  = require('../../config/config');
+    , config  = require('../config/config');
 
 var users = [
   {

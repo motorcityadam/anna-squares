@@ -21,7 +21,11 @@
     "globals": { // Globals variables.
         "$": false,
         "jQuery": false,
-        "angular": false
+        "angular": false,
+        "__dirname": false,
+        "module": false,
+        "exports": false,
+        "console": false
     },
     "predef": [ // Extra globals.
         "define",
