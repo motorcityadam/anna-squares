@@ -18,9 +18,7 @@ html(lang='en', data-ng-app='anna-squares')
       link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css')
       link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
 
-    link(rel='stylesheet', href='/stylesheets_build/common.css')
-    link(rel='stylesheet', href='/stylesheets_build/sidebar.css')
-    link(rel='stylesheet', href='/stylesheets_build/flash.css')
+    link(rel='stylesheet', href='/dist/anna-squares.css')
 
     script(type='text/javascript', src='/lib/modernizr/modernizr.js')
 
@@ -228,12 +226,8 @@ html(lang='en', data-ng-app='anna-squares')
       script(src='/lib/angular-ui-sortable/src/sortable.js')
       script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js')
 
-    script(src='/js_build/routingConfig.js')
-    script(src='/js_build/app.js')
-    script(src='/js_build/services.js')
-    script(src='/js_build/controllers.js')
-    script(src='/js_build/filters.js')
-    script(src='/js_build/directives.js')
+    script(src='/dist/common.js')
+    script(src='/dist/anna-squares.js')
 
     // Load all partial views
     script(type="text/ng-template", id="404")
@@ -248,6 +242,3 @@ html(lang='en', data-ng-app='anna-squares')
       include partials/private
     script(type="text/ng-template", id="register")
       include partials/register
-    if (req.host='localhost')
-      // Livereload script
-      script(type='text/javascript', src='http://localhost:35729/livereload.js')

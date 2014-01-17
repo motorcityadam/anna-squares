@@ -4,9 +4,8 @@ var _          = require('underscore')
 
 var AuthCtrl       = require('./controllers/auth')
     , UserCtrl     = require('./controllers/user')
-    , User         = require('./models/User.js')
-    , userRoles    = require('../client/js/routingConfig').userRoles
-    , accessLevels = require('../client/js/routingConfig').accessLevels;
+    , userRoles    = require('../client/dist/common').userRoles
+    , accessLevels = require('../client/dist/common').accessLevels;
 
 var routes = [
 
@@ -118,6 +117,17 @@ var routes = [
   }
 ];
 
+function ensureAuthorized (req, res, next) {
+  var role;
+  if(!req.user) role = userRoles.public;
+  else          role = req.user.role;
+
+  var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
+
+  if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
+  return next();
+}
+
 module.exports = function(app) {
 
   _.each(routes, function(route) {
@@ -139,18 +149,6 @@ module.exports = function(app) {
         break;
       default:
         throw new Error('Invalid HTTP method specified for route ' + route.path);
-        break;
     }
   });
-};
-
-function ensureAuthorized(req, res, next) {
-  var role;
-  if(!req.user) role = userRoles.public;
-  else          role = req.user.role;
-
-  var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
-
-  if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
-  return next();
 };

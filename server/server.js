@@ -2,14 +2,13 @@ var express    = require('express')
     , http     = require('http')
     , passport = require('passport')
     , path     = require('path')
-    , helpers  = require('view-helpers')
-    , stylus   = require('stylus');
+    , helpers  = require('view-helpers');
 
 var User     = require('./models/User.js')
     , config = require('./config/config');
 
 var app = module.exports = express();
-var rootDir = __dirname + '../';
+var rootDir = __dirname + '/../';
 
 app.set('views', rootDir + 'client/views');
 app.set('view engine', 'jade');
@@ -17,24 +16,13 @@ app.set('view options', {
   pretty: true
 });
 
-var compile = function (str, path) {
-  return stylus(str)
-    .set('filename', path)
-    .set('compress', true);
-};
-
-app.use(stylus.middleware({
-  src:     rootDir + 'client/stylesheets',
-  compile: compile
-}));
-
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.favicon());
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(rootDir, 'client')));
 app.use(
   express.cookieSession({
     secret: config.cookieSecret

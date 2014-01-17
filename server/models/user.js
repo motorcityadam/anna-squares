@@ -6,7 +6,8 @@ var _                  = require('underscore')
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , validator        = require('validator');
 
-var userRoles = require('../../client/js_build/routingConfig').userRoles
+// var userRoles = require('../../client/js_build/routingConfig').userRoles
+var userRoles = require('../../client/dist/common').userRoles
     , config  = require('../config/config');
 
 var users = [
