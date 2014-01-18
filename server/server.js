@@ -29,11 +29,13 @@ app.use(
   })
 );
 
-app.use(express.csrf());
-
-app.use(function(req, res, next) {
-  res.cookie('XSRF-TOKEN', req.csrfToken());
-  next();
+app.configure('development', 'production', function() {
+  app.use(express.csrf());
+  app.use(function (req, res, next) {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    res.locals.csrftoken = req.csrfToken();
+    next();
+  });
 });
 
 app.use(helpers(config.app.name));

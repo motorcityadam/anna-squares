@@ -62,7 +62,7 @@ angular.module('anna-squares')
             Auth.register({
               username: $scope.username,
               password: $scope.password,
-              role: $scope.userRoles.user
+              role: $scope.role
             },
             function() {
               $location.path('/');

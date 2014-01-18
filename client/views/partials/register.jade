@@ -16,8 +16,8 @@
             name="username",
             required,
             data-ng-minlength="1",
-            data-ng-maxlength="20",
-            data-ng-pattern="/^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$/",
+            data-ng-maxlength="39",
+            data-ng-pattern="/^[A-Za-z0-9]+(-*[A-Za-z0-9]+-*)*$/",
             autofocus)
           p.as-field-help.text-muted This is your username. Your username cannot be changed after the account is created.
         .form-group
@@ -29,7 +29,7 @@
             required,
             data-ng-minlength="7",
             data-ng-maxlength="",
-            data-ng-pattern="/^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\\W).*$/")
+            data-ng-pattern="/^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\W).*$/")
           p.as-field-help.text-muted Please enter a password with the following complexity characteristics:
           ul
             li.text-muted.strong At least 7 characters long.

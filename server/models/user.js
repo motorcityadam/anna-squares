@@ -6,7 +6,6 @@ var _                  = require('underscore')
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , validator        = require('validator');
 
-// var userRoles = require('../../client/js_build/routingConfig').userRoles
 var userRoles = require('../../client/dist/common').userRoles
     , config  = require('../config/config');
 
@@ -81,7 +80,7 @@ module.exports = {
       throw new Error('The username provided is too long (must be a maximum is 39 characters).');
     }
 
-    if (!(validator.matches(user.username, /^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$/))) {
+    if (!(validator.matches(user.username, /^[A-Za-z0-9]+(-*[A-Za-z0-9]+-*)*$/))) {
       throw new Error('Username may only contain alphanumeric characters or dashes and cannot begin with a dash.');
     }
 
@@ -89,11 +88,11 @@ module.exports = {
       throw new Error('The password provided is too short (must be a minimum of 7 characters).');
     }
 
-    if (!(validator.matches(user.password, /^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\\W).*$/))) {
+    if (!(validator.matches(user.password, /^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\W).*$/))) {
       throw new Error('The password provided does not conform with the complexity characteristics.');
     }
 
-    if (JSON.stringify(user.role) !== JSON.stringify(userRoles.user)) {
+    if (JSON.stringify(user.role) !== JSON.stringify({ bitMask: 2, title: 'user' })) {
       throw new Error('The user role provided is invalid.');
     }
   },
