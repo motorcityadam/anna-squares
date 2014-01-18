@@ -104,7 +104,7 @@ angular.module('anna-squares')
     }]);
 
 angular.module('anna-squares')
-    .controller('SidebarController', ['$rootScope', '$scope', '$location', 'Auth',
+    .controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
       function($rootScope, $scope, $location, Auth) { }]);
 
 angular.module('anna-squares')
@@ -137,25 +137,27 @@ angular.module('anna-squares')
         ['$rootScope', function($rootScope) { }]);
 
 angular.module('anna-squares')
-    .controller('RegisterCtrl',
-        ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-          $scope.role = Auth.userRoles.user;
-          $scope.userRoles = Auth.userRoles;
+  .controller('RegisterCtrl',
+    ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+      $scope.role = Auth.userRoles.user;
+      $scope.userRoles = Auth.userRoles;
 
-          $scope.register = function() {
-            Auth.register({
-              username: $scope.username,
-              password: $scope.password,
-              role: $scope.role
-            },
-            function() {
-              $location.path('/');
-            },
-            function(err) {
-              $rootScope.error = err;
-            });
-          };
-        }]);
+      $scope.register = function() {
+        Auth.register({
+          username: $scope.username,
+          email: $scope.email,
+          password: $scope.password,
+          confirm_password: $scope.confirm_password,
+          role: $scope.role
+        },
+        function() {
+          $location.path('/');
+        },
+        function(err) {
+          $rootScope.error = err;
+        });
+      };
+    }]);
 
 angular.module('anna-squares')
     .controller('PrivateCtrl',
@@ -237,6 +239,7 @@ angular.module('anna-squares').directive('activeNav', ['$location', function($lo
 
 }]);
 
+// TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', [function () {
   return {
     restrict: 'A',

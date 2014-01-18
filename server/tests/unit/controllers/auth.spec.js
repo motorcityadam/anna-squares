@@ -24,8 +24,9 @@ describe('Auth Controller Unit Tests - ', function() {
     beforeEach(function() {
       req.body = {
         username: 'user',
+        email:    'user@example.com',
         password: 'pass',
-        role: 1
+        role:     1
       };
     });
 
@@ -42,7 +43,7 @@ describe('Auth Controller Unit Tests - ', function() {
 
     it('should return a 403 when UserAlreadyExists error is returned from User.addUser()', function(done) {
       sandbox.stub(User, 'validate').returns();
-      sandbox.stub(User, 'addUser', function(username, password, role, callback) {
+      sandbox.stub(User, 'addUser', function(username, email, password, role, callback) {
         callback('UserAlreadyExists');
       });
 
@@ -56,7 +57,7 @@ describe('Auth Controller Unit Tests - ', function() {
 
     it('should return a 500 if error other than UserAlreadyExists is returned from User.addUser()', function(done) {
       sandbox.stub(User, 'validate').returns();
-      sandbox.stub(User, 'addUser', function(username, password, role, callback) {
+      sandbox.stub(User, 'addUser', function(username, email, password, role, callback) {
         callback('SomeError');
       });
 
@@ -70,7 +71,7 @@ describe('Auth Controller Unit Tests - ', function() {
 
     it('should call next() with an error argument if req.logIn() returns error', function(done) {
       sandbox.stub(User, 'validate').returns();
-      sandbox.stub(User, 'addUser', function(username, password, role, callback) {
+      sandbox.stub(User, 'addUser', function(username, email, password, role, callback) {
         callback(null, req.body);
       });
       req.logIn = function(user, callback) { return callback('SomeError'); };
@@ -83,9 +84,9 @@ describe('Auth Controller Unit Tests - ', function() {
       AuthCtrl.register(req, res, next);
     });
 
-    it('should return a 200 with a username and role in the response body', function(done) {
+    it('should return a 200 with a username, email and role in the response body', function(done) {
       sandbox.stub(User, 'validate').returns();
-      sandbox.stub(User, 'addUser', function(username, password, role, callback) {
+      sandbox.stub(User, 'addUser', function(username, email, password, role, callback) {
         callback(null, req.body);
       });
       req.logIn = function(user, callback) { return callback(null); };

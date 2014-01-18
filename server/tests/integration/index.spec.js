@@ -7,201 +7,273 @@ passportStub.install(app);
 
 // Test user account 1
 // Username valid
+// Email valid
 // Password valid
 //   - At least 7 characters in length
 //   - Contains a lowercase letter
 //   - Contains an uppercase letter
 //   - Contains a numeral (no special characters)
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user1 = {
-  'username': 'newUser1',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'as456Rt'
+  'username':         'newUser1',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'as456Rt',
+  'confirm_password': 'as456Rt'
 };
 
 // Test user account 2
 // Username valid - contains a dash
+// Email valid
 // Password valid
 //   - At least 7 characters in length
 //   - Contains a lowercase letter
 //   - Contains an uppercase letter
 //   - Contains a special character (no numerals)
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user2 = {
-  'username': 'new-User2',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'aS#$%rt'
+  'username':         'new-User2',
+  'email':            'acook@alliedstrand.co',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'aS#$%rt',
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 3
 // Username valid - ends with single a dash
+// Email valid
 // Password valid
 //   - At least 7 characters in length
 //   - Contains a lowercase letter
 //   - Contains an uppercase letter
 //   - Contains a special character and a numeral
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user3 = {
-  'username': 'newUser3',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'Aq#0%Rt'
+  'username':         'newUser3',
+  'email':            'acook@alliedstrand.io',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'Aq#0%Rt',
+  'confirm_password': 'Aq#0%Rt'
 };
 
 // Test user account 4
 // Username valid
+// Email valid
 // Password invalid
 //  - Is NOT at least 7 characters in length
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user4 = {
-  'username': 'newUser4',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'as456R'
+  'username':         'newUser4',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'as456R',
+  'confirm_password': 'as456R'
 };
 
 // Test user account 5
 // Username valid
+// Email valid
 // Password invalid
 //  - Does NOT contain a lowercase letter
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user5 = {
-  'username': 'newUser5',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'QW45ET6'
+  'username':         'newUser5',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'QW45ET6',
+  'confirm_password': 'QW45ET6'
 };
 
 // Test user account 6
 // Username valid
+// Email valid
 // Password invalid
 //  - Does NOT contain a uppercase letter
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user6 = {
-  'username': 'newUser6',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'bn4ert54yu'
+  'username':         'newUser6',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'bn4ert54yu',
+  'confirm_password': 'bn4ert54yu'
 };
 
 // Test user account 7
 // Username valid
+// Email valid
 // Password invalid
 //  - Does NOT contain a numeral or special character
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user7 = {
-  'username': 'newUser7',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'vhFgtYswEy'
+  'username':         'newUser7',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'vhFgtYswEy',
+  'confirm_password': 'vhFgtYswEy'
 };
 
 // Test user account 8
 // Username valid
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role invalid - no role
 var user8 = {
-  'username': 'newUser8',
-  'password': 'aS#$%rt'
+  'username':         'newUser8',
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 9
 // Username valid
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role invalid - bad title
 var user9 = {
-  'username': 'newUser9',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'something' }
+  'username':         'newUser9',
+  'password':         'aS#$%rt',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'something' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 10
 // Username invalid - no username
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user10 = {
-  'username': '',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'username':         '',
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'role':             { bitMask: 2, title: 'user' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 11
 // Username invalid - starts with a dash
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user11 = {
-  'username': '-newUser11',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'username':         '-newUser11',
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'role':             { bitMask: 2, title: 'user' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 12
 // Username invalid - too long
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user12 = {
-  'username': 'kfajsfoiwahojnsavodianidajdkajlkfiodsajfaskfjaweiofnaweiocnaosdsjgklsdjgksfdj',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'username':         'kfajsfoiwahojnsavodianidajdkajlkfiodsajfaskfjaweiofnaweiocnaosdsjgklsdjgksfdj',
+  'password':         'aS#$%rt',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 13
 // Username invalid - start with a space
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user13 = {
-  'username': ' newUser13',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'username':         ' newUser13',
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'role':             { bitMask: 2, title: 'user' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test user account 14
 // Username invalid - contains special characters (besides a dash)
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user14 = {
   'username': 'new_Use.r14',
+  'email':            'acook@alliedstrand.com',
   'password': 'aS#$%rt',
+  'confirm_password': 'aS#$%rt',
   'role': { bitMask: 2, title: 'user' }
 };
 
 // Test user account 15
 // Username valid - contains multiple dashes
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user15 = {
-  'username': 'new-----User15',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'username':         'new-----User15',
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'confirm_password': 'aS#$%rt',
+  'role':             { bitMask: 2, title: 'user' }
 };
 
 // Test user account 16
 // Username valid - ends with single a dash
+// Email valid
 // Password valid
 //   - At least 7 characters in length
 //   - Contains a lowercase letter
 //   - Contains an uppercase letter
 //   - Contains a special character and a numeral
+// Confirmation password valid - matches password
 // Role valid - 'user' role
 var user16 = {
-  'username': 'newUser16-',
-  'role': { bitMask: 2, title: 'user' },
-  'password': 'Aq#0%Rt'
+  'username':         'newUser16-',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 2, title: 'user' },
+  'password':         'Aq#0%Rt',
+  'confirm_password': 'Aq#0%Rt'
 };
 
 // Test user account 17
 // Username invalid - ends with multiple dashes
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role valid
 var user17 = {
   'username': 'newUser17---------------',
-  'password': 'aS#$%rt',
-  'role': { bitMask: 2, title: 'user' }
+  'email':            'acook@alliedstrand.com',
+  'password':         'aS#$%rt',
+  'role':             { bitMask: 2, title: 'user' },
+  'confirm_password': 'aS#$%rt'
 };
 
 // Test admin account
 // Username valid
+// Email valid
 // Password valid
+// Confirmation password valid - matches password
 // Role invalid - 'admin' role
 var admin = {
-  'username': 'adminUser',
-  'role': { bitMask: 4, title: 'admin' },
-  'password': 'as456Rt'
+  'username':         'adminUser',
+  'email':            'acook@alliedstrand.com',
+  'role':             { bitMask: 4, title: 'admin' },
+  'password':         'as456Rt',
+  'confirm_password':         'as456Rt',
 };
 
 describe('Server Integration Tests - ', function (done) {
@@ -281,4 +353,6 @@ describe('Server Integration Tests - ', function (done) {
     passportStub.login(user1); // Login as user
     request(app).get('/users').expect(403, done);
   });
+
+  // TODO: Add tests for invalid email and non-matching password and confirm_password.
 });

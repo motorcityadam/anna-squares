@@ -56,6 +56,7 @@ angular.module('anna-squares').directive('activeNav', ['$location', function($lo
 
 }]);
 
+// TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', [function () {
   return {
     restrict: 'A',

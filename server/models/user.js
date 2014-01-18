@@ -27,17 +27,18 @@ var users = [
 ];
 
 module.exports = {
-  addUser: function(username, password, role, callback) {
+  addUser: function(username, email, password, role, callback) {
     if(this.findByUsername(username) !== undefined)  return callback('UserAlreadyExists');
 
     // Clean up when 500 users reached
-    if(users.length > 500) {
+/*    if(users.length > 500) {
       users = users.slice(0, 2);
-    }
+    }*/
 
     var user = {
       id:         _.max(users, function(user) { return user.id; }).id + 1,
       username:   username,
+      email:      email,
       password:   password,
       role:       role
     };
@@ -78,6 +79,7 @@ module.exports = {
   },
 
   validate: function(user) {
+
     if (!(validator.isLength(user.username, 1, 39))) {
       throw new Error('The username provided is too long (must be a maximum is 39 characters).');
     }
@@ -86,12 +88,24 @@ module.exports = {
       throw new Error('Username may only contain alphanumeric characters or dashes and cannot begin with a dash.');
     }
 
+    if (!(validator.isEmail(user.email))) {
+      throw new Error('The e-mail address provided is invalid or malformed.');
+    }
+
+    if (!(validator.isLength(user.email, 1, 100))) {
+      throw new Error('The e-mail address provided is invalid or malformed.');
+    }
+
     if (!(validator.isLength(user.password, 7))) {
       throw new Error('The password provided is too short (must be a minimum of 7 characters).');
     }
 
     if (!(validator.matches(user.password, /^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\W).*$/))) {
       throw new Error('The password provided does not conform with the complexity characteristics.');
+    }
+
+    if (!(validator.equals(user.password, user.confirm_password))) {
+      throw new Error('The provided passwords provided do not match.');
     }
 
     if (JSON.stringify(user.role) !== JSON.stringify({ bitMask: 2, title: 'user' })) {

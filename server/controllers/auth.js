@@ -10,8 +10,8 @@ module.exports = {
       return res.send(400, err.message);
     }
 
-    User.addUser(req.body.username, req.body.password, req.body.role, function(err, user) {
-      if(err === 'UserAlreadyExists') return res.send(403, 'User already exists');
+    User.addUser(req.body.username, req.body.email, req.body.password, req.body.role, function(err, user) {
+      if(err === 'UserAlreadyExists') return res.send(403, 'User already exists.');
       else if(err)                    return res.send(500);
 
       req.logIn(user, function(err) {
