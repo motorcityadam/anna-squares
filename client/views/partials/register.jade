@@ -6,11 +6,12 @@
         |  Register
       h4 AnnaSquares is free and it always will be.
   .row
-    .col-lg-6
-      form.as-form(ng-submit="register()", name="registerForm")
-        .form-group
-          label.control-label(for="username") Username
-          input.form-control(
+    form.as-form(ng-submit="register()", name="registerForm")
+      .col-lg-6
+        //- Input field for Username
+        .form-group(ng-class="{'has-error' : registerForm.username.$dirty && registerForm.username.$invalid}")
+          label.control-label(for="as-reg-username") Username
+          input#as-reg-username.form-control(
             type="text",
             data-ng-model="username",
             name="username",
@@ -20,9 +21,31 @@
             data-ng-pattern="/^[A-Za-z0-9]+(-*[A-Za-z0-9]+-*)*$/",
             autofocus)
           p.as-field-help.text-muted This is your username. Your username cannot be changed after the account is created.
-        .form-group
-          label.control-label(for="password") Password
-          input.form-control(
+          div(ng-show="registerForm.username.$dirty && registerForm.username.$invalid")
+            p.has-error.help-block(ng-show="registerForm.username.$error.required") This field is required.
+            p.has-error.help-block(ng-show="registerForm.username.$error.pattern") Username may only contain alphanumeric characters or dashes and cannot begin with a dash.
+            p.has-error.help-block(ng-show="registerForm.username.$error.maxlength") The username provided is too long (must be a maximum is 39 characters).
+            p.has-error.help-block(ng-show="registerForm.username.$error.unique") The username provided has already been taken. Please choose another username.
+        //- Input field for Email Address
+        .form-group(ng-class="{'has-error' : registerForm.email.$dirty && registerForm.email.$invalid}")
+          label.control-label(for="as-reg-email") Email Address
+          input#as-reg-email.form-control(
+          type="email",
+          data-ng-model="email",
+          name="email",
+          required,
+          data-ng-minlength="1",
+          data-ng-maxlength="100")
+          p.as-field-help.text-muted AnnaSquares will never share your address with anyone without your explicit permission.
+          div(ng-show="registerForm.email.$dirty && registerForm.email.$invalid")
+            p.has-error.help-block(ng-show="registerForm.email.$error.required") This field is required.
+            p.has-error.help-block(ng-show="registerForm.email.$error.maxlength") The e-mail address provided is invalid or malformed.
+            p.has-error.help-block(ng-show="registerForm.email.$error.email") The e-mail address provided is invalid or malformed.
+            p.has-error.help-block(ng-show="registerForm.email.$error.unique") The e-mail address provided is already associated to another account.
+        //- Input field for Password
+        .form-group(ng-class="{'has-error' : registerForm.password.$dirty && registerForm.password.$invalid}")
+          label.control-label(for="as-reg-password") Password
+          input#as-reg-password.form-control(
             type="password",
             data-ng-model="password",
             name="password",
@@ -36,6 +59,23 @@
             li.text-muted.strong Contains a lowercase letter.
             li.text-muted.strong Contains an uppercase letter.
             li.text-muted.strong Contains a numeral or special character.
+          div(ng-show="registerForm.password.$dirty && registerForm.password.$invalid")
+            p.has-error.help-block(ng-show="registerForm.password.$error.required") This field is required.
+            p.has-error.help-block(ng-show="registerForm.password.$error.pattern") The password provided does not conform with the complexity characteristics.
+            p.has-error.help-block(ng-show="registerForm.password.$error.minlength") The password provided is too short (must be a minimum of 7 characters).
+        //- Input field for Confirm Password
+        .form-group(ng-class="{'has-error' : registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid}")
+          label.control-label(for="as-reg-confirmpassword") Confirm Password
+          input#as-reg-confirmpassword.form-control(
+            type="password",
+            data-ng-model="confirmPassword",
+            name="confirm_password",
+            required,
+            match-field="password")
+          div(ng-show="registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid")
+            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.required") This field is required.
+            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.matchField") The provided passwords provided do not match.
+      .col-lg-6
         p
           strong By clicking on the "Create An Account" button below, you are agreeing to the following:
         ul.list-unstyled

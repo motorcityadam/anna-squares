@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-01-17
+/*! anna-squares - v0.1.7 - 2014-01-18
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */

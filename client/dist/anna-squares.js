@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-01-17
+/*! anna-squares - v0.1.7 - 2014-01-18
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -237,6 +237,31 @@ angular.module('anna-squares').directive('activeNav', ['$location', function($lo
 
 }]);
 
+angular.module('anna-squares').directive('matchField', [function () {
+  return {
+    restrict: 'A',
+    scope: true,
+    require: 'ngModel',
+    link: function (scope, elem, attrs, control) {
+      // Instruct directive to ignore input fields where the as-match-field attribute is empty.
+      if (attrs.matchField === '') return;
+
+      var checker = function () {
+        // Store the value of the input field where the as-match-field attribute is not empty.
+        var e1 = scope.$eval(attrs.ngModel);
+
+        // Store the value of model assigned to the directive attribute.
+        var e2 = scope.$eval(attrs.matchField);
+        return e1 === e2;
+      };
+
+      // Set the match error key appropriately dependent on what checker() returns.
+      scope.$watch(checker, function (n) {
+        control.$setValidity('matchField', n);
+      });
+    }
+  };
+}]);
 
 /*global
   angular:false,

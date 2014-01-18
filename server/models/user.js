@@ -13,14 +13,16 @@ var users = [
   {
     id:       1,
     username: 'user',
+    email:    'user@somedomain.com',
     password: '123',
     role:     userRoles.user
   },
   {
     id:        2,
     username: 'admin',
+    email:    'admin@thisdomain.com',
     password: '123',
-    role:     userRoles.admin
+    role:      userRoles.admin
   }
 ];
 
