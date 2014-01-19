@@ -81,11 +81,11 @@ module.exports = function(grunt) {
     },
     watch: {
       all: {
-        files:['<%= src.app %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
+        files:['<%= src.app %>', '<%= src.common %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
         tasks:['default', 'timestamp']
       },
       build: {
-        files:['<%= src.app %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
+        files:['<%= src.app %>', '<%= src.common %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
         tasks:['build', 'timestamp'],
         options: {
           livereload: true
