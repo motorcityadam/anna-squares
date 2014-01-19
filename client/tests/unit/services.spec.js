@@ -1,6 +1,9 @@
+/*global
+ _:false,
+ expect:false,
+ inject:false
+ */
 'use strict';
-
-/* jasmine specs for services go here */
 
 describe('services', function() {
   var Auth;

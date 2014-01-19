@@ -86,7 +86,8 @@
     "grunt-nodemon": "latest",
     "grunt-concurrent": "latest",
     "grunt-karma": "latest",
-    "grunt-node-inspector": "latest"
+    "grunt-node-inspector": "latest",
+    "grunt-contrib-jasmine": "latest"
   },
   "bundledDependencies": [
   ],  

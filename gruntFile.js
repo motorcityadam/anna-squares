@@ -2,9 +2,9 @@
 
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-stylus');
@@ -27,8 +27,15 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    distdir: './client/dist',
+    distdir:  './client/dist',
     viewsdir: './client/views',
+    testdeps: [
+      './client/tests/lib/underscore-min.js',
+      './client/tests/lib/angular.min.js',
+      './client/tests/lib/angular-mocks.js',
+      './client/tests/lib/angular-cookies.min.js',
+      './client/tests/lib/angular-route.min.js'
+    ],
     pkg: grunt.file.readJSON('package.json'),
     banner:
         '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -36,10 +43,10 @@ module.exports = function(grunt) {
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             ' * Licensed under <%= pkg.license %>\n */\n',
     src: {
-      app: ['./client/src/app/**/*.js'],
-      common: ['./client/src/common/**/*.js'],
-      specs: ['./client/tests/**/*.spec.js'],
-      scenarios: ['./client/tests/**/*.scenario.js'],
+      app:         ['./client/src/app/**/*.js'],
+      common:      ['./client/src/common/**/*.js'],
+      specs:       ['./client/tests/**/*.spec.js'],
+      scenarios:   ['./client/tests/**/*.scenario.js'],
       stylesheets: ['./client/stylesheets/**/*.styl']
     },
     clean: ['<%= distdir %>/*'],
@@ -98,6 +105,15 @@ module.exports = function(grunt) {
           reporter: 'spec'
         },
         src: ['server/tests/**/*.js']
+      }
+    },
+    jasmine: {
+      unit: {
+        src: '<%= distdir %>/**/*.js',
+        options : {
+          vendor: '<%= testdeps %>',
+          specs:  '<%= src.specs %>'
+        }
       }
     },
     jshint: {
@@ -214,9 +230,13 @@ module.exports = function(grunt) {
       'Build release code package on client-side.',
       ['clean', 'uglify', 'jshint', 'stylus', 'karma:unit']);
   grunt.registerTask(
+     'test-client',
+     'Run unit and e2e tests for client-side code.',
+     ['build', 'jasmine:unit']);
+/*  grunt.registerTask(
       'test-client',
       'Run Karma tests for client-side code.',
-      ['karma:watch']);
+      ['karma:watch']);*/
 
   // Server-specific grunt tasks
   grunt.registerTask(
