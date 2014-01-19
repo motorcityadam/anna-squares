@@ -30,11 +30,11 @@ module.exports = function(grunt) {
     distdir:  './client/dist',
     viewsdir: './client/views',
     testdeps: [
-      './client/tests/lib/underscore-min.js',
-      './client/tests/lib/angular.min.js',
-      './client/tests/lib/angular-mocks.js',
-      './client/tests/lib/angular-cookies.min.js',
-      './client/tests/lib/angular-route.min.js'
+      './client/lib/underscore/underscore-min.js',
+      './client/lib/angular/angular.min.js',
+      './client/lib/angular-mocks/angular-mocks.js',
+      './client/lib/angular-cookies/angular-cookies.min.js',
+      './client/lib/angular-route/angular-route.min.js'
     ],
     pkg: grunt.file.readJSON('package.json'),
     banner:
