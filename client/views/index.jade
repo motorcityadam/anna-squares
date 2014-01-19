@@ -199,6 +199,8 @@ html(lang='en', data-ng-app='anna-squares')
                 li
                   strong
                     a(href="/about") About
+    if (settings.env == 'development')
+      script(src='//localhost:35729/livereload.js')
   footer
     if (settings.env == 'development' || settings.env == 'test')
       script(src='/lib/jquery/jquery.min.js')

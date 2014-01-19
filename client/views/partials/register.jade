@@ -68,13 +68,13 @@
           label.control-label(for="as-reg-confirmpassword") Confirm Password
           input#as-reg-confirmpassword.form-control(
             type="password",
-            data-ng-model="confirmPassword",
+            data-ng-model="confirm_password",
             name="confirm_password",
             required,
             match-field="password")
           div(ng-show="registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid")
             p.has-error.help-block(ng-show="registerForm.confirm_password.$error.required") This field is required.
-            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.matchField") The provided passwords provided do not match.
+            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.match") The provided passwords provided do not match.
       .col-lg-6
         p
           strong By clicking on the "Create An Account" button below, you are agreeing to the following:

@@ -85,7 +85,8 @@
     "grunt-mocha-test": "latest",
     "grunt-nodemon": "latest",
     "grunt-concurrent": "latest",
-    "grunt-karma": "latest"
+    "grunt-karma": "latest",
+    "grunt-node-inspector": "latest"
   },
   "bundledDependencies": [
   ],  

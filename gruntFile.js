@@ -11,6 +11,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-node-inspector');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('timestamp', function() {
     grunt.log.subhead(Date());
@@ -25,6 +28,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     distdir: './client/dist',
+    viewsdir: './client/views',
     pkg: grunt.file.readJSON('package.json'),
     banner:
         '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -77,12 +81,15 @@ module.exports = function(grunt) {
     },
     watch: {
       all: {
-        files:['<%= src.app %>', '<%= src.specs %>'],
+        files:['<%= src.app %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
         tasks:['default', 'timestamp']
       },
       build: {
-        files:['<%= src.app %>', '<%= src.specs %>'],
-        tasks:['build', 'timestamp']
+        files:['<%= src.app %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
+        tasks:['build', 'timestamp'],
+        options: {
+          livereload: true
+        }
       }
     },
     mochaTest: {
@@ -135,6 +142,59 @@ module.exports = function(grunt) {
           '<%= distdir %>/<%= pkg.name %>.css': ['<%= src.stylesheets %>']
         }
       }
+    },
+    nodemon: {
+      development: {
+        script: './server/server.js',
+        options: {
+          nodeArgs: ['--debug'],
+          args: [],
+          ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
+          debug: true,
+          delayTime: 3,
+          env: {
+            PORT: process.env.PORT
+          }
+        }
+      },
+      production: {
+        script: './server/server.js',
+        options: {
+          nodeArgs: [],
+          args: [],
+          ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
+          debug: true,
+          delayTime: 3,
+          env: {
+            PORT: process.env.PORT
+          }
+        }
+      }
+    },
+    'node-inspector': {
+      custom: {
+        options: {
+          'web-port': 1337,
+          'web-host': 'localhost',
+          'debug-port': 5858,
+          'save-live-edit': true,
+          'stack-trace-limit': 4
+        }
+      }
+    },
+    concurrent: {
+      development: {
+        tasks: ['nodemon:development', 'node-inspector', 'watch:build'],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      production: {
+        tasks: ['nodemon:production', 'node-inspector', 'watch:all'],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
     }
   });
 
@@ -145,16 +205,33 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'build', 'karma:unit']);
 
   // Client-specific tasks
-  grunt.registerTask('build', ['clean', 'concat', 'stylus']);
-  grunt.registerTask('release', ['clean', 'uglify', 'jshint', 'stylus', 'karma:unit']);
-  grunt.registerTask('test-client', ['karma:watch']);
+  grunt.registerTask(
+      'build',
+      'Build development code package on client-side.',
+      ['clean', 'concat', 'stylus']);
+  grunt.registerTask(
+      'release',
+      'Build release code package on client-side.',
+      ['clean', 'uglify', 'jshint', 'stylus', 'karma:unit']);
+  grunt.registerTask(
+      'test-client',
+      'Run Karma tests for client-side code.',
+      ['karma:watch']);
 
   // Server-specific grunt tasks
-  grunt.registerTask('test-server', ['jshint:server', 'mochaTest']);
+  grunt.registerTask(
+      'test-server',
+      'Run Mocha tests for server-side code.',
+      ['jshint:server', 'mochaTest']);
 
-  grunt.registerTask('supervise', function() {
-    this.async();
-    require('supervisor').run(['./server/server.js']);
+  // Application start task
+  grunt.task.registerTask('start', 'Starts the application.', function() {
+    if (process.env.NODE_ENV === 'development') {
+      grunt.task.run('build', 'concurrent:development');
+    }
+    if (process.env.NODE_ENV === 'production') {
+      grunt.task.run('release', 'concurrent:production');
+    }
   });
 
 };
