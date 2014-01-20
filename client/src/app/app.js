@@ -18,10 +18,10 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
           controller:     'HomeCtrl',
           access:         access.user
         });
-      $routeProvider.when('/login',
+      $routeProvider.when('/signin',
         {
-          templateUrl:    'login',
-          controller:     'LoginCtrl',
+          templateUrl:    'signin',
+          controller:     'SigninCtrl',
           access:         access.anon
         });
       $routeProvider.when('/register',
@@ -55,7 +55,7 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
         return {
           'responseError': function(response) {
             if(response.status === 401 || response.status === 403) {
-              $location.path('/login');
+              $location.path('/signin');
               return $q.reject(response);
             }
             else {
@@ -72,8 +72,8 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
       $rootScope.$on('$routeChangeStart', function (event, next, current) {
         $rootScope.error = null;
         if (!Auth.authorize(next.access)) {
-          if(Auth.isLoggedIn()) $location.path('/');
-          else                  $location.path('/login');
+          if(Auth.isSignedIn()) $location.path('/');
+          else                  $location.path('/signin');
         }
       });
 

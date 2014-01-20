@@ -25,7 +25,7 @@ angular.module('anna-squares')
 
           return accessLevel.bitMask & role.bitMask;
         },
-        isLoggedIn: function(user) {
+        isSignedIn: function(user) {
           if(user === undefined)
             user = currentUser;
           return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
@@ -36,14 +36,14 @@ angular.module('anna-squares')
             success();
           }).error(error);
         },
-        login: function(user, success, error) {
-          $http.post('/login', user).success(function(user){
+        signin: function(user, success, error) {
+          $http.post('/signin', user).success(function(user){
             changeUser(user);
             success(user);
           }).error(error);
         },
-        logout: function(success, error) {
-          $http.post('/logout').success(function(){
+        signout: function(success, error) {
+          $http.post('/signout').success(function(){
             changeUser({
               username: '',
               role: userRoles.public

@@ -369,7 +369,7 @@ describe('Server Integration Tests - ', function (done) {
     request(app).get('/').expect(200, done);
   });
   it('Logout - Return a 200', function(done) {
-    request(app).post('/logout').expect(200, done);
+    request(app).post('/signout').expect(200, done);
   });
   it('As a public user, on /users - Return a 403', function(done) {
     request(app).get('/users').expect(403, done);
@@ -440,17 +440,17 @@ describe('Server Integration Tests - ', function (done) {
   it('Register a new admin user role through public /register - Return a 400', function(done) {
     request(app).post('/register').send(admin).expect(400, done);
   });
-  it('Login as user (with username as username) - Return a 200', function(done) {
-    request(app).post('/login').send(user21).expect(200, done);
+  it('Sign in as user (with username as username) - Return a 200', function(done) {
+    request(app).post('/signin').send(user21).expect(200, done);
   });
-  it('Login as user (with email as username) - Return a 200', function(done) {
-    request(app).post('/login').send(user22).expect(200, done);
+  it('Sign in as user (with email as username) - Return a 200', function(done) {
+    request(app).post('/signin').send(user22).expect(200, done);
   });
   it('As a non-admin user, tries to access /users - Return a 403', function(done) {
     passportStub.login(user24);
     request(app).get('/users').expect(403, done);
   });
-  it('Try to login as a user who never registered - Return a 400', function(done) {
-    request(app).post('/login').send(user23).expect(400, done);
+  it('Try to sign in as a user who never registered - Return a 400', function(done) {
+    request(app).post('/signin').send(user23).expect(400, done);
   });
 });

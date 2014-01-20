@@ -43,7 +43,7 @@ html(lang='en', data-ng-app='anna-squares')
           ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
             li(data-access-level='accessLevels.anon', active-nav)
-              a(href='/login')
+              a(href='/signin')
                 i.fa.fa-sign-in
                 |  Sign In
             li(data-access-level='accessLevels.anon', active-nav)
@@ -158,7 +158,7 @@ html(lang='en', data-ng-app='anna-squares')
                         |  Settings
                     li.divider
                     li
-                      a(href="", data-ng-click="logout()")
+                      a(href="", data-ng-click="signout()")
                         i.fa.fa-sign-out
                         |  Sign Out
       #as-page-wrapper
@@ -238,8 +238,8 @@ html(lang='en', data-ng-app='anna-squares')
       include partials/admin
     script(type="text/ng-template", id="home")
       include partials/home
-    script(type="text/ng-template", id="login")
-      include partials/login
+    script(type="text/ng-template", id="signin")
+      include partials/signin
     script(type="text/ng-template", id="private")
       include partials/private
     script(type="text/ng-template", id="register")

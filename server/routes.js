@@ -30,7 +30,7 @@ var routes = [
     httpMethod: 'GET',
     middleware: [passport.authenticate('twitter', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/signin'
     })]
   },
   {
@@ -43,7 +43,7 @@ var routes = [
     httpMethod: 'GET',
     middleware: [passport.authenticate('facebook', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/signin'
     })]
   },
   {
@@ -56,7 +56,7 @@ var routes = [
     httpMethod: 'GET',
     middleware: [passport.authenticate('google', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/signin'
     })]
   },
   {
@@ -69,7 +69,7 @@ var routes = [
     httpMethod: 'GET',
     middleware: [passport.authenticate('linkedin', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/signin'
     })]
   },
 
@@ -80,14 +80,14 @@ var routes = [
     middleware: [AuthCtrl.register]
   },
   {
-    path: '/login',
+    path: '/signin',
     httpMethod: 'POST',
-    middleware: [AuthCtrl.login]
+    middleware: [AuthCtrl.signin]
   },
   {
-    path: '/logout',
+    path: '/signout',
     httpMethod: 'POST',
-    middleware: [AuthCtrl.logout]
+    middleware: [AuthCtrl.signout]
   },
 
   // User resource

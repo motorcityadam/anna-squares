@@ -26,9 +26,9 @@ describe('services', function() {
 
   describe('Auth', function() {
     describe('instantiate', function() {
-      it('should have isLoggedIn function', function() {
-        expect(Auth.isLoggedIn).toBeDefined();
-        expect(_.isFunction(Auth.isLoggedIn)).toEqual(true);
+      it('should have isSignedIn function', function() {
+        expect(Auth.isSignedIn).toBeDefined();
+        expect(_.isFunction(Auth.isSignedIn)).toEqual(true);
       });
 
       it('should have authorize function', function() {
@@ -36,14 +36,14 @@ describe('services', function() {
         expect(_.isFunction(Auth.authorize)).toEqual(true);
       });
 
-      it('should have login function', function() {
-        expect(Auth.login).toBeDefined();
-        expect(_.isFunction(Auth.login)).toEqual(true);
+      it('should have signin function', function() {
+        expect(Auth.signin).toBeDefined();
+        expect(_.isFunction(Auth.signin)).toEqual(true);
       });
 
-      it('should have logout function', function() {
-        expect(Auth.logout).toBeDefined();
-        expect(_.isFunction(Auth.logout)).toEqual(true);
+      it('should have signout function', function() {
+        expect(Auth.signout).toBeDefined();
+        expect(_.isFunction(Auth.signout)).toEqual(true);
       });
 
       it('should have register function', function() {
@@ -95,25 +95,25 @@ describe('services', function() {
       });
     });
 
-    describe('isLoggedIn', function() {
+    describe('isSignedIn', function() {
       it('should use the currentUser when use omitted', function() {
         // current user has role public
-        expect(Auth.isLoggedIn()).toEqual(false);
+        expect(Auth.isSignedIn()).toEqual(false);
       });
 
       it('should return false when user has role public', function() {
         var user = { role: { title: 'public' } };
-        expect(Auth.isLoggedIn(user)).toEqual(false);
+        expect(Auth.isSignedIn(user)).toEqual(false);
       });
 
       it('should return true when user has role user', function() {
         var user = { role: { title: 'user' } };
-        expect(Auth.isLoggedIn(user)).toEqual(true);
+        expect(Auth.isSignedIn(user)).toEqual(true);
       });
 
       it('should return true when user has role admin', function() {
         var user = { role: { title: 'admin' } };
-        expect(Auth.isLoggedIn(user)).toEqual(true);
+        expect(Auth.isSignedIn(user)).toEqual(true);
       });
     });
 
@@ -140,15 +140,15 @@ describe('services', function() {
       });
     });
 
-    describe('login', function() {
+    describe('signin', function() {
       it('should make a request and invoke callback', function() {
         var invoked = false;
         var success = function() {
           invoked = true;
         };
         var error = function() {};
-        $httpBackend.expectPOST('/login').respond();
-        Auth.login({}, success, error);
+        $httpBackend.expectPOST('/signin').respond();
+        Auth.signin({}, success, error);
         $httpBackend.flush();
         expect(invoked).toEqual(true);
       });
@@ -156,22 +156,22 @@ describe('services', function() {
       it('should append the user', function() {
         var success = function() {};
         var error = function() {};
-        $httpBackend.expectPOST('/login').respond({ 'user': 'bar' });
-        Auth.login({}, success, error);
+        $httpBackend.expectPOST('/signin').respond({ 'user': 'bar' });
+        Auth.signin({}, success, error);
         $httpBackend.flush();
         expect(Auth.user).toEqual({ username : '', role : { bitMask : 1, title : 'public' }, user : 'bar' });
       });
     });
 
-    describe('logout', function() {
+    describe('signout', function() {
       it('should make a request and invoke callback', function() {
         var invoked = false;
         var success = function() {
           invoked = true;
         };
         var error = function() {};
-        $httpBackend.expectPOST('/logout').respond();
-        Auth.logout(success, error);
+        $httpBackend.expectPOST('/signout').respond();
+        Auth.signout(success, error);
         $httpBackend.flush();
         expect(invoked).toEqual(true);
       });

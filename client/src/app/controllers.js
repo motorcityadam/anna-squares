@@ -10,11 +10,11 @@ angular.module('anna-squares')
       $scope.userRoles = Auth.userRoles;
       $scope.accessLevels = Auth.accessLevels;
 
-      $scope.logout = function() {
-        Auth.logout(function() {
-          $location.path('/login');
+      $scope.signout = function() {
+        Auth.signout(function() {
+          $location.path('/signin');
         }, function() {
-          $rootScope.error = 'Failed to logout.';
+          $rootScope.error = 'Failed to sign out.';
         });
       };
     }]);
@@ -24,13 +24,13 @@ angular.module('anna-squares')
       function($rootScope, $scope, $location, Auth) { }]);
 
 angular.module('anna-squares')
-    .controller('LoginCtrl',
+    .controller('SigninCtrl',
         ['$rootScope', '$scope', '$location', '$window', 'Auth',
           function($rootScope, $scope, $location, $window, Auth) {
 
           $scope.rememberme = true;
-          $scope.login = function() {
-            Auth.login({
+          $scope.signin = function() {
+            Auth.signin({
               username: $scope.username,
               password: $scope.password
             },
@@ -38,7 +38,7 @@ angular.module('anna-squares')
               $location.path('/');
             },
             function(err) {
-              $rootScope.error = 'Failed to login.';
+              $rootScope.error = 'Failed to sign in.';
             });
           };
 

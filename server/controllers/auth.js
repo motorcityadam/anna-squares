@@ -21,7 +21,7 @@ module.exports = {
     });
   },
 
-  login: function(req, res, next) {
+  signin: function(req, res, next) {
     passport.authenticate('local', function(err, user) {
 
       if(err)     { return next(err); }
@@ -37,7 +37,7 @@ module.exports = {
     })(req, res, next);
   },
 
-  logout: function(req, res) {
+  signout: function(req, res) {
     req.logout();
     res.send(200);
   }
