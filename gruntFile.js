@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-stylus');
@@ -29,13 +28,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     distdir:  './client/dist',
     viewsdir: './client/views',
-    testdeps: [
-      './client/lib/underscore/underscore-min.js',
-      './client/lib/angular/angular.min.js',
-      './client/lib/angular-mocks/angular-mocks.js',
-      './client/lib/angular-cookies/angular-cookies.min.js',
-      './client/lib/angular-route/angular-route.min.js'
-    ],
     pkg: grunt.file.readJSON('package.json'),
     banner:
         '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -105,15 +97,6 @@ module.exports = function(grunt) {
           reporter: 'spec'
         },
         src: ['server/tests/**/*.js']
-      }
-    },
-    jasmine: {
-      unit: {
-        src: '<%= distdir %>/**/*.js',
-        options : {
-          vendor: '<%= testdeps %>',
-          specs:  '<%= src.specs %>'
-        }
       }
     },
     jshint: {
@@ -230,13 +213,9 @@ module.exports = function(grunt) {
       'Build release code package on client-side.',
       ['clean', 'uglify', 'jshint', 'stylus', 'karma:unit']);
   grunt.registerTask(
-     'test-client',
-     'Run unit and e2e tests for client-side code.',
-     ['build', 'jasmine:unit']);
-/*  grunt.registerTask(
-      'test-client',
-      'Run Karma tests for client-side code.',
-      ['karma:watch']);*/
+   'test-client',
+   'Run unit and e2e tests for client-side code.',
+   ['build', 'jshint:client', 'karma:watch']);
 
   // Server-specific grunt tasks
   grunt.registerTask(
