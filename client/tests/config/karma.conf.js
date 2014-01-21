@@ -14,6 +14,7 @@ module.exports = function (config) {
       'lib/angular-cookies/angular-cookies.min.js',
       'lib/underscore/underscore-min.js',
       'lib/angular-mocks/angular-mocks.js',
+      'lib/restangular/dist/restangular.min.js',
       'lib/angular-placeholders/src/img/img.js',
       'lib/angular-asc-ui/dist/asc-ui-tpls.min.js',
       'lib/angular-ui-sortable/src/sortable.js',
