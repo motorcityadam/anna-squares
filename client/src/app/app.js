@@ -5,7 +5,7 @@
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares', ['ngCookies', 'ngRoute'])
+angular.module('anna-squares', ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider',
       function ($routeProvider, $locationProvider, $httpProvider) {
@@ -36,10 +36,10 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
           controller:     'RegisterCtrl',
           access:         access.anon
         });
-      $routeProvider.when('/private',
+      $routeProvider.when('/schedules',
         {
-          templateUrl:    'private',
-          controller:     'PrivateCtrl',
+          templateUrl:    'schedules',
+          controller:     'SchedulesCtrl',
           access:         access.user
         });
       $routeProvider.when('/admin',

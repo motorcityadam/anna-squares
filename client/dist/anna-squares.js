@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-01-20
+/*! anna-squares - v0.1.7 - 2014-01-21
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -9,7 +9,7 @@
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares', ['ngCookies', 'ngRoute'])
+angular.module('anna-squares', ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider',
       function ($routeProvider, $locationProvider, $httpProvider) {
@@ -40,10 +40,10 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
           controller:     'RegisterCtrl',
           access:         access.anon
         });
-      $routeProvider.when('/private',
+      $routeProvider.when('/schedules',
         {
-          templateUrl:    'private',
-          controller:     'PrivateCtrl',
+          templateUrl:    'schedules',
+          controller:     'SchedulesCtrl',
           access:         access.user
         });
       $routeProvider.when('/admin',
@@ -169,7 +169,7 @@ angular.module('anna-squares')
         ['$rootScope', function($rootScope) { }]);
 
 angular.module('anna-squares')
-  .controller('PrivateCtrl',
+  .controller('SchedulesCtrl',
     ['$rootScope', function($rootScope) { }]);
 
 

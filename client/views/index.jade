@@ -55,7 +55,7 @@ html(lang='en', data-ng-app='anna-squares')
                 i.fa.fa-dashboard
                 |  Dashboard
             li(data-access-level='accessLevels.user', active-nav)
-              a(href='/private')
+              a(href='/schedules')
                 i.fa.fa-tasks
                 |  Schedules
             li(data-access-level='accessLevels.admin', active-nav)
@@ -246,7 +246,7 @@ html(lang='en', data-ng-app='anna-squares')
       include partials/signin
     script(type="text/ng-template", id="dashboard")
       include partials/dashboard
-    script(type="text/ng-template", id="private")
-      include partials/private
+    script(type="text/ng-template", id="schedules")
+      include partials/schedules
     script(type="text/ng-template", id="register")
       include partials/register

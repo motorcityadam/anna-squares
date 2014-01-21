@@ -79,7 +79,7 @@ angular.module('anna-squares')
         ['$rootScope', function($rootScope) { }]);
 
 angular.module('anna-squares')
-  .controller('PrivateCtrl',
+  .controller('SchedulesCtrl',
     ['$rootScope', function($rootScope) { }]);
 
 
