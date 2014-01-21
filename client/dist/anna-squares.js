@@ -20,6 +20,12 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
         {
           templateUrl:    'home',
           controller:     'HomeCtrl',
+          access:         access.anon
+        });
+      $routeProvider.when('/dashboard',
+        {
+          templateUrl:    'dashboard',
+          controller:     'DashboardCtrl',
           access:         access.user
         });
       $routeProvider.when('/signin',
@@ -89,47 +95,47 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
 /* Controllers */
 
 angular.module('anna-squares')
-    .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-      $scope.user = Auth.user;
-      $scope.userRoles = Auth.userRoles;
-      $scope.accessLevels = Auth.accessLevels;
+  .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+    $scope.user = Auth.user;
+    $scope.userRoles = Auth.userRoles;
+    $scope.accessLevels = Auth.accessLevels;
 
-      $scope.signout = function() {
-        Auth.signout(function() {
-          $location.path('/signin');
-        }, function() {
-          $rootScope.error = 'Failed to sign out.';
+    $scope.signout = function() {
+      Auth.signout(function() {
+        $location.path('/signin');
+      }, function() {
+        $rootScope.error = 'Failed to sign out.';
+      });
+    };
+  }]);
+
+angular.module('anna-squares')
+  .controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
+    function($rootScope, $scope, $location, Auth) { }]);
+
+angular.module('anna-squares')
+  .controller('SigninCtrl',
+    ['$rootScope', '$scope', '$location', '$window', 'Auth',
+      function($rootScope, $scope, $location, $window, Auth) {
+
+      $scope.rememberme = true;
+      $scope.signin = function() {
+        Auth.signin({
+          username: $scope.username,
+          password: $scope.password
+        },
+        function(res) {
+          $location.path('/dashboard');
+        },
+        function(err) {
+          $rootScope.error = 'Failed to sign in.';
         });
       };
+
+      $scope.loginOauth = function(provider) {
+        $window.location.href = '/auth/' + provider;
+      };
     }]);
-
-angular.module('anna-squares')
-    .controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
-      function($rootScope, $scope, $location, Auth) { }]);
-
-angular.module('anna-squares')
-    .controller('SigninCtrl',
-        ['$rootScope', '$scope', '$location', '$window', 'Auth',
-          function($rootScope, $scope, $location, $window, Auth) {
-
-          $scope.rememberme = true;
-          $scope.signin = function() {
-            Auth.signin({
-              username: $scope.username,
-              password: $scope.password
-            },
-            function(res) {
-              $location.path('/');
-            },
-            function(err) {
-              $rootScope.error = 'Failed to sign in.';
-            });
-          };
-
-          $scope.loginOauth = function(provider) {
-            $window.location.href = '/auth/' + provider;
-          };
-        }]);
 
 angular.module('anna-squares')
     .controller('HomeCtrl',
@@ -150,7 +156,7 @@ angular.module('anna-squares')
           role: $scope.role
         },
         function() {
-          $location.path('/');
+          $location.path('/dashboard');
         },
         function(err) {
           $rootScope.error = err;
@@ -159,27 +165,29 @@ angular.module('anna-squares')
     }]);
 
 angular.module('anna-squares')
-    .controller('PrivateCtrl',
+    .controller('DashboardCtrl',
         ['$rootScope', function($rootScope) { }]);
+
+angular.module('anna-squares')
+  .controller('PrivateCtrl',
+    ['$rootScope', function($rootScope) { }]);
 
 
 angular.module('anna-squares')
-    .controller('AdminCtrl',
-        ['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
-          $scope.loading = true;
-          $scope.userRoles = Auth.userRoles;
+  .controller('AdminCtrl',
+    ['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
+      $scope.loading = true;
+      $scope.userRoles = Auth.userRoles;
 
-          Users.getAll(function(res) {
-            $scope.users = res;
-            $scope.loading = false;
-          }, function(err) {
-            $rootScope.error = 'Failed to fetch users.';
-            $scope.loading = false;
-          });
+      Users.getAll(function(res) {
+        $scope.users = res;
+        $scope.loading = false;
+      }, function(err) {
+        $rootScope.error = 'Failed to fetch users.';
+        $scope.loading = false;
+      });
 
-        }]);
-
-
+    }]);
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
@@ -270,56 +278,56 @@ angular.module('anna-squares').directive('matchField', function() {
 'use strict';
 
 angular.module('anna-squares')
-    .factory('Auth', function($http, $cookieStore){
+  .factory('Auth', function($http, $cookieStore){
 
-      var accessLevels = routingConfig.accessLevels
-          , userRoles = routingConfig.userRoles
-          , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
+    var accessLevels = routingConfig.accessLevels
+        , userRoles = routingConfig.userRoles
+        , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
-      $cookieStore.remove('user');
+    $cookieStore.remove('user');
 
-      function changeUser(user) {
-        _.extend(currentUser, user);
-      }
+    function changeUser(user) {
+      _.extend(currentUser, user);
+    }
 
-      return {
-        authorize: function(accessLevel, role) {
-          if(role === undefined)
-            role = currentUser.role;
+    return {
+      authorize: function(accessLevel, role) {
+        if(role === undefined)
+          role = currentUser.role;
 
-          return accessLevel.bitMask & role.bitMask;
-        },
-        isSignedIn: function(user) {
-          if(user === undefined)
-            user = currentUser;
-          return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
-        },
-        register: function(user, success, error) {
-          $http.post('/register', user).success(function(res) {
-            changeUser(res);
-            success();
-          }).error(error);
-        },
-        signin: function(user, success, error) {
-          $http.post('/signin', user).success(function(user){
-            changeUser(user);
-            success(user);
-          }).error(error);
-        },
-        signout: function(success, error) {
-          $http.post('/signout').success(function(){
-            changeUser({
-              username: '',
-              role: userRoles.public
-            });
-            success();
-          }).error(error);
-        },
-        accessLevels: accessLevels,
-        userRoles: userRoles,
-        user: currentUser
-      };
-    });
+        return accessLevel.bitMask & role.bitMask;
+      },
+      isSignedIn: function(user) {
+        if(user === undefined)
+          user = currentUser;
+        return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
+      },
+      register: function(user, success, error) {
+        $http.post('/register', user).success(function(res) {
+          changeUser(res);
+          success();
+        }).error(error);
+      },
+      signin: function(user, success, error) {
+        $http.post('/signin', user).success(function(user){
+          changeUser(user);
+          success(user);
+        }).error(error);
+      },
+      signout: function(success, error) {
+        $http.post('/signout').success(function(){
+          changeUser({
+            username: '',
+            role: userRoles.public
+          });
+          success();
+        }).error(error);
+      },
+      accessLevels: accessLevels,
+      userRoles: userRoles,
+      user: currentUser
+    };
+  });
 
 angular.module('anna-squares')
     .factory('Users', function($http) {

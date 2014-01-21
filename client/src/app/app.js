@@ -16,6 +16,12 @@ angular.module('anna-squares', ['ngCookies', 'ngRoute'])
         {
           templateUrl:    'home',
           controller:     'HomeCtrl',
+          access:         access.anon
+        });
+      $routeProvider.when('/dashboard',
+        {
+          templateUrl:    'dashboard',
+          controller:     'DashboardCtrl',
           access:         access.user
         });
       $routeProvider.when('/signin',

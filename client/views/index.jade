@@ -51,7 +51,7 @@ html(lang='en', data-ng-app='anna-squares')
                 i.fa.fa-magic
                 |  Register
             li(data-access-level='accessLevels.user', active-nav)
-              a(href='/')
+              a(href='/dashboard')
                 i.fa.fa-dashboard
                 |  Dashboard
             li(data-access-level='accessLevels.user', active-nav)
@@ -232,14 +232,20 @@ html(lang='en', data-ng-app='anna-squares')
     script(src='/dist/anna-squares.js')
 
     // Load all partial views
+    script(type="text/ng-template", id="403")
+      include partials/403
     script(type="text/ng-template", id="404")
       include partials/404
+    script(type="text/ng-template", id="500")
+      include partials/500
     script(type="text/ng-template", id="admin")
       include partials/admin
     script(type="text/ng-template", id="home")
       include partials/home
     script(type="text/ng-template", id="signin")
       include partials/signin
+    script(type="text/ng-template", id="dashboard")
+      include partials/dashboard
     script(type="text/ng-template", id="private")
       include partials/private
     script(type="text/ng-template", id="register")

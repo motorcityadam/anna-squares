@@ -150,7 +150,7 @@ module.exports = function(grunt) {
           args: [],
           ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
           debug: true,
-          delayTime: 3,
+          delayTime: 5,
           env: {
             PORT: process.env.PORT
           }
@@ -163,7 +163,7 @@ module.exports = function(grunt) {
           args: [],
           ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
           debug: true,
-          delayTime: 3,
+          delayTime: 5,
           env: {
             PORT: process.env.PORT
           }
