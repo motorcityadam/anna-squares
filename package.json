@@ -50,8 +50,7 @@
     "stylus": "latest",
     "bower": "latest",
     "grunt": "latest",
-    "grunt-cli": "latest",
-    "grunt-env": "latest"
+    "grunt-cli": "latest"
   },
   "analyze": false,
   "devDependencies": {
@@ -65,6 +64,7 @@
     "should": "latest",
     "phantomjs": "latest",
     "karma": "latest",
+    "karma-coverage": "latest",
     "karma-junit-reporter": "latest",
     "karma-jasmine": "latest",
     "karma-ng-scenario": "latest",
@@ -87,7 +87,8 @@
     "grunt-concurrent": "latest",
     "grunt-karma": "latest",
     "grunt-node-inspector": "latest",
-    "protractor": "latest"
+    "protractor": "latest",
+    "istanbul": "latest"
   },
   "bundledDependencies": [
   ],  

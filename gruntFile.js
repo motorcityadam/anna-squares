@@ -205,13 +205,9 @@ module.exports = function(grunt) {
 
   // Client-specific tasks
   grunt.registerTask(
-      'build',
-      'Build development code package on client-side.',
-      ['clean', 'concat', 'stylus']);
-  grunt.registerTask(
-      'release',
-      'Build release code package on client-side.',
-      ['clean', 'uglify', 'jshint', 'stylus', 'karma:unit']);
+    'build',
+    'Build development code package on client-side.',
+    ['clean', 'concat', 'stylus']);
   grunt.registerTask(
    'test-client',
    'Run unit and e2e tests for client-side code.',
@@ -219,9 +215,14 @@ module.exports = function(grunt) {
 
   // Server-specific grunt tasks
   grunt.registerTask(
-      'test-server',
-      'Run Mocha tests for server-side code.',
-      ['jshint:server', 'mochaTest']);
+    'test-server',
+    'Run Mocha tests for server-side code.',
+    ['jshint:server', 'mochaTest']);
+
+  grunt.registerTask(
+    'release',
+    'Build release code package on client-side.',
+    ['clean', 'uglify', 'jshint', 'karma:unit', 'mochaTest']);
 
   // Application start task
   grunt.task.registerTask('start', 'Starts the application.', function() {

@@ -37,3 +37,6 @@ client/lib
 .idea
 *.iml
 *.iws
+
+# Karma coverage reports
+client/coverage
