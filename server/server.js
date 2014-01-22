@@ -1,13 +1,16 @@
-var express    = require('express')
-    , http     = require('http')
-    , passport = require('passport')
-    , path     = require('path')
-    , helpers  = require('view-helpers');
+var express      = require('express')
+    , http       = require('http')
+    , passport   = require('passport')
+    , path       = require('path')
+    , helpers    = require('view-helpers')
+    , mongoose   = require('mongoose')
+    , mongoStore = require('connect-mongo')(express);
 
 var User     = require('./models/User.js')
     , config = require('./config/config');
 
 var app = module.exports = express();
+var db = mongoose.connect(config.db);
 var rootDir = __dirname + '/../';
 
 app.set('views', rootDir + 'client/views');
@@ -23,9 +26,18 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.favicon());
 app.use(express.static(path.join(rootDir, 'client')));
-app.use(
+/*app.use(
   express.cookieSession({
     secret: config.cookieSecret
+  })
+);*/
+app.use(
+  express.session({
+    secret: config.sessionSecret,
+    store: new mongoStore({
+      db: db.connection.db,
+      collection: 'sessions'
+    })
   })
 );
 
