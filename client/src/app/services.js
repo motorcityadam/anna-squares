@@ -8,8 +8,7 @@
 angular.module('anna-squares')
   .factory('Auth', function($http, $cookieStore){
 
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
+    var userRoles = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
@@ -20,8 +19,9 @@ angular.module('anna-squares')
 
     return {
       authorize: function(accessLevel, role) {
-        if(role === undefined)
+        if(role === undefined) {
           role = currentUser.role;
+        }
 
         return accessLevel.bitMask & role.bitMask;
       },
@@ -31,37 +31,35 @@ angular.module('anna-squares')
         return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
       },
       register: function(user, success, error) {
-        $http.post('/register', user).success(function(res) {
-          changeUser(res);
-          success();
-        }).error(error);
+        $http
+          .post('/users', user)
+          .success(function(res) {
+            success(res);
+          })
+          .error(error);
       },
       signin: function(user, success, error) {
-        $http.post('/signin', user).success(function(user){
-          changeUser(user);
-          success(user);
-        }).error(error);
+        $http
+          .post('/signin', user)
+          .success(function(user){
+            changeUser(user);
+            success(user);
+          })
+          .error(error);
       },
       signout: function(success, error) {
-        $http.post('/signout').success(function(){
-          changeUser({
-            username: '',
-            role: userRoles.public
-          });
-          success();
-        }).error(error);
+        $http
+          .post('/signout')
+          .success(function(){
+            changeUser({
+              username: '',
+              role: userRoles.public
+            });
+            success();
+          })
+          .error(error);
       },
-      accessLevels: accessLevels,
       userRoles: userRoles,
       user: currentUser
     };
   });
-
-angular.module('anna-squares')
-    .factory('Users', function($http) {
-      return {
-        getAll: function(success, error) {
-          $http.get('/users').success(success).error(error);
-        }
-      };
-    });

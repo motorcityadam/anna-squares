@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-01-21
+/*! anna-squares - v0.1.7 - 2014-01-31
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -15,13 +15,13 @@ angular.module('anna-squares',
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
-  var access = routingConfig.accessLevels;
+  var access = routingConfig.userRoles;
 
   $routeProvider.when('/',
     {
       templateUrl:    'home',
       controller:     'HomeCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/dashboard',
     {
@@ -33,13 +33,13 @@ angular.module('anna-squares',
     {
       templateUrl:    'signin',
       controller:     'SigninCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/register',
     {
       templateUrl:    'register',
       controller:     'RegisterCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/schedules',
     {
@@ -47,15 +47,20 @@ angular.module('anna-squares',
       controller:     'SchedulesCtrl',
       access:         access.user
     });
-  $routeProvider.when('/admin',
+  $routeProvider.when('/feedback',
     {
-      templateUrl:    'admin',
-      controller:     'AdminCtrl',
-      access:         access.admin
+      templateUrl:    'feedback',
+      controller:     'FeedbackCtrl',
+      access:         access.user
     });
   $routeProvider.when('/404',
     {
       templateUrl:    '404',
+      access:         access.public
+    });
+  $routeProvider.when('/500',
+    {
+      templateUrl:    '500',
       access:         access.public
     });
   $routeProvider.otherwise({redirectTo:'/404'});
@@ -81,11 +86,17 @@ angular.module('anna-squares',
 .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
 
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    $rootScope.error = null;
+
+    $rootScope.success = null;
+    $rootScope.info = null;
+    $rootScope.warning = null;
+    $rootScope.danger = null;
+
     if (!Auth.authorize(next.access)) {
       if(Auth.isSignedIn()) $location.path('/');
       else                  $location.path('/signin');
     }
+
   });
 
 }]);
@@ -93,19 +104,16 @@ angular.module('anna-squares',
 /*jshint unused: vars */
 'use strict';
 
-/* Controllers */
-
 angular.module('anna-squares')
   .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
-    $scope.accessLevels = Auth.accessLevels;
 
     $scope.signout = function() {
       Auth.signout(function() {
         $location.path('/signin');
       }, function() {
-        $rootScope.error = 'Failed to sign out.';
+        $rootScope.danger = 'Failed to sign out.';
       });
     };
   }]);
@@ -129,7 +137,7 @@ angular.module('anna-squares')
           $location.path('/dashboard');
         },
         function(err) {
-          $rootScope.error = 'Failed to sign in.';
+          $rootScope.danger = 'Failed to sign in.';
         });
       };
 
@@ -145,22 +153,20 @@ angular.module('anna-squares')
 angular.module('anna-squares')
   .controller('RegisterCtrl',
     ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-      $scope.role = Auth.userRoles.user;
-      $scope.userRoles = Auth.userRoles;
 
       $scope.register = function() {
         Auth.register({
           username: $scope.username,
           email: $scope.email,
           password: $scope.password,
-          confirm_password: $scope.confirm_password,
-          role: $scope.role
+          passwordConfirmation: $scope.passwordConfirmation
         },
-        function() {
-          $location.path('/dashboard');
+        function(message) {
+          $location.path('/signin');
+          $rootScope.success = message;
         },
         function(err) {
-          $rootScope.error = err;
+          $rootScope.danger = err;
         });
       };
     }]);
@@ -173,58 +179,45 @@ angular.module('anna-squares')
   .controller('SchedulesCtrl',
     ['$rootScope', function($rootScope) { }]);
 
-
 angular.module('anna-squares')
-  .controller('AdminCtrl',
-    ['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
-      $scope.loading = true;
-      $scope.userRoles = Auth.userRoles;
-
-      Users.getAll(function(res) {
-        $scope.users = res;
-        $scope.loading = false;
-      }, function(err) {
-        $rootScope.error = 'Failed to fetch users.';
-        $scope.loading = false;
-      });
-
-    }]);
+    .controller('FeedbackCtrl',
+        ['$rootScope', function($rootScope) { }]);
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
 
 angular.module('anna-squares')
-    .directive('accessLevel', ['Auth', function(Auth) {
-      return {
-        restrict: 'A',
-        link: function($scope, element, attrs) {
-          var prevDisp = element.css('display')
-              , userRole
-              , accessLevel;
+  .directive('accessLevel', ['Auth', function(Auth) {
+    return {
+      restrict: 'A',
+      link: function($scope, element, attrs) {
+        var prevDisp = element.css('display')
+            , userRole
+            , accessLevel;
 
-          $scope.user = Auth.user;
-          $scope.$watch('user', function(user) {
-            if(user.role)
-              userRole = user.role;
-            updateCSS();
-          }, true);
+        $scope.user = Auth.user;
+        $scope.$watch('user', function(user) {
+          if(user.role)
+            userRole = user.role;
+          updateCSS();
+        }, true);
 
-          attrs.$observe('accessLevel', function(al) {
-            if(al) accessLevel = $scope.$eval(al);
-            updateCSS();
-          });
+        attrs.$observe('accessLevel', function(al) {
+          if(al) accessLevel = $scope.$eval(al);
+          updateCSS();
+        });
 
-          function updateCSS() {
-            if(userRole && accessLevel) {
-              if(!Auth.authorize(accessLevel, userRole))
-                element.css('display', 'none');
-              else
-                element.css('display', prevDisp);
-            }
+        function updateCSS() {
+          if(userRole && accessLevel) {
+            if(!Auth.authorize(accessLevel, userRole))
+              element.css('display', 'none');
+            else
+              element.css('display', prevDisp);
           }
         }
-      };
-    }]);
+      }
+    };
+  }]);
 
 angular.module('anna-squares').directive('activeNav', ['$location', function($location) {
   return {
@@ -281,8 +274,7 @@ angular.module('anna-squares').directive('matchField', function() {
 angular.module('anna-squares')
   .factory('Auth', function($http, $cookieStore){
 
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
+    var userRoles = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
@@ -293,8 +285,9 @@ angular.module('anna-squares')
 
     return {
       authorize: function(accessLevel, role) {
-        if(role === undefined)
+        if(role === undefined) {
           role = currentUser.role;
+        }
 
         return accessLevel.bitMask & role.bitMask;
       },
@@ -304,37 +297,35 @@ angular.module('anna-squares')
         return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
       },
       register: function(user, success, error) {
-        $http.post('/register', user).success(function(res) {
-          changeUser(res);
-          success();
-        }).error(error);
+        $http
+          .post('/users', user)
+          .success(function(res) {
+            success(res);
+          })
+          .error(error);
       },
       signin: function(user, success, error) {
-        $http.post('/signin', user).success(function(user){
-          changeUser(user);
-          success(user);
-        }).error(error);
+        $http
+          .post('/signin', user)
+          .success(function(user){
+            changeUser(user);
+            success(user);
+          })
+          .error(error);
       },
       signout: function(success, error) {
-        $http.post('/signout').success(function(){
-          changeUser({
-            username: '',
-            role: userRoles.public
-          });
-          success();
-        }).error(error);
+        $http
+          .post('/signout')
+          .success(function(){
+            changeUser({
+              username: '',
+              role: userRoles.public
+            });
+            success();
+          })
+          .error(error);
       },
-      accessLevels: accessLevels,
       userRoles: userRoles,
       user: currentUser
     };
   });
-
-angular.module('anna-squares')
-    .factory('Users', function($http) {
-      return {
-        getAll: function(success, error) {
-          $http.get('/users').success(success).error(error);
-        }
-      };
-    });

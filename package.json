@@ -41,7 +41,7 @@
     "passport-twitter": "latest",
     "passport-linkedin": "latest",
     "passport-github": "latest",
-    "passport-google": "latest",
+    "passport-google-oauth": "latest",
     "underscore": "latest",
     "view-helpers": "latest",
     "validator": "latest",
@@ -50,7 +50,8 @@
     "stylus": "latest",
     "bower": "latest",
     "grunt": "latest",
-    "grunt-cli": "latest"
+    "grunt-cli": "latest",
+    "node-uuid": "latest"
   },
   "analyze": false,
   "devDependencies": {

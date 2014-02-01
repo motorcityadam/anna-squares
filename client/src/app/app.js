@@ -11,13 +11,13 @@ angular.module('anna-squares',
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
-  var access = routingConfig.accessLevels;
+  var access = routingConfig.userRoles;
 
   $routeProvider.when('/',
     {
       templateUrl:    'home',
       controller:     'HomeCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/dashboard',
     {
@@ -29,13 +29,13 @@ angular.module('anna-squares',
     {
       templateUrl:    'signin',
       controller:     'SigninCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/register',
     {
       templateUrl:    'register',
       controller:     'RegisterCtrl',
-      access:         access.anon
+      access:         access.public
     });
   $routeProvider.when('/schedules',
     {
@@ -43,15 +43,20 @@ angular.module('anna-squares',
       controller:     'SchedulesCtrl',
       access:         access.user
     });
-  $routeProvider.when('/admin',
+  $routeProvider.when('/feedback',
     {
-      templateUrl:    'admin',
-      controller:     'AdminCtrl',
-      access:         access.admin
+      templateUrl:    'feedback',
+      controller:     'FeedbackCtrl',
+      access:         access.user
     });
   $routeProvider.when('/404',
     {
       templateUrl:    '404',
+      access:         access.public
+    });
+  $routeProvider.when('/500',
+    {
+      templateUrl:    '500',
       access:         access.public
     });
   $routeProvider.otherwise({redirectTo:'/404'});
@@ -77,11 +82,17 @@ angular.module('anna-squares',
 .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
 
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    $rootScope.error = null;
+
+    $rootScope.success = null;
+    $rootScope.info = null;
+    $rootScope.warning = null;
+    $rootScope.danger = null;
+
     if (!Auth.authorize(next.access)) {
       if(Auth.isSignedIn()) $location.path('/');
       else                  $location.path('/signin');
     }
+
   });
 
 }]);

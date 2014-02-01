@@ -6,11 +6,23 @@ var express      = require('express')
     , mongoose   = require('mongoose')
     , mongoStore = require('connect-mongo')(express);
 
-var User     = require('./models/User.js')
-    , config = require('./config/config');
+require('./models/User.js');
+
+var config           = require('./config/config')
+    , configPassport = require('./config/passport');
 
 var app = module.exports = express();
-var db = mongoose.connect(config.db);
+var connectMongoose = function (connStr) {
+  return(
+    mongoose.connect(connStr, function (err) {
+      if (err) throw err;
+      console.log('');
+      console.log('########################');
+      console.log('Successfully connected mongoose to MongoDB on ' + connStr);
+    })
+  );
+};
+var db = connectMongoose(config.db);
 var rootDir = __dirname + '/../';
 
 app.set('views', rootDir + 'client/views');
@@ -26,11 +38,6 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.favicon());
 app.use(express.static(path.join(rootDir, 'client')));
-/*app.use(
-  express.cookieSession({
-    secret: config.cookieSecret
-  })
-);*/
 app.use(
   express.session({
     secret: config.sessionSecret,
@@ -55,18 +62,21 @@ app.use(helpers(config.app.name));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(User.localStrategy);
-passport.use(User.twitterStrategy());
-passport.use(User.facebookStrategy());
-passport.use(User.googleStrategy());
-passport.use(User.linkedInStrategy());
+passport.use(configPassport.localStrategy());
+passport.use(configPassport.twitterStrategy());
+passport.use(configPassport.facebookStrategy());
+passport.use(configPassport.githubStrategy());
+passport.use(configPassport.googleStrategy());
+passport.use(configPassport.linkedInStrategy());
 
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
+passport.serializeUser(configPassport.serializeUser);
+passport.deserializeUser(configPassport.deserializeUser);
 
 require('./routes.js')(app);
 
 app.set('port', config.port);
 http.createServer(app).listen(app.get('port'), function(){
+  console.log('');
+  console.log('########################');
   console.log('Express server listening on port ' + app.get('port') + ' in ' + app.get('env') + ' mode.');
 });

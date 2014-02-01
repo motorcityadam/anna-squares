@@ -2,10 +2,9 @@ var _          = require('underscore')
     , path     = require('path')
     , passport = require('passport');
 
-var AuthCtrl       = require('./controllers/auth')
-    , UserCtrl     = require('./controllers/user')
-    , userRoles    = require('../client/dist/common').userRoles
-    , accessLevels = require('../client/dist/common').accessLevels;
+var AuthCtrl    = require('./controllers/auth')
+    , UserCtrl  = require('./controllers/user')
+    , userRoles = require('../client/dist/common').userRoles;
 
 var routes = [
 
@@ -75,9 +74,9 @@ var routes = [
 
   // Local Authentication
   {
-    path: '/register',
+    path: '/users',
     httpMethod: 'POST',
-    middleware: [AuthCtrl.register]
+    middleware: [UserCtrl.create]
   },
   {
     path: '/signin',
@@ -88,14 +87,6 @@ var routes = [
     path: '/signout',
     httpMethod: 'POST',
     middleware: [AuthCtrl.signout]
-  },
-
-  // User resource
-  {
-    path: '/users',
-    httpMethod: 'GET',
-    middleware: [UserCtrl.index],
-    accessLevel: accessLevels.admin
   },
 
   // Handle all other requests by AngularJS client-side routing system
@@ -122,9 +113,6 @@ function ensureAuthorized (req, res, next) {
   if(!req.user) role = userRoles.public;
   else          role = req.user.role;
 
-  var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
-
-  if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
   return next();
 }
 

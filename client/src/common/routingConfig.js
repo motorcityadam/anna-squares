@@ -10,18 +10,18 @@
       'public',
       'user',
       'admin'
-    ],
+    ]
 
     /*
      Build out all the access levels you want referencing the roles listed above
      You can use the "*" symbol to represent access to all roles
      */
-    accessLevels : {
+/*    accessLevels : {
       'public' : '*',
       'anon': ['public'],
       'user' : ['user', 'admin'],
       'admin': ['admin']
-    }
+    }*/
 
   };
 
@@ -52,7 +52,7 @@
    This method builds access level bit masks based on the accessLevelDeclaration parameter which must
    contain an array for each access level containing the allowed user roles.
    */
-  function buildAccessLevels(accessLevelDeclarations, userRoles){
+/*  function buildAccessLevels(accessLevelDeclarations, userRoles){
 
     var accessLevels = {};
     var resultBitMask;
@@ -92,9 +92,9 @@
     }
 
     return accessLevels;
-  }
+  }*/
 
   exports.userRoles = buildRoles(config.roles);
-  exports.accessLevels = buildAccessLevels(config.accessLevels, exports.userRoles);
+  // exports.accessLevels = buildAccessLevels(config.accessLevels, exports.userRoles);
 
 })(typeof exports === 'undefined' ? this.routingConfig = {} : exports);

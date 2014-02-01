@@ -64,17 +64,17 @@
             p.has-error.help-block(ng-show="registerForm.password.$error.pattern") The password provided does not conform with the complexity characteristics.
             p.has-error.help-block(ng-show="registerForm.password.$error.minlength") The password provided is too short (must be a minimum of 7 characters).
         //- Input field for Confirm Password
-        .form-group(ng-class="{'has-error' : registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid}")
+        .form-group(ng-class="{'has-error' : registerForm.passwordConfirmation.$dirty && registerForm.passwordConfirmation.$invalid}")
           label.control-label(for="as-reg-confirmpassword") Confirm Password
           input#as-reg-confirmpassword.form-control(
             type="password",
-            data-ng-model="confirm_password",
-            name="confirm_password",
+            data-ng-model="passwordConfirmation",
+            name="passwordConfirmation",
             required,
             match-field="password")
-          div(ng-show="registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid")
-            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.required") This field is required.
-            p.has-error.help-block(ng-show="registerForm.confirm_password.$error.match") The provided passwords provided do not match.
+          div(ng-show="registerForm.passwordConfirmation.$dirty && registerForm.passwordConfirmation.$invalid")
+            p.has-error.help-block(ng-show="registerForm.passwordConfirmation.$error.required") This field is required.
+            p.has-error.help-block(ng-show="registerForm.passwordConfirmation.$error.match") The provided passwords provided do not match.
       .col-lg-6
         p
           strong By clicking on the "Create An Account" button below, you are agreeing to the following:

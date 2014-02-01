@@ -42,31 +42,27 @@ html(lang='en', data-ng-app='anna-squares')
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
-            li(data-access-level='accessLevels.anon', active-nav)
+            li(data-access-level="userRoles.public", active-nav)
               a(href='/signin')
                 i.fa.fa-sign-in
                 |  Sign In
-            li(data-access-level='accessLevels.anon', active-nav)
+            li(data-access-level="userRoles.public", active-nav)
               a(href='/register')
                 i.fa.fa-magic
                 |  Register
-            li(data-access-level='accessLevels.user', active-nav)
+            li(data-access-level="userRoles.user", active-nav)
               a(href='/dashboard')
                 i.fa.fa-dashboard
                 |  Dashboard
-            li(data-access-level='accessLevels.user', active-nav)
+            li(data-access-level="userRoles.user", active-nav)
               a(href='/schedules')
                 i.fa.fa-tasks
                 |  Schedules
-            li(data-access-level='accessLevels.admin', active-nav)
-              a(href='/admin')
-                i.fa.fa-building-o
-                |  Admin
-            li(data-access-level='accessLevels.user')
+            li(data-access-level="userRoles.user")
               a(href="/feedback")
                 i.fa.fa-comment
                 |  Send Feedback
-            li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
+            li.dropdown.notifications-dropdown(data-access-level="userRoles.user")
               a.dropdown-toggle(href="#", data-toggle="dropdown")
                 i.fa.fa-thumb-tack
                 |  Notifications
@@ -97,7 +93,7 @@ html(lang='en', data-ng-app='anna-squares')
                 li
                   a(href="#")
                     | View All Notifications
-            li.dropdown.alerts-dropdown(data-access-level='accessLevels.user')
+            li.dropdown.alerts-dropdown(data-access-level="userRoles.user")
               a.dropdown-toggle(href="#", data-toggle="dropdown")
                 i.fa.fa-bullhorn
                 |  Alerts
@@ -132,7 +128,7 @@ html(lang='en', data-ng-app='anna-squares')
                 li
                   a(href="#")
                     | View All Alerts
-            li.dropdown.user-dropdown(data-access-level='accessLevels.user')
+            li.dropdown.user-dropdown(data-access-level="userRoles.user")
               a.dropdown-toggle(href="#", data-toggle="dropdown")
                 i.fa.fa-user
                 |  {{ user.username }}
@@ -162,7 +158,10 @@ html(lang='en', data-ng-app='anna-squares')
                         i.fa.fa-sign-out
                         |  Sign Out
       #as-page-wrapper
-        .alert.alert-danger(data-ng-bind="error", data-ng-show="error")
+        .alert.alert-success(data-ng-bind="success", data-ng-show="success")
+        .alert.alert-info(data-ng-bind="info", data-ng-show="info")
+        .alert.alert-warning(data-ng-bind="warning", data-ng-show="warning")
+        .alert.alert-danger(data-ng-bind="danger", data-ng-show="danger")
         div(data-ng-view='ng-view')
         .as-footer
           .row
@@ -234,14 +233,10 @@ html(lang='en', data-ng-app='anna-squares')
     script(src='/dist/anna-squares.js')
 
     // Load all partial views
-    script(type="text/ng-template", id="403")
-      include partials/403
     script(type="text/ng-template", id="404")
       include partials/404
     script(type="text/ng-template", id="500")
       include partials/500
-    script(type="text/ng-template", id="admin")
-      include partials/admin
     script(type="text/ng-template", id="home")
       include partials/home
     script(type="text/ng-template", id="signin")
@@ -250,5 +245,7 @@ html(lang='en', data-ng-app='anna-squares')
       include partials/dashboard
     script(type="text/ng-template", id="schedules")
       include partials/schedules
+    script(type="text/ng-template", id="feedback")
+      include partials/feedback
     script(type="text/ng-template", id="register")
       include partials/register
