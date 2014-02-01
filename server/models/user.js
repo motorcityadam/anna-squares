@@ -133,7 +133,7 @@ UserSchema.path('passwordHash').validate(function() {
       this.invalidate('password', 'The password provided is too short (must be a minimum of 7 characters).');
     }
 
-    if (!(validator.matches(this._password, /^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]|.*\W).*$/))) {
+    if (!(validator.matches(this._password, /^(?=.{0,})(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z]).*$/))) {
       this.invalidate('password', 'The password provided does not conform with the complexity characteristics.');
     }
 
@@ -156,16 +156,16 @@ UserSchema.pre('save', function(next, done) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && !this.provider)
-    next(new Error('Invalid password'));
+    done(new Error('Invalid password.'));
 
-  mongoose.models['User'].findOne({username : self.username},function(err, user) {
+  mongoose.models.User.findOne({username : self.username},function(err, user) {
     if(err) {
       done(err);
     } else if(user) {
-      self.invalidate('username', 'The username provided is already taken.');
-      done(new Error('The username provided is already taken.'));
+      self.invalidate('username', 'The username provided is already taken. Please choose another username.');
+      done(new Error('The username provided is already taken. Please choose another username.'));
     } else {
-      mongoose.models['User'].findOne({email : self.email},function(err, email) {
+      mongoose.models.User.findOne({email : self.email},function(err, email) {
         if(err) {
           done(err);
         } else if(email) {

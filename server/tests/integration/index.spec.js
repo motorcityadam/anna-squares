@@ -37,12 +37,12 @@ describe('Server Integration Tests - ', function() {
       request(app).post('/users').send(users.user1).expect(200, done);
     });
 
-    it('should return a 403 response if username is taken on POST', function(done) {
-      request(app).post('/users').send(users.user2).expect(403, done);
+    it('should return a 400 response if username is taken on POST', function(done) {
+      request(app).post('/users').send(users.user2).expect(400, done);
     });
 
-    it('should return a 403 response if e-mail address is taken on POST', function(done) {
-      request(app).post('/users').send(users.user3).expect(403, done);
+    it('should return a 400 response if e-mail address is taken on POST', function(done) {
+      request(app).post('/users').send(users.user3).expect(400, done);
     });
 
     it('should return a 400 response if username is empty on POST', function(done) {

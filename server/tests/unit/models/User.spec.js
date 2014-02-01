@@ -10,7 +10,7 @@ var users = require('../../mocks/users');
 describe('User Model Unit Tests - ', function() {
   describe('Model User - ', function() {
     describe('#save() - ', function() {
-      after(function(done) {
+      afterEach(function(done) {
         User.remove().exec();
         done();
       });

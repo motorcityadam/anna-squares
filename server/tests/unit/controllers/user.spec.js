@@ -61,7 +61,7 @@ describe('User Controller Unit Tests - ', function() {
       UserCtrl.create(req, res, next);
     });
 
-    it('should return a 403 response when the user already exists', function(done) {
+    it('should return a 400 response when the user already exists', function(done) {
       req.body = {
         username             : 'user',
         email                : 'user@example.com',
@@ -70,7 +70,7 @@ describe('User Controller Unit Tests - ', function() {
       };
 
       res.send = function(httpStatus) {
-        expect(httpStatus).to.equal(403);
+        expect(httpStatus).to.equal(400);
         done();
       };
 

@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-01-31
+/*! anna-squares - v0.1.7 - 2014-02-01
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -72,7 +72,7 @@ table{font-size:13px}
 thead{background:#ccc}
 td{text-align:center}
 td > input{width:100%}
-.alert{padding:10px;margin:10px 0 0 0;border-radius:0}
+.alert{padding:10px;margin:10px 0;border-radius:0}
 .table-bordered{border:1px solid #999}
 .table > thead > tr > th,.table > tbody > tr > th,.table > tfoot > tr > th,.table > thead > tr > td,.table > tbody > tr > td,.table > tfoot > tr > td{line-height:1.428571429;vertical-align:middle}
 .table-bordered > thead > tr > th,.table-bordered > tbody > tr > th,.table-bordered > tfoot > tr > th,.table-bordered > thead > tr > td,.table-bordered > tbody > tr > td,.table-bordered > tfoot > tr > td{border:1px solid #999}
