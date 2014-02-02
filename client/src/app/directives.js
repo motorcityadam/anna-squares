@@ -40,7 +40,6 @@ angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', 
     restrict: 'A',
     link: function(scope, element, attrs) {
       $timeout(function() {
-        console.log(element.find('a'));
         var nestedA = element.find('a')[0];
         var path = nestedA.href;
 

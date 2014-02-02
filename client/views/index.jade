@@ -36,34 +36,34 @@ html(lang='en', data-ng-app='anna-squares')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="/")
+          a.navbar-brand(ng-href="/")
             | AnnaSquares
             sub  beta
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
             li(data-access-level="userRoles.public", active-nav)
-              a(href='/signin')
+              a(ng-href='/signin')
                 i.fa.fa-sign-in
                 |  Sign In
             li(data-access-level="userRoles.public", active-nav)
-              a(href='/register')
+              a(ng-href='/register')
                 i.fa.fa-magic
                 |  Register
             li(data-access-level="userRoles.user", active-nav)
-              a(href='/{{ username }}')
+              a(ng-href='/{{ username }}')
                 i.fa.fa-dashboard
                 |  Dashboard
             li(data-access-level="userRoles.user", active-nav)
-              a(href='/{{ username }}/schedules')
+              a(ng-href='/{{ username }}/schedules')
                 i.fa.fa-tasks
                 |  Schedules
             li(data-access-level="userRoles.user", active-nav)
-              a(href="/{{ username }}/feedback")
+              a(ng-href="/{{ username }}/feedback")
                 i.fa.fa-comment
                 |  Send Feedback
             li.dropdown.notifications-dropdown(data-access-level="userRoles.user")
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
+              a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-thumb-tack
                 |  Notifications
                 | <span class="badge">2</span>
@@ -71,7 +71,7 @@ html(lang='en', data-ng-app='anna-squares')
               ul.dropdown-menu
                 li.dropdown-header.strong 2 Notifications
                 li.notification-preview
-                  a(href="#")
+                  a(ng-href="#")
                     span.avatar
                       img.img-rounded(ph-img="80x80")
                     span.name Adam Cook
@@ -81,7 +81,7 @@ html(lang='en', data-ng-app='anna-squares')
                       |  4:34 PM
                 li.divider
                 li.notification-preview
-                  a(href="#")
+                  a(ng-href="#")
                     span.avatar
                       img.img-rounded(ph-img="80x80")
                     span.name Adam Cook
@@ -91,10 +91,10 @@ html(lang='en', data-ng-app='anna-squares')
                       |  4:34 PM
                 li.divider
                 li
-                  a(href="#")
+                  a(ng-href="#")
                     | View All Notifications
             li.dropdown.alerts-dropdown(data-access-level="userRoles.user")
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
+              a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-bullhorn
                 |  Alerts
                 | <span class="badge">3</span>
@@ -102,7 +102,7 @@ html(lang='en', data-ng-app='anna-squares')
               ul.dropdown-menu
                 li.dropdown-header.strong 3 Alerts
                 li.alert-preview
-                  a(href="#")
+                  a(ng-href="#")
                     span.name.label.label-info Information
                     span.alert This is an informational alert about the application.
                     span.time
@@ -110,7 +110,7 @@ html(lang='en', data-ng-app='anna-squares')
                       |  4:34 PM
                 li.divider
                 li.alert-preview
-                  a(href="#")
+                  a(ng-href="#")
                     span.name.label.label-danger Notice
                     span.alert This is an warning alert about the application.
                     span.time
@@ -118,7 +118,7 @@ html(lang='en', data-ng-app='anna-squares')
                       |  4:34 PM
                 li.divider
                 li.alert-preview
-                  a(href="#")
+                  a(ng-href="#")
                     span.name.label.label-danger Notice
                     span.alert This is an warning alert about the application.
                     span.time
@@ -126,35 +126,35 @@ html(lang='en', data-ng-app='anna-squares')
                       |  4:34 PM
                 li.divider
                 li
-                  a(href="#")
+                  a(ng-href="#")
                     | View All Alerts
             li.dropdown.user-dropdown(data-access-level="userRoles.user")
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
+              a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-user
                 |  {{ user.username }}
                 | <b class="caret"></b>
               div.dropdown-menu
                 div.user-dropdown-avatar
-                  a(href="#")
+                  a(ng-href="#")
                     div
                       img.img-rounded(ph-img="80x80")
                 div.user-dropdown-links
                   ul
                     li
-                      a(href="#")
+                      a(ng-href="#")
                         i.fa.fa-user
                         |  Profile
                     li
-                      a(href="#")
+                      a(ng-href="#")
                         i.fa.fa-group
                         |  Partners
                     li
-                      a(href="#")
+                      a(ng-href="#")
                         i.fa.fa-gear
                         |  Settings
                     li.divider
                     li
-                      a(href="", data-ng-click="signout()")
+                      a(ng-href="", data-ng-click="signout()")
                         i.fa.fa-sign-out
                         |  Sign Out
       #as-page-wrapper
@@ -167,37 +167,37 @@ html(lang='en', data-ng-app='anna-squares')
           .row
             .col-lg-12
               span.as-copyright © 2013 - 2014
-                a(href="http://www.adamjcook.io")  Adam Joseph Cook
+                a(ng-href="http://www.adamjcook.io")  Adam Joseph Cook
               br
               span.as-license Code for the application is completely open-source and is licensed under the
-                a(href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank")  The MIT License.
+                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank")  The MIT License.
               br
               span.as-license Some of the icons used are generously provided by
-                a(href="http://glyphicons.com/")  Glyphicons.
+                a(ng-href="http://glyphicons.com/")  Glyphicons.
               br
               span.as-license Many thanks to all the
-                a(href="https://github.com/adamjcook/anna-squares/blob/master/CONTRIBUTORS.md", target="_blank")  project contributors.
+                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/CONTRIBUTORS.md", target="_blank")  project contributors.
           .row
             .col-lg-12
               ul.list-inline
                 li
                   strong
-                    a(href="/about/contributing") Contributing
+                    a(ng-href="/about/contributing") Contributing
                 li
                   strong
-                    a(href="http://blog.annasquares.com") Blog
+                    a(ng-href="http://blog.annasquares.com") Blog
                 li
                   strong
-                    a(href="/about/terms") Terms
+                    a(ng-href="/about/terms") Terms
                 li
                   strong
-                    a(href="/about/privacy") Privacy
+                    a(ng-href="/about/privacy") Privacy
                 li
                   strong
-                    a(href="/about/contact") Contact
+                    a(ng-href="/about/contact") Contact
                 li
                   strong
-                    a(href="/about") About
+                    a(ng-href="/about") About
     if (settings.env == 'development')
       script(src='//localhost:35729/livereload.js')
   footer
