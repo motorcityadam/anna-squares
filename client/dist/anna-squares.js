@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-01
+/*! anna-squares - v0.1.7 - 2014-02-02
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -23,12 +23,6 @@ angular.module('anna-squares',
       controller:     'HomeCtrl',
       access:         access.public
     });
-  $routeProvider.when('/dashboard',
-    {
-      templateUrl:    'dashboard',
-      controller:     'DashboardCtrl',
-      access:         access.user
-    });
   $routeProvider.when('/signin',
     {
       templateUrl:    'signin',
@@ -41,13 +35,13 @@ angular.module('anna-squares',
       controller:     'RegisterCtrl',
       access:         access.public
     });
-  $routeProvider.when('/schedules',
+  $routeProvider.when('/:username/schedules',
     {
       templateUrl:    'schedules',
       controller:     'SchedulesCtrl',
       access:         access.user
     });
-  $routeProvider.when('/feedback',
+  $routeProvider.when('/:username/feedback',
     {
       templateUrl:    'feedback',
       controller:     'FeedbackCtrl',
@@ -62,6 +56,12 @@ angular.module('anna-squares',
     {
       templateUrl:    '500',
       access:         access.public
+    });
+  $routeProvider.when('/:username',
+    {
+      templateUrl:    'dashboard',
+      controller:     'DashboardCtrl',
+      access:         access.user
     });
   $routeProvider.otherwise({redirectTo:'/404'});
 
@@ -93,8 +93,7 @@ angular.module('anna-squares',
     $rootScope.danger = null;
 
     if (!Auth.authorize(next.access)) {
-      if(Auth.isSignedIn()) $location.path('/');
-      else                  $location.path('/signin');
+      if(!Auth.isSignedIn()) $location.path('/signin');
     }
 
   });
@@ -108,6 +107,7 @@ angular.module('anna-squares')
   .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
+    $scope.username = $scope.user.username;
 
     $scope.signout = function() {
       Auth.signout(function() {
@@ -127,14 +127,13 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$location', '$window', 'Auth',
       function($rootScope, $scope, $location, $window, Auth) {
 
-      $scope.rememberme = true;
       $scope.signin = function() {
         Auth.signin({
           username: $scope.username,
           password: $scope.password
         },
         function(res) {
-          $location.path('/dashboard');
+          $location.path('/' + Auth.user.username);
         },
         function(err) {
           $rootScope.danger = 'Failed to sign in.';
@@ -172,16 +171,31 @@ angular.module('anna-squares')
     }]);
 
 angular.module('anna-squares')
-    .controller('DashboardCtrl',
-        ['$rootScope', function($rootScope) { }]);
+  .controller('DashboardCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);
 
 angular.module('anna-squares')
   .controller('SchedulesCtrl',
-    ['$rootScope', function($rootScope) { }]);
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);
 
 angular.module('anna-squares')
-    .controller('FeedbackCtrl',
-        ['$rootScope', function($rootScope) { }]);
+  .controller('FeedbackCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
@@ -219,25 +233,26 @@ angular.module('anna-squares')
     };
   }]);
 
-angular.module('anna-squares').directive('activeNav', ['$location', function($location) {
+angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
-      var nestedA = element.find('a')[0];
-      var path = nestedA.href;
+      $timeout(function() {
+        console.log(element.find('a'));
+        var nestedA = element.find('a')[0];
+        var path = nestedA.href;
 
-      scope.location = $location;
-      scope.$watch('location.absUrl()', function(newPath) {
-        if (path === newPath) {
-          element.addClass('active');
-        } else {
-          element.removeClass('active');
-        }
+        scope.location = $location;
+        scope.$watch('location.absUrl()', function(newPath) {
+          if (path === newPath) {
+            element.addClass('active');
+          } else {
+            element.removeClass('active');
+          }
+        });
       });
     }
-
   };
-
 }]);
 
 // TODO: The 'matchField' directive needs tests!
@@ -295,6 +310,9 @@ angular.module('anna-squares')
         if(user === undefined)
           user = currentUser;
         return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
+      },
+      checkUsername: function(username) {
+        if (username === currentUser.username) return true;
       },
       register: function(user, success, error) {
         $http

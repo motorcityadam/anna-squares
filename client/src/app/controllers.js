@@ -6,6 +6,7 @@ angular.module('anna-squares')
   .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
+    $scope.username = $scope.user.username;
 
     $scope.signout = function() {
       Auth.signout(function() {
@@ -25,14 +26,13 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$location', '$window', 'Auth',
       function($rootScope, $scope, $location, $window, Auth) {
 
-      $scope.rememberme = true;
       $scope.signin = function() {
         Auth.signin({
           username: $scope.username,
           password: $scope.password
         },
         function(res) {
-          $location.path('/dashboard');
+          $location.path('/' + Auth.user.username);
         },
         function(err) {
           $rootScope.danger = 'Failed to sign in.';
@@ -70,13 +70,28 @@ angular.module('anna-squares')
     }]);
 
 angular.module('anna-squares')
-    .controller('DashboardCtrl',
-        ['$rootScope', function($rootScope) { }]);
+  .controller('DashboardCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);
 
 angular.module('anna-squares')
   .controller('SchedulesCtrl',
-    ['$rootScope', function($rootScope) { }]);
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);
 
 angular.module('anna-squares')
-    .controller('FeedbackCtrl',
-        ['$rootScope', function($rootScope) { }]);
+  .controller('FeedbackCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+      function($rootScope, $scope, $routeParams, $location, Auth) {
+
+        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
+
+      }]);

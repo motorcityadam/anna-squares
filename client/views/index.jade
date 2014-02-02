@@ -51,15 +51,15 @@ html(lang='en', data-ng-app='anna-squares')
                 i.fa.fa-magic
                 |  Register
             li(data-access-level="userRoles.user", active-nav)
-              a(href='/dashboard')
+              a(href='/{{ username }}')
                 i.fa.fa-dashboard
                 |  Dashboard
             li(data-access-level="userRoles.user", active-nav)
-              a(href='/schedules')
+              a(href='/{{ username }}/schedules')
                 i.fa.fa-tasks
                 |  Schedules
             li(data-access-level="userRoles.user", active-nav)
-              a(href="/feedback")
+              a(href="/{{ username }}/feedback")
                 i.fa.fa-comment
                 |  Send Feedback
             li.dropdown.notifications-dropdown(data-access-level="userRoles.user")

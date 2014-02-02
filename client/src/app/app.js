@@ -19,12 +19,6 @@ angular.module('anna-squares',
       controller:     'HomeCtrl',
       access:         access.public
     });
-  $routeProvider.when('/dashboard',
-    {
-      templateUrl:    'dashboard',
-      controller:     'DashboardCtrl',
-      access:         access.user
-    });
   $routeProvider.when('/signin',
     {
       templateUrl:    'signin',
@@ -37,13 +31,13 @@ angular.module('anna-squares',
       controller:     'RegisterCtrl',
       access:         access.public
     });
-  $routeProvider.when('/schedules',
+  $routeProvider.when('/:username/schedules',
     {
       templateUrl:    'schedules',
       controller:     'SchedulesCtrl',
       access:         access.user
     });
-  $routeProvider.when('/feedback',
+  $routeProvider.when('/:username/feedback',
     {
       templateUrl:    'feedback',
       controller:     'FeedbackCtrl',
@@ -58,6 +52,12 @@ angular.module('anna-squares',
     {
       templateUrl:    '500',
       access:         access.public
+    });
+  $routeProvider.when('/:username',
+    {
+      templateUrl:    'dashboard',
+      controller:     'DashboardCtrl',
+      access:         access.user
     });
   $routeProvider.otherwise({redirectTo:'/404'});
 
@@ -89,8 +89,7 @@ angular.module('anna-squares',
     $rootScope.danger = null;
 
     if (!Auth.authorize(next.access)) {
-      if(Auth.isSignedIn()) $location.path('/');
-      else                  $location.path('/signin');
+      if(!Auth.isSignedIn()) $location.path('/signin');
     }
 
   });

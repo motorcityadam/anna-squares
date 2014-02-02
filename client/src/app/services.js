@@ -30,6 +30,9 @@ angular.module('anna-squares')
           user = currentUser;
         return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
       },
+      checkUsername: function(username) {
+        if (username === currentUser.username) return true;
+      },
       register: function(user, success, error) {
         $http
           .post('/users', user)
