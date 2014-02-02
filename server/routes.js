@@ -2,9 +2,10 @@ var _          = require('underscore')
     , path     = require('path')
     , passport = require('passport');
 
-var AuthCtrl    = require('./controllers/auth')
-    , UserCtrl  = require('./controllers/user')
-    , userRoles = require('../client/dist/common').userRoles;
+var AuthCtrl       = require('./controllers/auth')
+    , UserCtrl     = require('./controllers/user')
+    , ScheduleCtrl = require('./controllers/schedule')
+    , userRoles    = require('../client/dist/common').userRoles;
 
 var routes = [
 
@@ -72,7 +73,7 @@ var routes = [
     })]
   },
 
-  // Local Authentication
+  // Local Authentication Routes
   {
     path: '/users',
     httpMethod: 'POST',
@@ -87,6 +88,41 @@ var routes = [
     path: '/signout',
     httpMethod: 'POST',
     middleware: [AuthCtrl.signout]
+  },
+
+  // Schedules API Routes
+  // Routes Overview
+  // GET    /schedules                   ->  index
+  // GET    /schedules/new               ->  new (Client)
+  // POST   /schedules                   ->  create
+  // GET    /schedules/:scheduleid       ->  show
+  // GET    /schedules/:scheduleid/edit  ->  edit (Client)
+  // PUT    /schedules/:scheduleid       ->  update
+  // DELETE /schedules/:scheduleid       ->  destroy
+  {
+    path: '/api/schedules',
+    httpMethod: 'GET',
+    middleware: [ScheduleCtrl.index]
+  },
+  {
+    path: '/api/schedules',
+    httpMethod: 'POST',
+    middleware: [ScheduleCtrl.create]
+  },
+  {
+    path: '/api/schedules/:scheduleid',
+    httpMethod: 'GET',
+    middleware: [ScheduleCtrl.show]
+  },
+  {
+    path: '/api/schedules/:scheduleid',
+    httpMethod: 'PUT',
+    middleware: [ScheduleCtrl.update]
+  },
+  {
+    path: '/api/schedules/:scheduleid',
+    httpMethod: 'DELETE',
+    middleware: [ScheduleCtrl.destroy]
   },
 
   // Handle all other requests by AngularJS client-side routing system
