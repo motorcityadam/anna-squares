@@ -6,6 +6,7 @@ angular.module('anna-squares')
   .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
+    $scope.accessLevels = Auth.accessLevels;
     $scope.username = $scope.user.username;
 
     $scope.signout = function() {
@@ -74,16 +75,12 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
 
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
-
       }]);
 
 angular.module('anna-squares')
   .controller('SchedulesCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
-
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
 
         var scheduleItems = $scope.scheduleItems = [];
 
@@ -352,7 +349,5 @@ angular.module('anna-squares')
   .controller('FeedbackCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
-
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
 
       }]);

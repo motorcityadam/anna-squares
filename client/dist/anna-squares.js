@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-02
+/*! anna-squares - v0.1.7 - 2014-02-03
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -15,7 +15,7 @@ angular.module('anna-squares',
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
-  var access = routingConfig.userRoles;
+  var access = routingConfig.accessLevels;
 
   $routeProvider.when('/',
     {
@@ -27,13 +27,13 @@ angular.module('anna-squares',
     {
       templateUrl:    'signin',
       controller:     'SigninCtrl',
-      access:         access.public
+      access:         access.anon
     });
   $routeProvider.when('/register',
     {
       templateUrl:    'register',
       controller:     'RegisterCtrl',
-      access:         access.public
+      access:         access.anon
     });
   $routeProvider.when('/:username/schedules',
     {
@@ -93,7 +93,8 @@ angular.module('anna-squares',
     $rootScope.danger = null;
 
     if (!Auth.authorize(next.access)) {
-      if(!Auth.isSignedIn()) $location.path('/signin');
+      if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
+      else                  $location.path('/signin');
     }
 
   });
@@ -107,6 +108,7 @@ angular.module('anna-squares')
   .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
+    $scope.accessLevels = Auth.accessLevels;
     $scope.username = $scope.user.username;
 
     $scope.signout = function() {
@@ -175,16 +177,12 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
 
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
-
       }]);
 
 angular.module('anna-squares')
   .controller('SchedulesCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
-
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
 
         var scheduleItems = $scope.scheduleItems = [];
 
@@ -454,8 +452,6 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
 
-        if (!Auth.checkUsername($routeParams.username)) $location.path('/404');
-
       }]);
 /*global angular:false*/
 /*jshint unused: vars */
@@ -494,7 +490,7 @@ angular.module('anna-squares')
     };
   }]);
 
-angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
+/*angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -513,7 +509,7 @@ angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', 
       });
     }
   };
-}]);
+}]);*/
 
 // TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', function() {
@@ -549,7 +545,8 @@ angular.module('anna-squares').directive('matchField', function() {
 angular.module('anna-squares')
   .factory('Auth', function($http, $cookieStore){
 
-    var userRoles = routingConfig.userRoles
+    var accessLevels  = routingConfig.accessLevels
+        , userRoles   = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
@@ -603,7 +600,18 @@ angular.module('anna-squares')
           })
           .error(error);
       },
+      accessLevels: accessLevels,
       userRoles: userRoles,
       user: currentUser
+    };
+  });
+
+angular.module('anna-squares')
+  .factory('Schedule', function($http){
+
+    return {
+      getAll: function(success, error) {
+        $http.get('/schedules').success(success).error(error);
+      }
     };
   });

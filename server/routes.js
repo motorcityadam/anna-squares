@@ -5,7 +5,8 @@ var _          = require('underscore')
 var AuthCtrl       = require('./controllers/auth')
     , UserCtrl     = require('./controllers/user')
     , ScheduleCtrl = require('./controllers/schedule')
-    , userRoles    = require('../client/dist/common').userRoles;
+    , userRoles    = require('../client/dist/common').userRoles
+    , accessLevels = require('../client/dist/common').accessLevels;
 
 var routes = [
 
@@ -100,27 +101,28 @@ var routes = [
   // PUT    /schedules/:scheduleid       ->  update
   // DELETE /schedules/:scheduleid       ->  destroy
   {
-    path: '/api/schedules',
+    path: '/schedules',
     httpMethod: 'GET',
-    middleware: [ScheduleCtrl.index]
+    middleware: [ScheduleCtrl.index],
+    accessLevel: accessLevels.user
   },
   {
-    path: '/api/schedules',
+    path: '/schedules',
     httpMethod: 'POST',
     middleware: [ScheduleCtrl.create]
   },
   {
-    path: '/api/schedules/:scheduleid',
+    path: '/schedules/:scheduleid',
     httpMethod: 'GET',
     middleware: [ScheduleCtrl.show]
   },
   {
-    path: '/api/schedules/:scheduleid',
+    path: '/schedules/:scheduleid',
     httpMethod: 'PUT',
     middleware: [ScheduleCtrl.update]
   },
   {
-    path: '/api/schedules/:scheduleid',
+    path: '/schedules/:scheduleid',
     httpMethod: 'DELETE',
     middleware: [ScheduleCtrl.destroy]
   },
@@ -144,11 +146,14 @@ var routes = [
   }
 ];
 
-function ensureAuthorized (req, res, next) {
+function ensureAuthorized(req, res, next) {
   var role;
   if(!req.user) role = userRoles.public;
   else          role = req.user.role;
 
+  var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
+
+  if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
   return next();
 }
 

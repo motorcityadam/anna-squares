@@ -17,14 +17,6 @@ module.exports = {
     done(null, user.id);
   },
 
-/*  deserializeUser: function(id, done) {
-    User.findOne({
-      _id: id
-    }, '-salt -passwordHash', function(err, user) {
-      done(err, user);
-    });
-  },*/
-
   deserializeUser: function(id, done) {
     User.findById(id, function(err, user) {
       done(err, user);

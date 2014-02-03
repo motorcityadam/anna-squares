@@ -1,10 +1,12 @@
 /*jshint unused: vars */
 
-// var User = require('../models/User.js');
+var Schedule = require('../models/Schedule.js');
 
 module.exports = {
 
   index: function(req, res, next) {
+
+    res.send('Index');
 
   },
 

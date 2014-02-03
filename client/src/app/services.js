@@ -8,7 +8,8 @@
 angular.module('anna-squares')
   .factory('Auth', function($http, $cookieStore){
 
-    var userRoles = routingConfig.userRoles
+    var accessLevels  = routingConfig.accessLevels
+        , userRoles   = routingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
@@ -62,7 +63,18 @@ angular.module('anna-squares')
           })
           .error(error);
       },
+      accessLevels: accessLevels,
       userRoles: userRoles,
       user: currentUser
+    };
+  });
+
+angular.module('anna-squares')
+  .factory('Schedule', function($http){
+
+    return {
+      getAll: function(success, error) {
+        $http.get('/schedules').success(success).error(error);
+      }
     };
   });

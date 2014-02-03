@@ -11,7 +11,7 @@ angular.module('anna-squares',
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
-  var access = routingConfig.userRoles;
+  var access = routingConfig.accessLevels;
 
   $routeProvider.when('/',
     {
@@ -23,13 +23,13 @@ angular.module('anna-squares',
     {
       templateUrl:    'signin',
       controller:     'SigninCtrl',
-      access:         access.public
+      access:         access.anon
     });
   $routeProvider.when('/register',
     {
       templateUrl:    'register',
       controller:     'RegisterCtrl',
-      access:         access.public
+      access:         access.anon
     });
   $routeProvider.when('/:username/schedules',
     {
@@ -89,7 +89,8 @@ angular.module('anna-squares',
     $rootScope.danger = null;
 
     if (!Auth.authorize(next.access)) {
-      if(!Auth.isSignedIn()) $location.path('/signin');
+      if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
+      else                  $location.path('/signin');
     }
 
   });

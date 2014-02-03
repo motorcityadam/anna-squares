@@ -42,27 +42,27 @@ html(lang='en', data-ng-app='anna-squares')
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
-            li(data-access-level="userRoles.public", active-nav)
+            li(data-access-level='accessLevels.anon', active-nav)
               a(ng-href='/signin')
                 i.fa.fa-sign-in
                 |  Sign In
-            li(data-access-level="userRoles.public", active-nav)
+            li(data-access-level='accessLevels.anon', active-nav)
               a(ng-href='/register')
                 i.fa.fa-magic
                 |  Register
-            li(data-access-level="userRoles.user", active-nav)
+            li(data-access-level='accessLevels.user', active-nav)
               a(ng-href='/{{ username }}')
                 i.fa.fa-dashboard
                 |  Dashboard
-            li(data-access-level="userRoles.user", active-nav)
+            li(data-access-level='accessLevels.user', active-nav)
               a(ng-href='/{{ username }}/schedules')
                 i.fa.fa-tasks
                 |  Schedules
-            li(data-access-level="userRoles.user", active-nav)
+            li(data-access-level='accessLevels.user', active-nav)
               a(ng-href="/{{ username }}/feedback")
                 i.fa.fa-comment
                 |  Send Feedback
-            li.dropdown.notifications-dropdown(data-access-level="userRoles.user")
+            li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-thumb-tack
                 |  Notifications
@@ -93,7 +93,7 @@ html(lang='en', data-ng-app='anna-squares')
                 li
                   a(ng-href="#")
                     | View All Notifications
-            li.dropdown.alerts-dropdown(data-access-level="userRoles.user")
+            li.dropdown.alerts-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-bullhorn
                 |  Alerts
@@ -128,7 +128,7 @@ html(lang='en', data-ng-app='anna-squares')
                 li
                   a(ng-href="#")
                     | View All Alerts
-            li.dropdown.user-dropdown(data-access-level="userRoles.user")
+            li.dropdown.user-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-user
                 |  {{ user.username }}

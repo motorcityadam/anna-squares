@@ -35,7 +35,7 @@ angular.module('anna-squares')
     };
   }]);
 
-angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
+/*angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -54,7 +54,7 @@ angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', 
       });
     }
   };
-}]);
+}]);*/
 
 // TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', function() {
