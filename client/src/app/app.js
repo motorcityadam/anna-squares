@@ -6,7 +6,7 @@
 'use strict';
 
 angular.module('anna-squares',
-        ['ngCookies', 'ngRoute', 'restangular', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+        ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
