@@ -41,31 +41,72 @@ html(lang='en', data-ng-app='anna-squares')
             sub  beta
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
+            li
+              a(href="#!/schedules")
+                i.fa.fa-plus
+                | &nbsp;Start New Schedule...
+            li
+              a(href="#")
+                i.fa.fa-edit
+                | &nbsp;Edit Schedule
+            li
+              a(href="#")
+                i.fa.fa-copy
+                | &nbsp;Copy Previous Schedule
+            li
+              a(href="#")
+                i.fa.fa-print
+                | &nbsp;Print Schedule...
+            li
+              a(href="#")
+                i.fa.fa-envelope
+                | &nbsp;Email Schedule...
+            li
+              a(href="#")
+                i.fa.fa-share
+                | &nbsp;Share Schedule With...
+            li
+              a(href="#")
+                i.fa.fa-book
+                | &nbsp;Help and Documentation
+            li.divider
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                i.fa.fa-trash-o
+                | &nbsp;Delete Schedule
+                | <b class="caret"></b>
+              ul.dropdown-menu
+                li
+                  .panel.panel-danger
+                    .panel-heading
+                      p Are you sure? This cannot be undone.
+                      .btn-group
+                        button.btn.btn-danger(type="button") Yes
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
             li(data-access-level='accessLevels.anon', active-nav)
               a(ng-href='/signin')
                 i.fa.fa-sign-in
-                |  Sign In
+                | &nbsp;Sign In
             li(data-access-level='accessLevels.anon', active-nav)
               a(ng-href='/register')
                 i.fa.fa-magic
-                |  Register
+                | &nbsp;Register
             li(data-access-level='accessLevels.user', active-nav)
               a(ng-href='/{{ username }}')
                 i.fa.fa-dashboard
-                |  Dashboard
+                | &nbsp;Dashboard
             li(data-access-level='accessLevels.user', active-nav)
               a(ng-href='/{{ username }}/schedules')
                 i.fa.fa-tasks
-                |  Schedules
+                | &nbsp;Schedules
             li(data-access-level='accessLevels.user', active-nav)
               a(ng-href="/{{ username }}/feedback")
                 i.fa.fa-comment
-                |  Send Feedback
+                | &nbsp;Send Feedback
             li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-thumb-tack
-                |  Notifications
+                | &nbsp;Notifications
                 | <span class="badge">2</span>
                 | <b class="caret"></b>
               ul.dropdown-menu
@@ -78,7 +119,7 @@ html(lang='en', data-ng-app='anna-squares')
                     span.notification This is a notification. This notification is very important.
                     span.time
                       i.fa.fa-clock-o
-                      |  4:34 PM
+                      | &nbsp;4:34 PM
                 li.divider
                 li.notification-preview
                   a(ng-href="#")
@@ -88,7 +129,7 @@ html(lang='en', data-ng-app='anna-squares')
                     span.notification This is a sample notification. This notification is very important.
                     span.time
                       i.fa.fa-clock-o
-                      |  4:34 PM
+                      | &nbsp;4:34 PM
                 li.divider
                 li
                   a(ng-href="#")
@@ -96,7 +137,7 @@ html(lang='en', data-ng-app='anna-squares')
             li.dropdown.alerts-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-bullhorn
-                |  Alerts
+                | &nbsp;Alerts
                 | <span class="badge">3</span>
                 | <b class="caret"></b>
               ul.dropdown-menu
@@ -107,7 +148,7 @@ html(lang='en', data-ng-app='anna-squares')
                     span.alert This is an informational alert about the application.
                     span.time
                       i.fa.fa-clock-o
-                      |  4:34 PM
+                      | &nbsp;4:34 PM
                 li.divider
                 li.alert-preview
                   a(ng-href="#")
@@ -115,7 +156,7 @@ html(lang='en', data-ng-app='anna-squares')
                     span.alert This is an warning alert about the application.
                     span.time
                       i.fa.fa-clock-o
-                      |  4:34 PM
+                      | &nbsp;4:34 PM
                 li.divider
                 li.alert-preview
                   a(ng-href="#")
@@ -123,7 +164,7 @@ html(lang='en', data-ng-app='anna-squares')
                     span.alert This is an warning alert about the application.
                     span.time
                       i.fa.fa-clock-o
-                      |  4:34 PM
+                      | &nbsp;4:34 PM
                 li.divider
                 li
                   a(ng-href="#")
@@ -131,7 +172,7 @@ html(lang='en', data-ng-app='anna-squares')
             li.dropdown.user-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="#", data-toggle="dropdown")
                 i.fa.fa-user
-                |  {{ user.username }}
+                | &nbsp;{{ user.username }}
                 | <b class="caret"></b>
               div.dropdown-menu
                 div.user-dropdown-avatar
@@ -143,20 +184,20 @@ html(lang='en', data-ng-app='anna-squares')
                     li
                       a(ng-href="#")
                         i.fa.fa-user
-                        |  Profile
+                        | &nbsp;Profile
                     li
                       a(ng-href="#")
                         i.fa.fa-group
-                        |  Partners
+                        | &nbsp;Partners
                     li
                       a(ng-href="#")
                         i.fa.fa-gear
-                        |  Settings
+                        | &nbsp;Settings
                     li.divider
                     li
                       a(ng-href="", data-ng-click="signout()")
                         i.fa.fa-sign-out
-                        |  Sign Out
+                        | &nbsp;Sign Out
       #as-page-wrapper
         .alert.alert-success(data-ng-bind="success", data-ng-show="success")
         .alert.alert-info(data-ng-bind="info", data-ng-show="info")
@@ -167,16 +208,16 @@ html(lang='en', data-ng-app='anna-squares')
           .row
             .col-lg-12
               span.as-copyright © 2013 - 2014
-                a(ng-href="http://www.adamjcook.io")  Adam Joseph Cook
+                a(ng-href="http://www.adamjcook.io") &nbsp;Adam Joseph Cook
               br
-              span.as-license Code for the application is completely open-source and is licensed under the
-                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank")  The MIT License.
+              span.as-license Code for the application is completely open-source and is licensed under
+                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/LICENSE", target="_blank") &nbsp;The MIT License.
               br
               span.as-license Some of the icons used are generously provided by
-                a(ng-href="http://glyphicons.com/")  Glyphicons.
+                a(ng-href="http://glyphicons.com/") &nbsp;Glyphicons.
               br
               span.as-license Many thanks to all the
-                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/CONTRIBUTORS.md", target="_blank")  project contributors.
+                a(ng-href="https://github.com/adamjcook/anna-squares/blob/master/CONTRIBUTORS.md", target="_blank") &nbsp;project contributors.
           .row
             .col-lg-12
               ul.list-inline

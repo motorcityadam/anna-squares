@@ -87,9 +87,16 @@ body
     border-top: 1px solid #ccc;
     width: 100%;
 
-  .navbar-inverse .navbar-nav > li > a:hover,
-  .navbar-inverse .navbar-nav > li > a:focus
-    background-color: #080808;
+  .navbar-inverse .navbar-nav.as-side-nav > li > a
+    color: #333;
+
+  .navbar-inverse .navbar-nav.as-side-nav > li > a:hover,
+  .navbar-inverse .navbar-nav.as-side-nav > li > a:focus
+    background-color: #d6d6d6;
+
+  .navbar-inverse .navbar-nav.as-side-nav > .open > a
+    background-color: #d6d6d6;
+    color: #333;
 
   .notifications-dropdown .dropdown-menu,
   .alerts-dropdown .dropdown-menu
