@@ -12,6 +12,7 @@
     "angular-route": "latest",
     "angular-cookies": "latest",
     "angular-ui-utils": "latest",
+    "angular-ui-router": "latest",
     "font-awesome": "latest",
     "angular-placeholders": "latest",
     "momentjs": "2.5.0",
