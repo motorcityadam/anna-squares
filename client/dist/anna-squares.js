@@ -35,10 +35,34 @@ angular.module('anna-squares',
       controller:     'RegisterCtrl',
       access:         access.anon
     });
+  $routeProvider.when('/:username',
+    {
+      templateUrl:    'dashboard',
+      controller:     'DashboardCtrl',
+      access:         access.user
+    });
   $routeProvider.when('/:username/schedules',
     {
-      templateUrl:    'schedules',
-      controller:     'SchedulesCtrl',
+      templateUrl:    'schedules/list',
+      controller:     'SchedulesListCtrl',
+      access:         access.user
+    });
+  $routeProvider.when('/:username/schedules/new',
+    {
+      templateUrl:    'schedules/form',
+      controller:     'SchedulesNewCtrl',
+      access:         access.user
+    });
+  $routeProvider.when('/:username/schedules/:scheduleid',
+    {
+      templateUrl:    'schedules/detail',
+      controller:     'SchedulesDetailCtrl',
+      access:         access.user
+    });
+  $routeProvider.when('/:username/schedules/:scheduleid/edit',
+    {
+      templateUrl:    'schedules/form',
+      controller:     'SchedulesEditCtrl',
       access:         access.user
     });
   $routeProvider.when('/:username/feedback',
@@ -57,13 +81,7 @@ angular.module('anna-squares',
       templateUrl:    '500',
       access:         access.public
     });
-  $routeProvider.when('/:username',
-    {
-      templateUrl:    'dashboard',
-      controller:     'DashboardCtrl',
-      access:         access.user
-    });
-  $routeProvider.otherwise({redirectTo:'/404'});
+  $routeProvider.otherwise({redirectTo: '/404'});
 
   $locationProvider.html5Mode(true);
 
@@ -91,6 +109,9 @@ angular.module('anna-squares',
     $rootScope.info = null;
     $rootScope.warning = null;
     $rootScope.danger = null;
+
+    console.log(current);
+    console.log(next);
 
     if (!Auth.authorize(next.access)) {
       if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
@@ -180,6 +201,34 @@ angular.module('anna-squares')
       }]);
 
 angular.module('anna-squares')
+  .controller('SchedulesListCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesNewCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesDetailCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesEditCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+/*angular.module('anna-squares')
   .controller('SchedulesCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
@@ -445,7 +494,7 @@ angular.module('anna-squares')
         computeTimes();
 
 
-      }]);
+      }]);*/
 
 angular.module('anna-squares')
   .controller('FeedbackCtrl',
@@ -612,6 +661,14 @@ angular.module('anna-squares')
     return {
       getAll: function(success, error) {
         $http.get('/schedules').success(success).error(error);
+      },
+      postNew: function(schedule, success, error) {
+        $http
+          .post('/schedule/new', schedule)
+          .success(function(schedule){
+            success(schedule);
+          })
+          .error(error);
       }
     };
   });

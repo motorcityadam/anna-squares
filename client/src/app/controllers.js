@@ -78,6 +78,34 @@ angular.module('anna-squares')
       }]);
 
 angular.module('anna-squares')
+  .controller('SchedulesListCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesNewCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesDetailCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('SchedulesEditCtrl',
+    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
+      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+      }]);
+
+/*angular.module('anna-squares')
   .controller('SchedulesCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
@@ -343,7 +371,7 @@ angular.module('anna-squares')
         computeTimes();
 
 
-      }]);
+      }]);*/
 
 angular.module('anna-squares')
   .controller('FeedbackCtrl',
