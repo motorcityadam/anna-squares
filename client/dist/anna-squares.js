@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-03
+/*! anna-squares - v0.1.7 - 2014-02-04
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -21,6 +21,16 @@ angular.module('anna-squares',
     {
       templateUrl:    'home',
       controller:     'HomeCtrl',
+      access:         access.public
+    });
+  $routeProvider.when('/404',
+    {
+      templateUrl:    '404',
+      access:         access.public
+    });
+  $routeProvider.when('/500',
+    {
+      templateUrl:    '500',
       access:         access.public
     });
   $routeProvider.when('/signin',
@@ -71,16 +81,6 @@ angular.module('anna-squares',
       controller:     'FeedbackCtrl',
       access:         access.user
     });
-  $routeProvider.when('/404',
-    {
-      templateUrl:    '404',
-      access:         access.public
-    });
-  $routeProvider.when('/500',
-    {
-      templateUrl:    '500',
-      access:         access.public
-    });
   $routeProvider.otherwise({redirectTo: '/404'});
 
   $locationProvider.html5Mode(true);
@@ -101,7 +101,8 @@ angular.module('anna-squares',
 
 }])
 
-.run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
+.run(['$rootScope', '$routeParams', '$location', '$http', 'Auth',
+      function ($rootScope, $routeParams, $location, $http, Auth) {
 
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
@@ -109,9 +110,6 @@ angular.module('anna-squares',
     $rootScope.info = null;
     $rootScope.warning = null;
     $rootScope.danger = null;
-
-    console.log(current);
-    console.log(next);
 
     if (!Auth.authorize(next.access)) {
       if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
@@ -198,12 +196,16 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
 
+        console.log('Dashboard');
+
       }]);
 
 angular.module('anna-squares')
   .controller('SchedulesListCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+        console.log('SchedulesList');
 
       }]);
 

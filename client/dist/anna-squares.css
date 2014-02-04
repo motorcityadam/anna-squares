@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-03
+/*! anna-squares - v0.1.7 - 2014-02-04
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -11,7 +11,7 @@ a,a:hover,a:active,a:focus,.btn:hover,.btn:active,.btn:focus{outline:0;outline:n
 .jumbotron{font-weight:normal}
 .jumbotron > h3{margin-bottom:21px}
 .navbar{font-weight:normal}
-.navbar-inverse{border-color:#222}
+.navbar-inverse{background:#343131;border:none}
 .navbar .dropdown-menu > li > a,.navbar .dropdown-menu > li > a:focus{font-weight:normal}
 .dropdown-menu{border-radius:0;border:1px solid #9a9a9a;-moz-box-shadow:3px 3px 3px rgba(0,0,0,0.22);-webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.22);box-shadow:3px 3px 3px rgba(0,0,0,0.22)}
 .dropdown-menu > li > a:hover,.dropdown-menu > li > a:focus{color:#333;background-color:#f2f2f2;cursor:pointer}
@@ -104,7 +104,7 @@ body{margin-top:50px}
 .notifications-dropdown .dropdown-menu .notification-preview .time,.alerts-dropdown .dropdown-menu .alert-preview .time{font-size:12px}
 @media (min-width:768px){#as-wrapper{padding-left:225px}
 #as-page-wrapper{padding:15px 25px}
-.as-side-nav{margin-left:-225px;left:225px;width:225px;position:fixed;top:50px;height:100%;border-radius:0;border:none;background-color:#444;border-top:1px solid #101010;overflow-y:auto}
+.as-side-nav{margin-left:-225px;left:225px;width:225px;position:fixed;top:50px;height:100%;border-radius:0;border:none;background-color:#e3e3e3;overflow-y:auto}
 .as-side-nav > li.dropdown > ul.dropdown-menu{position:relative;min-width:225px;margin:0;padding:0;border:none;border-radius:0;background-color:transparent;box-shadow:none;-webkit-box-shadow:none}
 .as-side-nav > li.dropdown > ul.dropdown-menu > li{color:#fff;padding:15px}
 .as-side-nav > li.dropdown > ul.dropdown-menu > li > a{color:#999;padding:15px 15px 15px 25px}

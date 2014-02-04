@@ -75,12 +75,16 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
       function($rootScope, $scope, $routeParams, $location, Auth) {
 
+        console.log('Dashboard');
+
       }]);
 
 angular.module('anna-squares')
   .controller('SchedulesListCtrl',
     ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
       function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+
+        console.log('SchedulesList');
 
       }]);
 

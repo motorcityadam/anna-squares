@@ -28,6 +28,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     distdir:  './client/dist',
     viewsdir: './client/views',
+    stylesheetsdir: './client/stylesheets',
     pkg: grunt.file.readJSON('package.json'),
     banner:
         '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -80,11 +81,23 @@ module.exports = function(grunt) {
     },
     watch: {
       all: {
-        files:['<%= src.app %>', '<%= src.common %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
+        files:[
+          '<%= src.app %>',
+          '<%= src.common %>',
+          '<%= viewsdir %>/**/*.jade',
+          '<%= stylesheetsdir %>/**/*.styl',
+          '<%= src.specs %>'
+        ],
         tasks:['default', 'timestamp']
       },
       build: {
-        files:['<%= src.app %>', '<%= src.common %>', '<%= viewsdir %>/**/*.jade', '<%= src.specs %>'],
+        files:[
+          '<%= src.app %>',
+          '<%= src.common %>',
+          '<%= viewsdir %>/**/*.jade',
+          '<%= stylesheetsdir %>/**/*.styl',
+          '<%= src.specs %>'
+        ],
         tasks:['build', 'timestamp'],
         options: {
           livereload: true
