@@ -92,15 +92,15 @@ html(lang='en', data-ng-app='anna-squares')
                 i.fa.fa-magic
                 | &nbsp;Register
             li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href='/{{ username }}')
+              a(ng-href='/{{ user.username }}')
                 i.fa.fa-dashboard
                 | &nbsp;Dashboard
             li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href='/{{ username }}/schedules')
+              a(ng-href='/{{ user.username }}/schedules')
                 i.fa.fa-tasks
                 | &nbsp;Schedules
             li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href="/{{ username }}/feedback")
+              a(ng-href="/{{ user.username }}/feedback")
                 i.fa.fa-comment
                 | &nbsp;Send Feedback
             li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')

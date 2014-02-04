@@ -17,7 +17,7 @@ a,a:hover,a:active,a:focus,.btn:hover,.btn:active,.btn:focus{outline:0;outline:n
 .dropdown-menu > li > a:hover,.dropdown-menu > li > a:focus{color:#333;background-color:#f2f2f2;cursor:pointer}
 .navbar-inverse .navbar-brand{color:#fff}
 .navbar-inverse .navbar-nav > li > a{color:#ccc}
-.navbar-inverse .navbar-nav > li > a:hover,.navbar-inverse .navbar-nav > li > a:focus{color:#fff;background-color:#333}
+.navbar-inverse .navbar-nav > li > a:hover,.navbar-inverse .navbar-nav > li > a:focus{color:#fff;background-color:#4e4a4a}
 .navbar-inverse .navbar-nav > li > a:active{color:#fff;background-color:#333}
 @media (min-width: 768px){.navbar-fixed-top .navbar-collapse{padding-right:15px;padding-left:15px}
 }label,.control-label,.help-block,.checkbox,.radio{font-size:13px;font-weight:bold}
@@ -30,6 +30,8 @@ pre{border-radius:0}
 .as-btn-hollow{background:none;color:#fff}
 .btn-md.as-btn-hollow{padding:10px 28px}
 .btn{outline:0;border-radius:0}
+.btn-primary,.btn-danger{border-bottom:3px solid rgba(0,0,0,0.5)}
+.btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active{border-bottom:3px solid rgba(0,0,0,0.5)}
 .navbar-nav>li.as-accent{background:#484848}
 .form-control{border-radius:0;outline:none;border:1px inset #ccc;-webkit-box-shadow:none;box-shadow:none;-webkit-transition:none;transition:none}
 .date-control{padding:6px 12px;vertical-align:middle;text-align:center;width:250px;height:34px;margin-left:10px;border-radius:0;outline:none;border:1px inset #ccc;-webkit-box-shadow:none;box-shadow:none;-webkit-transition:none;transition:none}

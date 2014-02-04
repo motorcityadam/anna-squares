@@ -128,7 +128,6 @@ angular.module('anna-squares')
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
-    $scope.username = $scope.user.username;
 
     $scope.signout = function() {
       Auth.signout(function() {
