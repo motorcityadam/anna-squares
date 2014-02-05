@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-04
+/*! anna-squares - v0.1.7 - 2014-02-05
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -8,13 +8,7 @@
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares',
-        ['ui.router', 'ngCookies', 'asc.ui', 'placeholders.img', 'ui.sortable'])
-  .run(['$rootScope', '$state', '$stateParams',
-    function ($rootScope,  $state,  $stateParams) {
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-      }]);
+angular.module('anna-squares', ['ngCookies', 'ui.router', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
 angular.module('anna-squares')
   .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -43,10 +37,50 @@ angular.module('anna-squares')
       .state('404', {
         url: '/404',
         templateUrl: '404'
+      })
+
+      .state('dashboard', {
+        url: '/:username',
+        templateUrl: 'dashboard',
+        controller: 'DashboardCtrl'
+      })
+
+      .state('schedules', {
+        abstract: true,
+        url: '/:username/schedules',
+        templateUrl: 'schedules',
+        controller: 'ScheduleListCtrl'
+      })
+
+      .state('schedules.list', {
+        url: '',
+        templateUrl: 'schedules/list'
+      })
+
+      .state('schedules.detail', {
+        url: '/{scheduleid:[0-9]{1,8}}',
+        views: {
+          '': {
+            templateUrl: 'schedules/detail',
+            controller: 'ScheduleDetailCtrl'
+          }
+        }
+      })
+
+      .state('feedback', {
+        url: '/:username/feedback',
+        templateUrl: 'feedback',
+        controller: 'FeedbackCtrl'
       });
 
   }]);
 
+angular.module('anna-squares')
+  .run(['$rootScope', '$state', '$stateParams',
+    function ($rootScope,  $state,  $stateParams) {
+      $rootScope.$state = $state;
+      $rootScope.$stateParams = $stateParams;
+    }]);
 /*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
@@ -233,40 +267,28 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('DashboardCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
-      function($rootScope, $scope, $routeParams, $location, Auth) {
+    ['$rootScope', '$scope', '$location', 'Auth',
+      function($rootScope, $scope, $location, Auth) {
 
         console.log('Dashboard');
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesListCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleListCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
 
         console.log('SchedulesList');
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesNewCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleDetailCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
 
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesDetailCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
-
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesEditCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+        console.log('SchedulesDetail');
 
       }]);
 
@@ -581,27 +603,6 @@ angular.module('anna-squares')
     };
   }]);
 
-/*angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      $timeout(function() {
-        var nestedA = element.find('a')[0];
-        var path = nestedA.href;
-
-        scope.location = $location;
-        scope.$watch('location.absUrl()', function(newPath) {
-          if (path === newPath) {
-            element.addClass('active');
-          } else {
-            element.removeClass('active');
-          }
-        });
-      });
-    }
-  };
-}]);*/
-
 // TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', function() {
   return {
@@ -697,7 +698,7 @@ angular.module('anna-squares')
     };
   });
 
-angular.module('anna-squares')
+/*angular.module('anna-squares')
   .factory('Schedule', function($http){
 
     return {
@@ -713,4 +714,4 @@ angular.module('anna-squares')
           .error(error);
       }
     };
-  });
+  });*/

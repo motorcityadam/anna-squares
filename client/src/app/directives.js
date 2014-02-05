@@ -35,27 +35,6 @@ angular.module('anna-squares')
     };
   }]);
 
-/*angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      $timeout(function() {
-        var nestedA = element.find('a')[0];
-        var path = nestedA.href;
-
-        scope.location = $location;
-        scope.$watch('location.absUrl()', function(newPath) {
-          if (path === newPath) {
-            element.addClass('active');
-          } else {
-            element.removeClass('active');
-          }
-        });
-      });
-    }
-  };
-}]);*/
-
 // TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', function() {
   return {

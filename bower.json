@@ -9,7 +9,6 @@
     "modernizr": "latest",
     "underscore": "1.5.2",
     "angular": "latest",
-    "angular-route": "latest",
     "angular-cookies": "latest",
     "angular-ui-utils": "latest",
     "angular-ui-router": "0.2.8-bowratic-tedium",

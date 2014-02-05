@@ -75,40 +75,28 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('DashboardCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
-      function($rootScope, $scope, $routeParams, $location, Auth) {
+    ['$rootScope', '$scope', '$location', 'Auth',
+      function($rootScope, $scope, $location, Auth) {
 
         console.log('Dashboard');
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesListCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleListCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
 
         console.log('SchedulesList');
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesNewCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleDetailCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
 
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesDetailCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
-
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesEditCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+        console.log('SchedulesDetail');
 
       }]);
 

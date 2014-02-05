@@ -69,7 +69,7 @@ angular.module('anna-squares')
     };
   });
 
-angular.module('anna-squares')
+/*angular.module('anna-squares')
   .factory('Schedule', function($http){
 
     return {
@@ -85,4 +85,4 @@ angular.module('anna-squares')
           .error(error);
       }
     };
-  });
+  });*/

@@ -101,28 +101,28 @@ var routes = [
   // PUT    /schedules/:scheduleid       ->  update
   // DELETE /schedules/:scheduleid       ->  destroy
   {
-    path: '/schedules',
+    path: '/api/schedules',
     httpMethod: 'GET',
     middleware: [ScheduleCtrl.index],
     accessLevel: accessLevels.user
   },
   {
-    path: '/schedules',
+    path: '/api/schedules',
     httpMethod: 'POST',
     middleware: [ScheduleCtrl.create]
   },
   {
-    path: '/schedules/:scheduleid',
+    path: '/api/schedules/:scheduleid',
     httpMethod: 'GET',
     middleware: [ScheduleCtrl.show]
   },
   {
-    path: '/schedules/:scheduleid',
+    path: '/api/schedules/:scheduleid',
     httpMethod: 'PUT',
     middleware: [ScheduleCtrl.update]
   },
   {
-    path: '/schedules/:scheduleid',
+    path: '/api/schedules/:scheduleid',
     httpMethod: 'DELETE',
     middleware: [ScheduleCtrl.destroy]
   },
