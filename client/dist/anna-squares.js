@@ -3,15 +3,51 @@
  * Licensed under MIT
  */
 /*global
-  angular:false,
-  routingConfig:false
+  angular:false
 */
 /*jshint unused: vars */
 'use strict';
 
 angular.module('anna-squares',
-        ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+        ['ui.router', 'ngCookies', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+  .run(['$rootScope', '$state', '$stateParams',
+    function ($rootScope,  $state,  $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+      }]);
 
+angular.module('anna-squares')
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+
+      .state('home', {
+        url: '/',
+        templateUrl: 'home',
+        controller: 'HomeCtrl'
+      })
+
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'signin',
+        controller: 'SigninCtrl'
+      })
+
+      .state('register', {
+        url: '/register',
+        templateUrl: 'register',
+        controller: 'RegisterCtrl'
+      })
+
+      .state('404', {
+        url: '/404',
+        templateUrl: '404'
+      });
+
+  }]);
+
+/*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -118,7 +154,8 @@ angular.module('anna-squares',
 
   });
 
-}]);
+}]);*/
+
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
@@ -167,7 +204,11 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
     .controller('HomeCtrl',
-        ['$rootScope', function($rootScope) { }]);
+        ['$rootScope', function($rootScope) {
+
+          console.log('In Home Controller.');
+
+        }]);
 
 angular.module('anna-squares')
   .controller('RegisterCtrl',

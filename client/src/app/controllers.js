@@ -46,7 +46,11 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
     .controller('HomeCtrl',
-        ['$rootScope', function($rootScope) { }]);
+        ['$rootScope', function($rootScope) {
+
+          console.log('In Home Controller.');
+
+        }]);
 
 angular.module('anna-squares')
   .controller('RegisterCtrl',
