@@ -6,7 +6,9 @@ var express      = require('express')
     , mongoose   = require('mongoose')
     , mongoStore = require('connect-mongo')(express);
 
+// Require application models
 require('./models/User.js');
+require('./models/Schedule.js');
 
 var config           = require('./config/config')
     , configPassport = require('./config/passport');

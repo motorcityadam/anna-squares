@@ -9,23 +9,38 @@ var mongoose    = require('mongoose')
 var RowSchema = new Schema({
   rowNumber: {
     type: Number,
+    unique: true,
     required: true
   },
   isMust: Boolean,
   hasDocs: Boolean,
   patientName: String,
-  planMinutes: Number,
-  metMinutes: Number
+  planMinutes: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  metMinutes: {
+    type: Number,
+    required: true,
+    default: 0
+  }
 });
 
+// TODO: Set owner field to 'required: true'
 var ScheduleSchema = new Schema({
-  scheduleDate: Date,
-  startTime: Date,
+  scheduleDate: {
+    type: Date,
+    required: true
+  },
+  startTime: {
+    type: Date,
+    required: true
+  },
   notes: String,
   rows: [RowSchema],
   owner: {
-    type: ObjectId,
-    required: true
+    type: ObjectId
   },
   createdDate: {
     type: Date,
