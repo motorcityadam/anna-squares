@@ -1,6 +1,6 @@
 /*jshint unused: vars */
 
-var Schedule = require('../models/Schedule.js');
+// var Schedule = require('../models/Schedule.js');
 
 module.exports = {
 
