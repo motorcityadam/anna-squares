@@ -4,82 +4,16 @@
 var should     = require('should')
     , mongoose = require('mongoose');
 
-var Schedule = mongoose.model('Schedule');
-// var users = require('../../mocks/users');
-
-var schedule1 = {
-  scheduleDate : new Date(),
-  startTime    : new Date(),
-  notes        : '',
-  rows         : [{
-    rowNumber   : 1,
-    isMust      : true,
-    hasDocs     : true,
-    patientName : 'Adam J. Cook',
-    planMinutes : 0,
-    metMinutes  : 0
-  },{
-    rowNumber   : 2,
-    isMust      : true,
-    hasDocs     : false,
-    patientName : 'Anna Acosta',
-    planMinutes : 60,
-    metMinutes  : 10
-  }]
-
-};
-
-/*var RowSchema = new Schema({
-  rowNumber: {
-    type: Number,
-    unique: true,
-    required: true
-  },
-  isMust: Boolean,
-  hasDocs: Boolean,
-  patientName: String,
-  planMinutes: {
-    type: Number,
-    required: true,
-    default: 0
-  },
-  metMinutes: {
-    type: Number,
-    required: true,
-    default: 0
-  }
-});
-
-var ScheduleSchema = new Schema({
-  scheduleDate: {
-    type: Date,
-    required: true
-  },
-  startTime: {
-    type: Date,
-    required: true
-  },
-  notes: String,
-  rows: [RowSchema],
-  owner: {
-    type: ObjectId
-  },
-  createdDate: {
-    type: Date,
-    required: true,
-    default: new Date()
-  },
-  updatedDate: {
-    type: Date,
-    required: true,
-    default: new Date()
-  }
-});*/
+var Schedule  = mongoose.model('Schedule');
+var User      = mongoose.model('User');
+var users     = require('../../mocks/users');
+var schedules = require('../../mocks/schedules');
 
 describe('Schedule Model Unit Tests - ', function() {
   describe('Model Schedule - ', function() {
     describe('#save() - ', function() {
       afterEach(function(done) {
+        User.remove().exec();
         Schedule.remove().exec();
         done();
       });
@@ -91,8 +25,52 @@ describe('Schedule Model Unit Tests - ', function() {
         });
       });
 
-      it('should be able to save a user without issue', function(done) {
-        new Schedule(schedule1).save(done);
+      it('should be able to save a schedule without issue', function(done) {
+        var user = new User(users.user1);
+        var schedule = new Schedule(schedules.schedule1);
+        schedule.owner = user;
+        schedule.save(done);
+      });
+
+      /** Basic schema constraint tests */
+      it('should fail to save a schedule with a patient name longer than 100 characters', function(done) {
+        var user = new User(users.user1);
+        var schedule = new Schedule(schedules.schedule2);
+        schedule.owner = user;
+        return schedule.save(function(err) {
+          should.exist(err);
+          done();
+        });
+      });
+
+      it('should fail to save a schedule with a row with plan minutes set to a negative value', function(done) {
+        var user = new User(users.user1);
+        var schedule = new Schedule(schedules.schedule3);
+        schedule.owner = user;
+        return schedule.save(function(err) {
+          should.exist(err);
+          done();
+        });
+      });
+
+      it('should fail to save a schedule with a row with met minutes set to a negative value', function(done) {
+        var user = new User(users.user1);
+        var schedule = new Schedule(schedules.schedule4);
+        schedule.owner = user;
+        return schedule.save(function(err) {
+          should.exist(err);
+          done();
+        });
+      });
+
+      it('should fail to save a schedule with a notes field longer than 63,206 characters', function(done) {
+        var user = new User(users.user1);
+        var schedule = new Schedule(schedules.schedule5);
+        schedule.owner = user;
+        return schedule.save(function(err) {
+          should.exist(err);
+          done();
+        });
       });
 
     });
