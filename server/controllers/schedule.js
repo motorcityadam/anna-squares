@@ -1,12 +1,21 @@
 /*jshint unused: vars */
 
-// var Schedule = require('../models/Schedule.js');
+var Schedule = require('../models/Schedule.js');
 
 module.exports = {
 
   index: function(req, res, next) {
 
-    res.send('Index');
+    Schedule.find({}, function (err, schedules) {
+      if (err) {
+        return res.send(400, err);
+      }
+      var scheduleMap = {};
+      schedules.forEach(function(schedule) {
+        scheduleMap[schedule._id] = schedule;
+      });
+      res.send(200, scheduleMap);
+    });
 
   },
 

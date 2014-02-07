@@ -69,12 +69,15 @@ angular.module('anna-squares')
     };
   });
 
-/*angular.module('anna-squares')
+angular.module('anna-squares')
   .factory('Schedule', function($http){
 
     return {
       getAll: function(success, error) {
-        $http.get('/schedules').success(success).error(error);
+        $http
+          .get('/schedules')
+          .success(success)
+          .error(error);
       },
       postNew: function(schedule, success, error) {
         $http
@@ -85,4 +88,4 @@ angular.module('anna-squares')
           .error(error);
       }
     };
-  });*/
+  });

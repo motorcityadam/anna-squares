@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-05
+/*! anna-squares - v0.1.7 - 2014-02-06
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -276,10 +276,16 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('ScheduleListCtrl',
-    ['$rootScope', '$scope', 'Auth',
-      function($rootScope, $scope, Auth) {
+    ['$rootScope', '$scope', 'Auth', 'Schedule',
+      function($rootScope, $scope, Auth, Schedule) {
 
-        console.log('SchedulesList');
+        Schedule.getAll(
+          function(scheduleMap) {
+            $scope.scheduleMap = scheduleMap;
+          },
+          function(err) {
+            $rootScope.danger = err;
+          });
 
       }]);
 
@@ -698,12 +704,15 @@ angular.module('anna-squares')
     };
   });
 
-/*angular.module('anna-squares')
+angular.module('anna-squares')
   .factory('Schedule', function($http){
 
     return {
       getAll: function(success, error) {
-        $http.get('/schedules').success(success).error(error);
+        $http
+          .get('/schedules')
+          .success(success)
+          .error(error);
       },
       postNew: function(schedule, success, error) {
         $http
@@ -714,4 +723,4 @@ angular.module('anna-squares')
           .error(error);
       }
     };
-  });*/
+  });

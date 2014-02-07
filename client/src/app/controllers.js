@@ -84,10 +84,16 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('ScheduleListCtrl',
-    ['$rootScope', '$scope', 'Auth',
-      function($rootScope, $scope, Auth) {
+    ['$rootScope', '$scope', 'Auth', 'Schedule',
+      function($rootScope, $scope, Auth, Schedule) {
 
-        console.log('SchedulesList');
+        Schedule.getAll(
+          function(scheduleMap) {
+            $scope.scheduleMap = scheduleMap;
+          },
+          function(err) {
+            $rootScope.danger = err;
+          });
 
       }]);
 

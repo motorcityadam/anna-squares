@@ -2,17 +2,15 @@
   .col-lg-12
     h3
       i.fa.fa-tasks.fa-1x
-      |  Schedules
+      | &nbsp;Schedules
 .row
   .col-lg-3
-    ul
-      li Schedule 1
-      li Schedule 2
-      li Schedule 3
-      li Schedule 4
-      li Schedule 5
-      li Schedule 6
-      li Schedule 7
-      li Schedule 8
+    ul(ng-show='{ scheduleMap === {} }')
+      li You do not have any saved schedules.
+    ul(ng-repeat='scheduleItem in scheduleMap')
+      li {{ scheduleItem }}
   .col-lg-9
     div(ui-view)
+.row
+  .col-lg-12
+    pre {{ scheduleMap }}
