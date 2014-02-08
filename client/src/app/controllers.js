@@ -18,8 +18,12 @@ angular.module('anna-squares')
   }]);
 
 angular.module('anna-squares')
-  .controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
-    function($rootScope, $scope, $location, Auth) { }]);
+  .controller('MainToolbarCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'toolbarService', 'requestCommunicationChannel',
+    function($rootScope, $scope, $location, Auth, toolbarService, requestCommunicationChannel) {
+
+
+
+    }]);
 
 angular.module('anna-squares')
   .controller('SigninCtrl',
@@ -47,8 +51,6 @@ angular.module('anna-squares')
 angular.module('anna-squares')
     .controller('HomeCtrl',
         ['$rootScope', function($rootScope) {
-
-          console.log('In Home Controller.');
 
         }]);
 
@@ -78,14 +80,12 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', '$location', 'Auth',
       function($rootScope, $scope, $location, Auth) {
 
-        console.log('Dashboard');
-
       }]);
 
 angular.module('anna-squares')
   .controller('ScheduleListCtrl',
-    ['$rootScope', '$scope', 'Auth', 'Schedule',
-      function($rootScope, $scope, Auth, Schedule) {
+    ['$rootScope', '$scope', 'Auth', 'Schedule', 'toolbarService', 'requestCommunicationChannel',
+      function($rootScope, $scope, Auth, Schedule, toolbarService, requestCommunicationChannel) {
 
         Schedule.getAll(
           function(scheduleMap) {

@@ -41,48 +41,7 @@ html(lang='en', data-ng-app='anna-squares')
             | AnnaSquares
             sub  beta
         .collapse.navbar-collapse.navbar-ex1-collapse
-          ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
-            li
-              a(href="#!/schedules")
-                i.fa.fa-plus
-                | &nbsp;Start New Schedule...
-            li
-              a(href="#")
-                i.fa.fa-edit
-                | &nbsp;Edit Schedule
-            li
-              a(href="#")
-                i.fa.fa-copy
-                | &nbsp;Copy Previous Schedule
-            li
-              a(href="#")
-                i.fa.fa-print
-                | &nbsp;Print Schedule...
-            li
-              a(href="#")
-                i.fa.fa-envelope
-                | &nbsp;Email Schedule...
-            li
-              a(href="#")
-                i.fa.fa-share
-                | &nbsp;Share Schedule With...
-            li
-              a(href="#")
-                i.fa.fa-book
-                | &nbsp;Help and Documentation
-            li.divider
-            li.dropdown
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
-                i.fa.fa-trash-o
-                | &nbsp;Delete Schedule
-                | <b class="caret"></b>
-              ul.dropdown-menu
-                li
-                  .panel.panel-danger
-                    .panel-heading
-                      p Are you sure? This cannot be undone.
-                      .btn-group
-                        button.btn.btn-danger(type="button") Yes
+          include _maintoolbar
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
             li(ng-class="{ active: $state.includes('signin') }", data-access-level='accessLevels.anon')
               a(ui-sref='signin')

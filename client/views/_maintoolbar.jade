@@ -1,0 +1,5 @@
+ul.nav.navbar-nav.as-side-nav(ngrepeat="item in itemMap", data-ng-controller="MainToolbarCtrl")
+  li
+    a(ng-href="{{ item.action }}")
+      i(ng-class="{{ item.icon }}")
+      | &nbsp;{{ item.name }}

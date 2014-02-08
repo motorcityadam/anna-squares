@@ -89,3 +89,111 @@ angular.module('anna-squares')
       }
     };
   });
+
+
+angular.module('anna-squares')
+  .factory('requestCommunicationChannel', ['$rootScope', function ($rootScope) {
+
+    var _EDIT_DATA_ = '_EDIT_DATA_';
+    var _DATA_UPDATED_ = '_DATA_UPDATED_';
+
+    // Publish edit data notification
+    var editData = function (item) {
+      $rootScope.$broadcast(_EDIT_DATA_, {item: item});
+    };
+
+    // Subscribe to edit data notification
+    var onEditData = function($scope, handler) {
+      $scope.$on(_EDIT_DATA_, function(event, args) {
+        handler(args.item);
+      });
+    };
+
+    // Publish data changed notification
+    var dataUpdated = function () {
+      $rootScope.$broadcast(_DATA_UPDATED_);
+    };
+
+    // Subscribe to data changed notification
+    var onDataUpdated = function ($scope, handler) {
+      $scope.$on(_DATA_UPDATED_, function (event) {
+        handler();
+      });
+    };
+
+    return {
+      editData      : editData,
+      onEditData    : onEditData,
+      dataUpdated   : dataUpdated,
+      onDataUpdated : onDataUpdated
+    };
+  }]);
+
+// Define the data service for application toolbars
+angular.module('anna-squares')
+  .factory('toolbarService', ['requestCommunicationChannel', function (requestCommunicationChannel) {
+    var items = [];
+
+    // Sends notification that data has been updated
+    var saveItem = function(item) {
+      requestCommunicationChannel.dataUpdated();
+    };
+
+    // Removes the item from the array and sends a notification that data has been updated
+    var deleteItem = function(item) {
+      for(var i = 0; i < items.length; i++) {
+        if(items[i]._id.$oid === item._id.$oid) {
+          items.splice(i, 1);
+          requestCommunicationChannel.dataUpdated();
+          return;
+        }
+      }
+    };
+
+    // Removes the all items from the array and sends a notification that data has been updated
+    var deleteItems = function() {
+      items.length = 0;
+      requestCommunicationChannel.dataUpdated();
+      return;
+    };
+
+    // Internal function to generate a random number GUID generation
+    var S4 = function() {
+      return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+
+    // Generates a GUID for adding items to array
+    var guid = function () {
+      return (S4() + S4() + '-' + S4() + '-4' + S4().substr(0,3) + '-' + S4() + '-' + S4() + S4() + S4()).toLowerCase();
+    };
+
+    // Function to add a item to the array and sends a notification that data has been updated
+    var addItem = function(item) {
+      items.id.$oid = guid();
+      items.push(item);
+      requestCommunicationChannel.dataUpdated();
+    };
+
+    // Returns the array of items
+    var getItems = function() {
+      return items;
+    };
+
+    // Returns a specific item with the given ID
+    var getItem = function(id) {
+      for(var i = 0; i < items.length; i++) {
+        if(items[i]._id.$oid === id) {
+          return items[i];
+        }
+      }
+    };
+
+    return {
+      getItems    : getItems,
+      getItem     : getItem,
+      saveItem    : saveItem,
+      deleteItems : deleteItems,
+      deleteItem  : deleteItem,
+      addItem     : addItem
+    };
+  }]);
