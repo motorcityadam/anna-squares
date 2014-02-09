@@ -48,7 +48,7 @@ angular.module('anna-squares')
       .state('schedules', {
         abstract: true,
         url: '/:username/schedules',
-        templateUrl: 'schedules',
+        templateUrl: 'schedules/index',
         controller: 'ScheduleListCtrl'
       })
 
