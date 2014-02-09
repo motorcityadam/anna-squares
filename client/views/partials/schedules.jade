@@ -5,8 +5,6 @@
       | &nbsp;Schedules
 .row
   .col-lg-3
-    ul(ng-show='{ scheduleMap === {} }')
-      li You do not have any saved schedules.
     ul(ng-repeat='scheduleItem in scheduleMap')
       li {{ scheduleItem }}
   .col-lg-9

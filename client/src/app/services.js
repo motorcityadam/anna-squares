@@ -132,7 +132,20 @@ angular.module('anna-squares')
 // Define the data service for application toolbars
 angular.module('anna-squares')
   .factory('toolbarService', ['requestCommunicationChannel', function (requestCommunicationChannel) {
-    var items = [];
+    var items = [
+      {'_id': { '$oid': '50ae677361d118e3646d7d6c'},
+        'name': 'New Schedule...',
+        'icon': 'fa fa-plus',
+        'action': '#',
+        'show': true
+      },
+      {'_id': { '$oid': '50ae677361d118e3646d7d6d'},
+        'name': 'Edit Schedule',
+        'icon': 'fa fa-edit',
+        'action': '#',
+        'show': true
+      }
+    ];
 
     // Sends notification that data has been updated
     var saveItem = function(item) {

@@ -21,8 +21,6 @@ angular.module('anna-squares')
   .controller('MainToolbarCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'toolbarService', 'requestCommunicationChannel',
     function($rootScope, $scope, $location, Auth, toolbarService, requestCommunicationChannel) {
 
-
-
     }]);
 
 angular.module('anna-squares')
@@ -86,6 +84,8 @@ angular.module('anna-squares')
   .controller('ScheduleListCtrl',
     ['$rootScope', '$scope', 'Auth', 'Schedule', 'toolbarService', 'requestCommunicationChannel',
       function($rootScope, $scope, Auth, Schedule, toolbarService, requestCommunicationChannel) {
+
+        // Add publish
 
         Schedule.getAll(
           function(scheduleMap) {
