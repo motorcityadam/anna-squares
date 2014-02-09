@@ -41,7 +41,6 @@ html(lang='en', data-ng-app='anna-squares')
             | AnnaSquares
             sub  beta
         .collapse.navbar-collapse.navbar-ex1-collapse
-          include _maintoolbar
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
             li(ng-class="{ active: $state.includes('signin') }", data-access-level='accessLevels.anon')
               a(ui-sref='signin')
