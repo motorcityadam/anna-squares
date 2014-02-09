@@ -27,6 +27,7 @@ html(lang='en', data-ng-app='anna-squares')
       if (window.location.href.indexOf('#_=_') > 0) {
         window.location = window.location.href.replace(/#.*/, '');
       }
+
   body(data-ng-cloak)
     #as-wrapper
       nav.navbar.navbar-inverse.navbar-fixed-top(data-role="navigation")
@@ -36,71 +37,30 @@ html(lang='en', data-ng-app='anna-squares')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(ng-href="/")
+          a.navbar-brand(ui-sref='home')
             | AnnaSquares
             sub  beta
         .collapse.navbar-collapse.navbar-ex1-collapse
-          ul.nav.navbar-nav.as-side-nav(data-ng-controller="SidebarCtrl")
-            li
-              a(href="#!/schedules")
-                i.fa.fa-plus
-                | &nbsp;Start New Schedule...
-            li
-              a(href="#")
-                i.fa.fa-edit
-                | &nbsp;Edit Schedule
-            li
-              a(href="#")
-                i.fa.fa-copy
-                | &nbsp;Copy Previous Schedule
-            li
-              a(href="#")
-                i.fa.fa-print
-                | &nbsp;Print Schedule...
-            li
-              a(href="#")
-                i.fa.fa-envelope
-                | &nbsp;Email Schedule...
-            li
-              a(href="#")
-                i.fa.fa-share
-                | &nbsp;Share Schedule With...
-            li
-              a(href="#")
-                i.fa.fa-book
-                | &nbsp;Help and Documentation
-            li.divider
-            li.dropdown
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
-                i.fa.fa-trash-o
-                | &nbsp;Delete Schedule
-                | <b class="caret"></b>
-              ul.dropdown-menu
-                li
-                  .panel.panel-danger
-                    .panel-heading
-                      p Are you sure? This cannot be undone.
-                      .btn-group
-                        button.btn.btn-danger(type="button") Yes
+          include _maintoolbar
           ul.nav.navbar-nav.navbar-right.as-user-nav(data-ng-controller="NavCtrl")
-            li(data-access-level='accessLevels.anon', active-nav)
-              a(ng-href='/signin')
+            li(ng-class="{ active: $state.includes('signin') }", data-access-level='accessLevels.anon')
+              a(ui-sref='signin')
                 i.fa.fa-sign-in
                 | &nbsp;Sign In
-            li(data-access-level='accessLevels.anon', active-nav)
-              a(ng-href='/register')
+            li(ng-class="{ active: $state.includes('register') }", data-access-level='accessLevels.anon')
+              a(ui-sref='register')
                 i.fa.fa-magic
                 | &nbsp;Register
-            li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href='/{{ user.username }}')
+            li(ng-class="{ active: $state.includes('dashboard') }", data-access-level='accessLevels.user')
+              a(ng-href='/#/{{ user.username }}')
                 i.fa.fa-dashboard
                 | &nbsp;Dashboard
-            li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href='/{{ user.username }}/schedules')
+            li(ng-class="{ active: $state.includes('schedules') }", data-access-level='accessLevels.user')
+              a(ng-href='/#/{{ user.username }}/schedules')
                 i.fa.fa-tasks
                 | &nbsp;Schedules
-            li(data-access-level='accessLevels.user', active-nav)
-              a(ng-href="/{{ user.username }}/feedback")
+            li(ng-class="{ active: $state.includes('feedback') }", data-access-level='accessLevels.user')
+              a(ng-href='/#/{{ user.username }}/feedback')
                 i.fa.fa-comment
                 | &nbsp;Send Feedback
             li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
@@ -203,7 +163,7 @@ html(lang='en', data-ng-app='anna-squares')
         .alert.alert-info(data-ng-bind="info", data-ng-show="info")
         .alert.alert-warning(data-ng-bind="warning", data-ng-show="warning")
         .alert.alert-danger(data-ng-bind="danger", data-ng-show="danger")
-        div(data-ng-view='ng-view')
+        div(ui-view)
         .as-footer
           .row
             .col-lg-12
@@ -250,7 +210,7 @@ html(lang='en', data-ng-app='anna-squares')
       script(src='/lib/underscore/underscore-min.js')
       script(src='/lib/angular/angular.min.js')
       script(src='/lib/angular-cookies/angular-cookies.min.js')
-      script(src='/lib/angular-route/angular-route.min.js')
+      script(src='/lib/angular-ui-router/release/angular-ui-router.min.js')
       script(src='/lib/angular-placeholders/src/img/img.js')
       script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
       script(src='/lib/angular-ui-sortable/src/sortable.js')
@@ -263,7 +223,7 @@ html(lang='en', data-ng-app='anna-squares')
       script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
       script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js')
       script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-cookies.min.js')
-      script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js')
+      script(src='/lib/angular-ui-router/release/angular-ui-router.min.js')
       script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
       script(src='/lib/angular-ui-sortable/src/sortable.js')
       script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js')
@@ -282,6 +242,8 @@ html(lang='en', data-ng-app='anna-squares')
       include partials/signin
     script(type="text/ng-template", id="dashboard")
       include partials/dashboard
+    script(type="text/ng-template", id="schedules")
+      include partials/schedules
     script(type="text/ng-template", id="schedules/list")
       include partials/schedules/list
     script(type="text/ng-template", id="schedules/detail")

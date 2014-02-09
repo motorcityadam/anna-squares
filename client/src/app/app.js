@@ -1,13 +1,83 @@
 /*global
-  angular:false,
-  routingConfig:false
+  angular:false
 */
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares',
-        ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+angular.module('anna-squares', ['ngCookies', 'ui.router', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
+angular.module('anna-squares')
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+
+      .state('home', {
+        url: '/',
+        templateUrl: 'home',
+        controller: 'HomeCtrl'
+      })
+
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'signin',
+        controller: 'SigninCtrl'
+      })
+
+      .state('register', {
+        url: '/register',
+        templateUrl: 'register',
+        controller: 'RegisterCtrl'
+      })
+
+      .state('404', {
+        url: '/404',
+        templateUrl: '404'
+      })
+
+      .state('dashboard', {
+        url: '/:username',
+        templateUrl: 'dashboard',
+        controller: 'DashboardCtrl'
+      })
+
+      .state('schedules', {
+        abstract: true,
+        url: '/:username/schedules',
+        templateUrl: 'schedules',
+        controller: 'ScheduleListCtrl'
+      })
+
+      .state('schedules.list', {
+        url: '',
+        templateUrl: 'schedules/list'
+      })
+
+      .state('schedules.detail', {
+        url: '/{scheduleid:[0-9]{1,8}}',
+        views: {
+          '': {
+            templateUrl: 'schedules/detail',
+            controller: 'ScheduleDetailCtrl'
+          }
+        }
+      })
+
+      .state('feedback', {
+        url: '/:username/feedback',
+        templateUrl: 'feedback',
+        controller: 'FeedbackCtrl'
+      });
+
+  }]);
+
+angular.module('anna-squares')
+  .run(['$rootScope', '$state', '$stateParams',
+    function ($rootScope,  $state,  $stateParams) {
+      $rootScope.$state = $state;
+      $rootScope.$stateParams = $stateParams;
+    }]);
+/*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -114,4 +184,4 @@ angular.module('anna-squares',
 
   });
 
-}]);
+}]);*/

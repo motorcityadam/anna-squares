@@ -3,15 +3,85 @@
  * Licensed under MIT
  */
 /*global
-  angular:false,
-  routingConfig:false
+  angular:false
 */
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares',
-        ['ngCookies', 'ngRoute', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+angular.module('anna-squares', ['ngCookies', 'ui.router', 'asc.ui', 'placeholders.img', 'ui.sortable'])
 
+angular.module('anna-squares')
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+
+      .state('home', {
+        url: '/',
+        templateUrl: 'home',
+        controller: 'HomeCtrl'
+      })
+
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'signin',
+        controller: 'SigninCtrl'
+      })
+
+      .state('register', {
+        url: '/register',
+        templateUrl: 'register',
+        controller: 'RegisterCtrl'
+      })
+
+      .state('404', {
+        url: '/404',
+        templateUrl: '404'
+      })
+
+      .state('dashboard', {
+        url: '/:username',
+        templateUrl: 'dashboard',
+        controller: 'DashboardCtrl'
+      })
+
+      .state('schedules', {
+        abstract: true,
+        url: '/:username/schedules',
+        templateUrl: 'schedules',
+        controller: 'ScheduleListCtrl'
+      })
+
+      .state('schedules.list', {
+        url: '',
+        templateUrl: 'schedules/list'
+      })
+
+      .state('schedules.detail', {
+        url: '/{scheduleid:[0-9]{1,8}}',
+        views: {
+          '': {
+            templateUrl: 'schedules/detail',
+            controller: 'ScheduleDetailCtrl'
+          }
+        }
+      })
+
+      .state('feedback', {
+        url: '/:username/feedback',
+        templateUrl: 'feedback',
+        controller: 'FeedbackCtrl'
+      });
+
+  }]);
+
+angular.module('anna-squares')
+  .run(['$rootScope', '$state', '$stateParams',
+    function ($rootScope,  $state,  $stateParams) {
+      $rootScope.$state = $state;
+      $rootScope.$stateParams = $stateParams;
+    }]);
+/*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -118,7 +188,8 @@ angular.module('anna-squares',
 
   });
 
-}]);
+}]);*/
+
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
@@ -139,8 +210,10 @@ angular.module('anna-squares')
   }]);
 
 angular.module('anna-squares')
-  .controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
-    function($rootScope, $scope, $location, Auth) { }]);
+  .controller('MainToolbarCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'toolbarService', 'requestCommunicationChannel',
+    function($rootScope, $scope, $location, Auth, toolbarService, requestCommunicationChannel) {
+
+    }]);
 
 angular.module('anna-squares')
   .controller('SigninCtrl',
@@ -167,7 +240,9 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
     .controller('HomeCtrl',
-        ['$rootScope', function($rootScope) { }]);
+        ['$rootScope', function($rootScope) {
+
+        }]);
 
 angular.module('anna-squares')
   .controller('RegisterCtrl',
@@ -192,40 +267,34 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('DashboardCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
-      function($rootScope, $scope, $routeParams, $location, Auth) {
-
-        console.log('Dashboard');
+    ['$rootScope', '$scope', '$location', 'Auth',
+      function($rootScope, $scope, $location, Auth) {
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesListCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleListCtrl',
+    ['$rootScope', '$scope', 'Auth', 'Schedule', 'toolbarService', 'requestCommunicationChannel',
+      function($rootScope, $scope, Auth, Schedule, toolbarService, requestCommunicationChannel) {
 
-        console.log('SchedulesList');
+        // Add publish
 
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesNewCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
-
-      }]);
-
-angular.module('anna-squares')
-  .controller('SchedulesDetailCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+        Schedule.getAll(
+          function(scheduleMap) {
+            $scope.scheduleMap = scheduleMap;
+          },
+          function(err) {
+            $rootScope.danger = err;
+          });
 
       }]);
 
 angular.module('anna-squares')
-  .controller('SchedulesEditCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth', '$timeout',
-      function($rootScope, $scope, $routeParams, $location, Auth, $timeout) {
+  .controller('ScheduleDetailCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
+
+        console.log('SchedulesDetail');
 
       }]);
 
@@ -540,27 +609,6 @@ angular.module('anna-squares')
     };
   }]);
 
-/*angular.module('anna-squares').directive('activeNav', ['$location', '$timeout', function($location, $timeout) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      $timeout(function() {
-        var nestedA = element.find('a')[0];
-        var path = nestedA.href;
-
-        scope.location = $location;
-        scope.$watch('location.absUrl()', function(newPath) {
-          if (path === newPath) {
-            element.addClass('active');
-          } else {
-            element.removeClass('active');
-          }
-        });
-      });
-    }
-  };
-}]);*/
-
 // TODO: The 'matchField' directive needs tests!
 angular.module('anna-squares').directive('matchField', function() {
   return {
@@ -661,7 +709,10 @@ angular.module('anna-squares')
 
     return {
       getAll: function(success, error) {
-        $http.get('/schedules').success(success).error(error);
+        $http
+          .get('/schedules')
+          .success(success)
+          .error(error);
       },
       postNew: function(schedule, success, error) {
         $http
@@ -673,3 +724,124 @@ angular.module('anna-squares')
       }
     };
   });
+
+
+angular.module('anna-squares')
+  .factory('requestCommunicationChannel', ['$rootScope', function ($rootScope) {
+
+    var _EDIT_DATA_ = '_EDIT_DATA_';
+    var _DATA_UPDATED_ = '_DATA_UPDATED_';
+
+    // Publish edit data notification
+    var editData = function (item) {
+      $rootScope.$broadcast(_EDIT_DATA_, {item: item});
+    };
+
+    // Subscribe to edit data notification
+    var onEditData = function($scope, handler) {
+      $scope.$on(_EDIT_DATA_, function(event, args) {
+        handler(args.item);
+      });
+    };
+
+    // Publish data changed notification
+    var dataUpdated = function () {
+      $rootScope.$broadcast(_DATA_UPDATED_);
+    };
+
+    // Subscribe to data changed notification
+    var onDataUpdated = function ($scope, handler) {
+      $scope.$on(_DATA_UPDATED_, function (event) {
+        handler();
+      });
+    };
+
+    return {
+      editData      : editData,
+      onEditData    : onEditData,
+      dataUpdated   : dataUpdated,
+      onDataUpdated : onDataUpdated
+    };
+  }]);
+
+// Define the data service for application toolbars
+angular.module('anna-squares')
+  .factory('toolbarService', ['requestCommunicationChannel', function (requestCommunicationChannel) {
+    var items = [
+      {'_id': { '$oid': '50ae677361d118e3646d7d6c'},
+        'name': 'New Schedule...',
+        'icon': 'fa fa-plus',
+        'action': '#',
+        'show': true
+      },
+      {'_id': { '$oid': '50ae677361d118e3646d7d6d'},
+        'name': 'Edit Schedule',
+        'icon': 'fa fa-edit',
+        'action': '#',
+        'show': true
+      }
+    ];
+
+    // Sends notification that data has been updated
+    var saveItem = function(item) {
+      requestCommunicationChannel.dataUpdated();
+    };
+
+    // Removes the item from the array and sends a notification that data has been updated
+    var deleteItem = function(item) {
+      for(var i = 0; i < items.length; i++) {
+        if(items[i]._id.$oid === item._id.$oid) {
+          items.splice(i, 1);
+          requestCommunicationChannel.dataUpdated();
+          return;
+        }
+      }
+    };
+
+    // Removes the all items from the array and sends a notification that data has been updated
+    var deleteItems = function() {
+      items.length = 0;
+      requestCommunicationChannel.dataUpdated();
+      return;
+    };
+
+    // Internal function to generate a random number GUID generation
+    var S4 = function() {
+      return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+
+    // Generates a GUID for adding items to array
+    var guid = function () {
+      return (S4() + S4() + '-' + S4() + '-4' + S4().substr(0,3) + '-' + S4() + '-' + S4() + S4() + S4()).toLowerCase();
+    };
+
+    // Function to add a item to the array and sends a notification that data has been updated
+    var addItem = function(item) {
+      items.id.$oid = guid();
+      items.push(item);
+      requestCommunicationChannel.dataUpdated();
+    };
+
+    // Returns the array of items
+    var getItems = function() {
+      return items;
+    };
+
+    // Returns a specific item with the given ID
+    var getItem = function(id) {
+      for(var i = 0; i < items.length; i++) {
+        if(items[i]._id.$oid === id) {
+          return items[i];
+        }
+      }
+    };
+
+    return {
+      getItems    : getItems,
+      getItem     : getItem,
+      saveItem    : saveItem,
+      deleteItems : deleteItems,
+      deleteItem  : deleteItem,
+      addItem     : addItem
+    };
+  }]);
