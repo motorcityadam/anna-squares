@@ -30,7 +30,7 @@ pre{border-radius:0}
 .as-btn-hollow{background:none;color:#fff}
 .btn-md.as-btn-hollow{padding:10px 28px}
 .btn{outline:0;border-radius:0}
-.btn-primary,.btn-danger{border-bottom:3px solid rgba(0,0,0,0.5)}
+.btn-default,.btn-primary,.btn-success,.btn-info,.btn-warning,.btn-danger{border-bottom:3px solid rgba(0,0,0,0.5)}
 .btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active{border-bottom:3px solid rgba(0,0,0,0.5)}
 .navbar-nav>li.as-accent{background:#484848}
 .form-control{border-radius:0;outline:none;border:1px inset #ccc;-webkit-box-shadow:none;box-shadow:none;-webkit-transition:none;transition:none}

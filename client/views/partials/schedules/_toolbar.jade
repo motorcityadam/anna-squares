@@ -1,0 +1,28 @@
+.btn-toolbar(role="toolbar")
+  .btn-group
+    button.btn.btn-success(type="button", ng-disabled='false', ng-click='newSchedule()')
+      i.fa.fa-plus
+      | &nbsp;New
+  .btn-group
+    button.btn.btn-primary(type="button", ng-disabled='false', ng-click='copySchedule()')
+      i.fa.fa-copy
+      | &nbsp;Copy To Today
+    button.btn.btn-primary(type="button", ng-disabled='false', ng-click='editSchedule()')
+      i.fa.fa-edit
+      | &nbsp;Edit
+  .btn-group
+    button.btn.btn-default(type="button", ng-disabled='false', ng-click='printSchedule()')
+      i.fa.fa-print
+      | &nbsp;Print
+    button.btn.btn-default(type="button", ng-disabled='false')
+      i.fa.fa-envelope
+      | &nbsp;E-mail&nbsp;
+      span.caret
+    button.btn.btn-default(type="button", ng-disabled='false')
+      i.fa.fa-share
+      | &nbsp;Share&nbsp;
+      span.caret
+  .btn-group
+    button.btn.btn-danger(type="button", ng-disabled='false', ng-click='discardSchedule()')
+      i.fa.fa-times
+      | &nbsp;Discard

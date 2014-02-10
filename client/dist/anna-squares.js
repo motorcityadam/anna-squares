@@ -210,12 +210,6 @@ angular.module('anna-squares')
   }]);
 
 angular.module('anna-squares')
-  .controller('MainToolbarCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'toolbarService', 'requestCommunicationChannel',
-    function($rootScope, $scope, $location, Auth, toolbarService, requestCommunicationChannel) {
-
-    }]);
-
-angular.module('anna-squares')
   .controller('SigninCtrl',
     ['$rootScope', '$scope', '$location', '$window', 'Auth',
       function($rootScope, $scope, $location, $window, Auth) {
@@ -274,10 +268,8 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('ScheduleListCtrl',
-    ['$rootScope', '$scope', 'Auth', 'Schedule', 'toolbarService', 'requestCommunicationChannel',
-      function($rootScope, $scope, Auth, Schedule, toolbarService, requestCommunicationChannel) {
-
-        // Add publish
+    ['$rootScope', '$scope', 'Auth', 'Schedule',
+      function($rootScope, $scope, Auth, Schedule) {
 
         Schedule.getAll(
           function(scheduleMap) {
@@ -568,8 +560,8 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('FeedbackCtrl',
-    ['$rootScope', '$scope', '$routeParams', '$location', 'Auth',
-      function($rootScope, $scope, $routeParams, $location, Auth) {
+    ['$rootScope', '$scope', '$location', 'Auth',
+      function($rootScope, $scope, $location, Auth) {
 
       }]);
 /*global angular:false*/
