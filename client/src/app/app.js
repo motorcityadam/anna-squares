@@ -4,72 +4,94 @@
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares', ['ngCookies', 'ui.router', 'asc.ui', 'placeholders.img', 'ui.sortable'])
+angular.module('anna-squares', ['ngCookies', 'ui.router', 'ui.bootstrap', 'placeholders.img', 'ui.sortable']);
 
 angular.module('anna-squares')
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
+  .config(['$stateProvider', '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
 
-    $stateProvider
+      $urlRouterProvider.otherwise('/');
 
-      .state('home', {
-        url: '/',
-        templateUrl: 'home',
-        controller: 'HomeCtrl'
-      })
+      $stateProvider
 
-      .state('signin', {
-        url: '/signin',
-        templateUrl: 'signin',
-        controller: 'SigninCtrl'
-      })
+        .state('home', {
+          url: '/',
+          templateUrl: 'home',
+          controller: 'HomeCtrl'
+        })
 
-      .state('register', {
-        url: '/register',
-        templateUrl: 'register',
-        controller: 'RegisterCtrl'
-      })
+        .state('signin', {
+          url: '/signin',
+          templateUrl: 'signin',
+          controller: 'SigninCtrl'
+        })
 
-      .state('404', {
-        url: '/404',
-        templateUrl: '404'
-      })
+        .state('register', {
+          url: '/register',
+          templateUrl: 'register',
+          controller: 'RegisterCtrl'
+        })
 
-      .state('dashboard', {
-        url: '/:username',
-        templateUrl: 'dashboard',
-        controller: 'DashboardCtrl'
-      })
+        .state('404', {
+          url: '/404',
+          templateUrl: '404'
+        })
 
-      .state('schedules', {
-        abstract: true,
-        url: '/:username/schedules',
-        templateUrl: 'schedules/index',
-        controller: 'ScheduleListCtrl'
-      })
+        .state('dashboard', {
+          url: '/:username',
+          templateUrl: 'dashboard',
+          controller: 'DashboardCtrl'
+        })
 
-      .state('schedules.list', {
-        url: '',
-        templateUrl: 'schedules/list'
-      })
+        .state('schedules', {
+          abstract: true,
+          url: '/:username/schedules',
+          templateUrl: 'schedules/index',
+          controller: 'ScheduleListCtrl'
+        })
 
-      .state('schedules.detail', {
-        url: '/{scheduleid:[0-9]{1,8}}',
-        views: {
-          '': {
-            templateUrl: 'schedules/detail',
-            controller: 'ScheduleDetailCtrl'
+        .state('schedules.list', {
+          url: '',
+          templateUrl: 'schedules/list'
+        })
+
+        .state('schedules.new', {
+          url: '/new',
+          views: {
+            '': {
+              templateUrl: 'schedules/form',
+              controller: 'ScheduleCreateCtrl'
+            }
           }
-        }
-      })
+        })
 
-      .state('feedback', {
-        url: '/:username/feedback',
-        templateUrl: 'feedback',
-        controller: 'FeedbackCtrl'
-      });
+        .state('schedules.detail', {
+          url: '/{scheduleid:[0-9]{1,8}}',
+          views: {
+            '': {
+              templateUrl: 'schedules/detail',
+              controller: 'ScheduleDetailCtrl'
+            }
+          }
+        })
 
-  }]);
+        .state('schedules.update', {
+          url: '/{scheduleid:[0-9]{1,8}}/edit',
+          views: {
+            '': {
+              templateUrl: 'schedules/form',
+              controller: 'ScheduleUpdateCtrl'
+            }
+          }
+        })
+
+        .state('feedback', {
+          url: '/:username/feedback',
+          templateUrl: 'feedback',
+          controller: 'FeedbackCtrl'
+        });
+    }
+  ]);
 
 angular.module('anna-squares')
   .run(['$rootScope', '$state', '$stateParams',

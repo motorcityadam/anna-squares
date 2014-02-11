@@ -52,7 +52,7 @@ html(lang='en', data-ng-app='anna-squares')
                 | &nbsp;Register
             li(ng-class="{ active: $state.includes('dashboard') }", data-access-level='accessLevels.user')
               a(ng-href='/#/{{ user.username }}')
-                i.fa.fa-dashboard
+                i.fa.fa-flag
                 | &nbsp;Dashboard
             li(ng-class="{ active: $state.includes('schedules') }", data-access-level='accessLevels.user')
               a(ng-href='/#/{{ user.username }}/schedules')
@@ -61,7 +61,7 @@ html(lang='en', data-ng-app='anna-squares')
             li(ng-class="{ active: $state.includes('feedback') }", data-access-level='accessLevels.user')
               a(ng-href='/#/{{ user.username }}/feedback')
                 i.fa.fa-comment
-                | &nbsp;Send Feedback
+                | &nbsp;Feedback
             li.dropdown.notifications-dropdown(data-access-level='accessLevels.user')
               a.dropdown-toggle(ng-href="", data-toggle="dropdown")
                 i.fa.fa-thumb-tack
@@ -162,7 +162,7 @@ html(lang='en', data-ng-app='anna-squares')
         .alert.alert-info(data-ng-bind="info", data-ng-show="info")
         .alert.alert-warning(data-ng-bind="warning", data-ng-show="warning")
         .alert.alert-danger(data-ng-bind="danger", data-ng-show="danger")
-        div(ui-view)
+        div(ui-view, autoscroll="false")
         .as-footer
           .row
             .col-lg-12
@@ -211,7 +211,7 @@ html(lang='en', data-ng-app='anna-squares')
       script(src='/lib/angular-cookies/angular-cookies.min.js')
       script(src='/lib/angular-ui-router/release/angular-ui-router.min.js')
       script(src='/lib/angular-placeholders/src/img/img.js')
-      script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
+      script(src='/lib/angular-bootstrap/ui-bootstrap-tpls.min.js')
       script(src='/lib/angular-ui-sortable/src/sortable.js')
       script(src='/lib/momentjs/min/moment.min.js')
     if (settings.env == 'production' || settings.env == 'stage' || settings.env == 'travis')
@@ -223,7 +223,7 @@ html(lang='en', data-ng-app='anna-squares')
       script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js')
       script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-cookies.min.js')
       script(src='/lib/angular-ui-router/release/angular-ui-router.min.js')
-      script(src='/lib/angular-asc-ui/dist/asc-ui-tpls.min.js')
+      script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js')
       script(src='/lib/angular-ui-sortable/src/sortable.js')
       script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js')
 

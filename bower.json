@@ -10,13 +10,13 @@
     "underscore": "1.5.2",
     "angular": "latest",
     "angular-cookies": "latest",
+    "angular-bootstrap": "latest",
     "angular-ui-utils": "latest",
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "font-awesome": "latest",
     "angular-placeholders": "latest",
     "momentjs": "2.5.0",
-    "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip",
-    "angular-asc-ui": "https://github.com/adamjcook/angular-asc-ui/archive/v0.1.13.zip"
+    "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip"
   },
   "devDependencies": {
     "angular-mocks": "latest",

@@ -5,13 +5,7 @@
       | &nbsp;Schedules
 .row
   .col-lg-12
-    include _toolbar.jade
-.row(ng-show='!scheduleMap.length')
+    include toolbar.jade
+.row
   .col-lg-12
-    h4 You do not have any saved schedules yet.
-.row(ng-show='scheduleMap.length')
-  .col-lg-3
-    ul(ng-repeat='scheduleItem in scheduleMap')
-      li {{ scheduleItem }}
-  .col-lg-9
-    div(ui-view)
+    div(ui-view, autoscroll="false")

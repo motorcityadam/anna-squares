@@ -41,10 +41,10 @@ angular.module('anna-squares')
     }]);
 
 angular.module('anna-squares')
-    .controller('HomeCtrl',
-        ['$rootScope', function($rootScope) {
+  .controller('HomeCtrl',
+    ['$rootScope', function($rootScope) {
 
-        }]);
+    }]);
 
 angular.module('anna-squares')
   .controller('RegisterCtrl',
@@ -75,6 +75,17 @@ angular.module('anna-squares')
       }]);
 
 angular.module('anna-squares')
+  .controller('ScheduleToolbarCtrl',
+    ['$rootScope', '$scope', '$state', 'Auth',
+      function($rootScope, $scope, $state, Auth) {
+
+        $scope.newSchedule = function() {
+          $state.transitionTo('schedules.new', {username: Auth.user.username});
+        };
+
+      }]);
+
+angular.module('anna-squares')
   .controller('ScheduleListCtrl',
     ['$rootScope', '$scope', 'Auth', 'Schedule',
       function($rootScope, $scope, Auth, Schedule) {
@@ -94,7 +105,25 @@ angular.module('anna-squares')
     ['$rootScope', '$scope', 'Auth',
       function($rootScope, $scope, Auth) {
 
-        console.log('SchedulesDetail');
+        console.log('Detail Schedules!');
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('ScheduleCreateCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
+
+        console.log('Create Schedules!');
+
+      }]);
+
+angular.module('anna-squares')
+  .controller('ScheduleUpdateCtrl',
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) {
+
+        console.log('Update Schedules!');
 
       }]);
 

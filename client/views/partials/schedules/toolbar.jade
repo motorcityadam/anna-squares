@@ -1,4 +1,4 @@
-.btn-toolbar(role="toolbar")
+.btn-toolbar.as-toolbar(role="toolbar", data-ng-controller="ScheduleToolbarCtrl")
   .btn-group
     button.btn.btn-success(type="button", ng-disabled='false', ng-click='newSchedule()')
       i.fa.fa-plus
@@ -10,6 +10,10 @@
     button.btn.btn-primary(type="button", ng-disabled='false', ng-click='editSchedule()')
       i.fa.fa-edit
       | &nbsp;Edit
+  .btn-group
+    button.btn.btn-warning(type="button", ng-disabled='false', ng-click='saveSchedule()')
+      i.fa.fa-save
+      | &nbsp;Save
   .btn-group
     button.btn.btn-default(type="button", ng-disabled='false', ng-click='printSchedule()')
       i.fa.fa-print
