@@ -16,8 +16,7 @@
     "angular-placeholders": "latest",
     "momentjs": "2.5.0",
     "angular-ui-sortable": "https://github.com/angular-ui/ui-sortable/archive/angular1.2.zip",
-    "angular-asc-ui": "https://github.com/adamjcook/angular-asc-ui/archive/v0.1.13.zip",
-    "q": "1.0.0"
+    "angular-asc-ui": "https://github.com/adamjcook/angular-asc-ui/archive/v0.1.13.zip"
   },
   "devDependencies": {
     "angular-mocks": "latest",
