@@ -4,11 +4,11 @@ var mongoose           = require('mongoose')
     , LocalStrategy    = require('passport-local').Strategy
     , TwitterStrategy  = require('passport-twitter').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy
-    , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-    , GitHubStrategy = require('passport-github').Strategy
+    , GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy
+    , GitHubStrategy   = require('passport-github').Strategy
     , LinkedInStrategy = require('passport-linkedin').Strategy;
 
-var User = mongoose.model('User')
+var User     = mongoose.model('User')
     , config = require('./config');
 
 
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   // Use local strategy
-  localStrategy: function() {
+/*  localStrategy: function() {
     return new LocalStrategy(
       function(username, password, done) {
         User.findOne({
@@ -46,6 +46,13 @@ module.exports = {
           }
           return done(null, user);
         });
+      }
+    );
+  },*/
+
+  localStrategy: function() {
+    return new LocalStrategy(
+      function(username, password, done) {
       }
     );
   },
