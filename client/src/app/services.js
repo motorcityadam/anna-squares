@@ -70,28 +70,6 @@ angular.module('anna-squares')
   });
 
 angular.module('anna-squares')
-  .factory('Schedule', function($http){
-
-    return {
-      getAll: function(success, error) {
-        $http
-          .get('/schedules')
-          .success(success)
-          .error(error);
-      },
-      postNew: function(schedule, success, error) {
-        $http
-          .post('/schedule/new', schedule)
-          .success(function(schedule){
-            success(schedule);
-          })
-          .error(error);
-      }
-    };
-  });
-
-
-angular.module('anna-squares')
   .factory('requestCommunicationChannel', ['$rootScope', function ($rootScope) {
 
     var _EDIT_DATA_ = '_EDIT_DATA_';
