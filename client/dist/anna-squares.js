@@ -8,7 +8,7 @@
 /*jshint unused: vars */
 'use strict';
 
-angular.module('anna-squares', ['ngCookies', 'ui.router', 'ui.bootstrap', 'placeholders.img', 'ui.sortable']);
+angular.module('anna-squares', ['ngCookies', 'ui.router', 'asc.ui', 'placeholders.img', 'ui.sortable']);
 
 angular.module('anna-squares')
   .config(['$stateProvider', '$urlRouterProvider',
