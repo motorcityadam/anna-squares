@@ -48,6 +48,11 @@ var UserSchema = new Schema({
   url: String,
   company: String,
   location: String,
+  timezone: {
+    type: String,
+    default: "-6:00",
+    required: true
+  },
   createdDate: {
     type: Date,
     required: true,

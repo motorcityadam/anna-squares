@@ -1,4 +1,4 @@
-/*! anna-squares - v0.1.7 - 2014-02-10
+/*! anna-squares - v0.1.7 - 2014-02-11
  * Copyright (c) 2014 Adam Joseph Cook <acook@alliedstrand.com>;
  * Licensed under MIT
  */
@@ -103,6 +103,27 @@ angular.module('anna-squares')
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
     }]);
+
+angular.module('anna-squares')
+  .run(['$rootScope', 'Auth',
+    function ($rootScope, Auth) {
+
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+
+        $rootScope.success = null;
+        $rootScope.info = null;
+        $rootScope.warning = null;
+        $rootScope.danger = null;
+
+/*        if (!Auth.authorize(next.access)) {
+          if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
+          else                  $location.path('/signin');
+        }*/
+
+      });
+
+    }]);
+
 /*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
@@ -217,14 +238,14 @@ angular.module('anna-squares')
 'use strict';
 
 angular.module('anna-squares')
-  .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+  .controller('NavCtrl', ['$rootScope', '$scope', '$state', 'Auth', function($rootScope, $scope, $state, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
 
     $scope.signout = function() {
       Auth.signout(function() {
-        $location.path('/signin');
+        $state.transitionTo('signin');
       }, function() {
         $rootScope.danger = 'Failed to sign out.';
       });
@@ -233,8 +254,8 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('SigninCtrl',
-    ['$rootScope', '$scope', '$location', '$window', 'Auth',
-      function($rootScope, $scope, $location, $window, Auth) {
+    ['$rootScope', '$scope', '$state', '$window', 'Auth',
+      function($rootScope, $scope, $state, $window, Auth) {
 
       $scope.signin = function() {
         Auth.signin({
@@ -242,10 +263,10 @@ angular.module('anna-squares')
           password: $scope.password
         },
         function(res) {
-          $location.path('/' + Auth.user.username);
+          $state.transitionTo('dashboard', {username: Auth.user.username});
         },
         function(err) {
-          $rootScope.danger = 'Failed to sign in.';
+          $rootScope.danger = 'Incorrect username or password.';
         });
       };
 
@@ -256,13 +277,11 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('HomeCtrl',
-    ['$rootScope', function($rootScope) {
-
-    }]);
+    ['$rootScope', function($rootScope) { }]);
 
 angular.module('anna-squares')
   .controller('RegisterCtrl',
-    ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+    ['$rootScope', '$scope', '$state', 'Auth', function($rootScope, $scope, $state, Auth) {
 
       $scope.register = function() {
         Auth.register({
@@ -272,7 +291,7 @@ angular.module('anna-squares')
           passwordConfirmation: $scope.passwordConfirmation
         },
         function(message) {
-          $location.path('/signin');
+          $state.transitionTo('signin');
           $rootScope.success = message;
         },
         function(err) {
@@ -283,10 +302,8 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('DashboardCtrl',
-    ['$rootScope', '$scope', '$location', 'Auth',
-      function($rootScope, $scope, $location, Auth) {
-
-      }]);
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) { }]);
 
 angular.module('anna-squares')
   .controller('ScheduleToolbarCtrl',
@@ -611,10 +628,8 @@ angular.module('anna-squares')
 
 angular.module('anna-squares')
   .controller('FeedbackCtrl',
-    ['$rootScope', '$scope', '$location', 'Auth',
-      function($rootScope, $scope, $location, Auth) {
-
-      }]);
+    ['$rootScope', '$scope', 'Auth',
+      function($rootScope, $scope, Auth) { }]);
 /*global angular:false*/
 /*jshint unused: vars */
 'use strict';
@@ -868,23 +883,26 @@ angular.module('anna-squares')
   }]);
 
 
+/*global
+ angular:false
+ */
 angular.module('anna-squares')
-    .factory('Schedule', function($http){
+  .factory('Schedule', function($http){
 
-      return {
-        getAll: function(success, error) {
-          $http
-              .get('/schedules')
-              .success(success)
-              .error(error);
-        },
-        postNew: function(schedule, success, error) {
-          $http
-              .post('/schedule/new', schedule)
-              .success(function(schedule){
-                success(schedule);
-              })
-              .error(error);
-        }
-      };
-    });
+    return {
+      getAll: function(success, error) {
+        $http
+            .get('/schedules')
+            .success(success)
+            .error(error);
+      },
+      postNew: function(schedule, success, error) {
+        $http
+            .post('/schedule/new', schedule)
+            .success(function(schedule){
+              success(schedule);
+            })
+            .error(error);
+      }
+    };
+  });

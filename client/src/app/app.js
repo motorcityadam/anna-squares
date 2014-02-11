@@ -99,6 +99,27 @@ angular.module('anna-squares')
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
     }]);
+
+angular.module('anna-squares')
+  .run(['$rootScope', 'Auth',
+    function ($rootScope, Auth) {
+
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+
+        $rootScope.success = null;
+        $rootScope.info = null;
+        $rootScope.warning = null;
+        $rootScope.danger = null;
+
+/*        if (!Auth.authorize(next.access)) {
+          if(Auth.isSignedIn()) $location.path('/' + Auth.user.username);
+          else                  $location.path('/signin');
+        }*/
+
+      });
+
+    }]);
+
 /*
 .config(['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
